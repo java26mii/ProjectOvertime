@@ -3,6 +3,11 @@
   <persistence-unit name="MVCHibernateHRPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>models.Account</class>
+    <class>models.Employee</class>
+    <class>models.Employeejob</class>
+    <class>models.Employeerole</class>
+    <class>models.Job</class>
+    <class>models.Role</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="hr"/>

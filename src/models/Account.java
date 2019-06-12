@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ASUS
  */
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = "ACCOUNTS")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
@@ -36,35 +36,35 @@ public class Account implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
     @Column(name = "PASSWORD")
     private String password;
-    @JoinColumn(name = "ID", referencedColumnName = "EMPLOYEE_ID", insertable = false, updatable = false)
-    @OneToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
 
     public Account() {
     }
 
-    public Account(Integer id) {
+    public Account(Long id) {
         this.id = id;
     }
 
-    public Account(Integer id, String username, String password) {
+    public Account(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

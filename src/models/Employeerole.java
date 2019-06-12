@@ -6,54 +6,47 @@
 package models;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author ASUS
  */
 @Entity
-@Table(name = "JOBS")
+@Table(name = "EMPLOYEEROLES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
-    , @NamedQuery(name = "Job.findById", query = "SELECT j FROM Job j WHERE j.id = :id")
-    , @NamedQuery(name = "Job.findByName", query = "SELECT j FROM Job j WHERE j.name = :name")})
-public class Job implements Serializable {
+    @NamedQuery(name = "Employeerole.findAll", query = "SELECT e FROM Employeerole e")
+    , @NamedQuery(name = "Employeerole.findById", query = "SELECT e FROM Employeerole e WHERE e.id = :id")})
+public class Employeerole implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
-    @Basic(optional = false)
-    @Column(name = "NAME")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
-    private List<Employeejob> employeejobList;
+    @JoinColumn(name = "EMPLOYEE", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Employee employee;
+    @JoinColumn(name = "ROLE", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Role role;
 
-    public Job() {
+    public Employeerole() {
     }
 
-    public Job(Long id) {
+    public Employeerole(Long id) {
         this.id = id;
-    }
-
-    public Job(Long id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Long getId() {
@@ -64,21 +57,20 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    @XmlTransient
-    public List<Employeejob> getEmployeejobList() {
-        return employeejobList;
+    public Role getRole() {
+        return role;
     }
 
-    public void setEmployeejobList(List<Employeejob> employeejobList) {
-        this.employeejobList = employeejobList;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
@@ -91,10 +83,10 @@ public class Job implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Job)) {
+        if (!(object instanceof Employeerole)) {
             return false;
         }
-        Job other = (Job) object;
+        Employeerole other = (Employeerole) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +95,7 @@ public class Job implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Job[ id=" + id + " ]";
+        return "models.Employeerole[ id=" + id + " ]";
     }
     
 }

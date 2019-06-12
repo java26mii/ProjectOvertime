@@ -6,8 +6,6 @@
 package models;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,122 +20,98 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Arif Fridasari
+ * @author ASUS
  */
 @Entity
 @Table(name = "EMPLOYEES")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
-    , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.Id = :Id")
-    , @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName")
-    , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
+    , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")
+    , @NamedQuery(name = "Employee.findByFirstname", query = "SELECT e FROM Employee e WHERE e.firstname = :firstname")
+    , @NamedQuery(name = "Employee.findByLastname", query = "SELECT e FROM Employee e WHERE e.lastname = :lastname")
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
-    , @NamedQuery(name = "Employee.findByPhoneNumber", query = "SELECT e FROM Employee e WHERE e.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "Employee.findByHireDate", query = "SELECT e FROM Employee e WHERE e.hireDate = :hireDate")
-    , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")
-    , @NamedQuery(name = "Employee.findByCommissionPct", query = "SELECT e FROM Employee e WHERE e.commissionPct = :commissionPct")})
+    , @NamedQuery(name = "Employee.findByPhonenumber", query = "SELECT e FROM Employee e WHERE e.phonenumber = :phonenumber")
+    , @NamedQuery(name = "Employee.findByIsdelete", query = "SELECT e FROM Employee e WHERE e.isdelete = :isdelete")})
 public class Employee implements Serializable {
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private Account account;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "EMPLOYEE_ID")
-    private Integer Id;
-    @Column(name = "FIRST_NAME")
-    private String firstName;
+    @Column(name = "ID")
+    private Long id;
     @Basic(optional = false)
-    @Column(name = "LAST_NAME")
-    private String lastName;
+    @Column(name = "FIRSTNAME")
+    private String firstname;
+    @Basic(optional = false)
+    @Column(name = "LASTNAME")
+    private String lastname;
     @Basic(optional = false)
     @Column(name = "EMAIL")
     private String email;
-    @Column(name = "PHONE_NUMBER")
-    private String phoneNumber;
     @Basic(optional = false)
-    @Column(name = "HIRE_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date hireDate;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "SALARY")
-    private BigDecimal salary;
-    @Column(name = "COMMISSION_PCT")
-    private BigDecimal commissionPct;
-    @JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "DEPARTMENT_ID")
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
-    private Department department;
-    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER)
+    @Column(name = "PHONENUMBER")
+    private long phonenumber;
+    @Basic(optional = false)
+    @Column(name = "ISDELETE")
+    private Character isdelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<Employeejob> employeejobList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
-    @JoinColumn(name = "MANAGER_ID", referencedColumnName = "EMPLOYEE_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MANAGER", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee manager;
-    @JoinColumn(name = "JOB_ID", referencedColumnName = "JOB_ID")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Job job;
-    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
-    private List<Department> departmentList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private Account account;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<Employeerole> employeeroleList;
 
     public Employee() {
     }
 
-    public Employee(Integer Id) {
-        this.Id = Id;
+    public Employee(Long id) {
+        this.id = id;
     }
 
-
-    public Employee(String id) {
-        this.Id = Id;
-    }
-
-
-    public Employee(Integer Id, String firstName, String lastName, String email, String phoneNumber, Date hireDate, BigDecimal salary, BigDecimal commissionPct, Department department, Employee manager, Job job) {
-        this.Id = Id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Employee(Long id, String firstname, String lastname, String email, long phonenumber, Character isdelete) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.hireDate = hireDate;
-        this.salary = salary;
-        this.commissionPct = commissionPct;
-        this.department = department;
-        this.manager = manager;
-        this.job = job;
+        this.phonenumber = phonenumber;
+        this.isdelete = isdelete;
     }
 
-    public Integer getId() {
-        return Id;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Integer Id) {
-        this.Id = Id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -146,44 +120,29 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public long getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhonenumber(long phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    public Date getHireDate() {
-        return hireDate;
+    public Character getIsdelete() {
+        return isdelete;
     }
 
-    public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
+    public void setIsdelete(Character isdelete) {
+        this.isdelete = isdelete;
     }
 
-    public BigDecimal getSalary() {
-        return salary;
+    @XmlTransient
+    public List<Employeejob> getEmployeejobList() {
+        return employeejobList;
     }
 
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
-    public BigDecimal getCommissionPct() {
-        return commissionPct;
-    }
-
-    public void setCommissionPct(BigDecimal commissionPct) {
-        this.commissionPct = commissionPct;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setEmployeejobList(List<Employeejob> employeejobList) {
+        this.employeejobList = employeejobList;
     }
 
     @XmlTransient
@@ -203,48 +162,6 @@ public class Employee implements Serializable {
         this.manager = manager;
     }
 
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
-    }
-
-    @XmlTransient
-    public List<Department> getDepartmentList() {
-        return departmentList;
-    }
-
-    public void setDepartmentList(List<Department> departmentList) {
-        this.departmentList = departmentList;
-    }
-
-    @Override
-    public String toString() {
-        return "models.Employee[ Id=" + Id + " ]";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(obj instanceof Employee)) {
-            return false;
-        }
-        Employee other = (Employee) obj;
-        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (Id != null ? Id.hashCode() : 0);
-        return hash;
-    }
-
     public Account getAccount() {
         return account;
     }
@@ -253,4 +170,38 @@ public class Employee implements Serializable {
         this.account = account;
     }
 
+    @XmlTransient
+    public List<Employeerole> getEmployeeroleList() {
+        return employeeroleList;
+    }
+
+    public void setEmployeeroleList(List<Employeerole> employeeroleList) {
+        this.employeeroleList = employeeroleList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Employee)) {
+            return false;
+        }
+        Employee other = (Employee) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "models.Employee[ id=" + id + " ]";
+    }
+    
 }
