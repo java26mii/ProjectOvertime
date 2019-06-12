@@ -42,7 +42,7 @@ public class Job implements Serializable {
     @Column(name = "NAME")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
-    private List<Employeejob> employeejobList;
+    private List<EmployeeJob> employeeJobList;
 
     public Job() {
     }
@@ -73,12 +73,12 @@ public class Job implements Serializable {
     }
 
     @XmlTransient
-    public List<Employeejob> getEmployeejobList() {
-        return employeejobList;
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
     }
 
-    public void setEmployeejobList(List<Employeejob> employeejobList) {
-        this.employeejobList = employeejobList;
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
     }
 
     @Override

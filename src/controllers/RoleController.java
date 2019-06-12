@@ -6,9 +6,9 @@
 package controllers;
 
 import daos.GeneralDAO;
-import icontrollers.IJobController;
+import icontrollers.IRoleController;
 import java.util.List;
-import models.Job;
+import models.Role;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -16,33 +16,33 @@ import org.hibernate.SessionFactory;
  *
  * @author ASUS
  */
-public class JobController implements IJobController {
+public class RoleController implements IRoleController {
 
-    private GeneralDAO<Job> gdao;
+    private GeneralDAO<Role> gdao;
 
-    public JobController(SessionFactory factory) {
-        gdao = new GeneralDAO(factory, Job.class);
+    public RoleController(SessionFactory factory) {
+        gdao = new GeneralDAO(factory, Role.class);
     }
 
     @Override
-    public List<Job> getAll() {
+    public List<Role> getAll() {
         return gdao.getData("");
     }
 
     @Override
-    public Job getById(String id) {
+    public Role getById(String id) {
         return gdao.getById(id);
     }
 
     @Override
-    public List<Job> search(Object keyword) {
+    public List<Role> search(Object keyword) {
         return gdao.getData(keyword);
     }
 
     @Override
     public String save(String id, String name) {
         String result = "";
-        Job job = new Job(Long.parseLong(id), name);
+        Role job = new Role(Long.parseLong(id), name);
         if (gdao.saveOrDelete(job, false)) {
             result = "Success";
         } else {
@@ -54,7 +54,7 @@ public class JobController implements IJobController {
     @Override
     public String delete(String id) {
       String result = "Failed";
-        if (gdao.saveOrDelete(new Job(Long.parseLong(id)), true)) {
+        if (gdao.saveOrDelete(new Role(Long.parseLong(id)), true)) {
             result = "Success";
         }
         return result;

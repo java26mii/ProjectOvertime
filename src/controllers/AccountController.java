@@ -41,7 +41,7 @@ public class AccountController implements IAccountController {
     public String register(String id, String username, String password) {
         String result = "";
         String pass = hash(password);
-        Account account = new Account(Integer.parseInt(id), username, pass);
+        Account account = new Account(Long.parseLong(id), username, password);
         if (igdao.saveOrDelete(account, false)) {
             result = "Success";
         } else {

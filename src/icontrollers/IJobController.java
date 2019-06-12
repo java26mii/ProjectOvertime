@@ -19,7 +19,7 @@ public interface IJobController {
 
     public List<Job> search(Object keyword);
 
-    public String save(String id, String title, String minSalary, String maxSalary);
+    public String save(String id, String name);
 
     public String delete(String id);
 }

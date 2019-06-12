@@ -61,7 +61,7 @@ public class Employee implements Serializable {
     @Column(name = "ISDELETE")
     private Character isdelete;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<Employeejob> employeejobList;
+    private List<EmployeeJob> employeeJobList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     @JoinColumn(name = "MANAGER", referencedColumnName = "ID")
@@ -70,7 +70,7 @@ public class Employee implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
     private Account account;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<Employeerole> employeeroleList;
+    private List<EmployeeRole> employeeRoleList;
 
     public Employee() {
     }
@@ -137,12 +137,12 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
-    public List<Employeejob> getEmployeejobList() {
-        return employeejobList;
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
     }
 
-    public void setEmployeejobList(List<Employeejob> employeejobList) {
-        this.employeejobList = employeejobList;
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
     }
 
     @XmlTransient
@@ -171,12 +171,12 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
-    public List<Employeerole> getEmployeeroleList() {
-        return employeeroleList;
+    public List<EmployeeRole> getEmployeeRoleList() {
+        return employeeRoleList;
     }
 
-    public void setEmployeeroleList(List<Employeerole> employeeroleList) {
-        this.employeeroleList = employeeroleList;
+    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
+        this.employeeRoleList = employeeRoleList;
     }
 
     @Override

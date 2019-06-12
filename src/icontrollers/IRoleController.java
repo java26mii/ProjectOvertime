@@ -6,19 +6,19 @@
 package icontrollers;
 
 import java.util.List;
-import models.Region;
+import models.Role;
 
 /**
  *
  * @author HP
  */
-public interface IRegionController {
+public interface IRoleController {
 
-    public Region getById(String id);
+    public Role getById(String id);
 
-    public List<Region> getAll();
+    public List<Role> getAll();
 
-    public List<Region> search(Object keyword);
+    public List<Role> search(Object keyword);
 
     public String save(String id, String name);
 

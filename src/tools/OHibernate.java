@@ -1,28 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tools;
 
-import controllers.AccountController;
-import controllers.DepartmentController;
-import controllers.EmployeeController;
-import controllers.JobController;
-import daos.GeneralDAO;
-import icontrollers.IAccountController;
-import icontrollers.IDepartmentController;
-import icontrollers.IEmployeeController;
-import icontrollers.IJobController;
 import java.math.BigDecimal;
 import java.util.Date;
-import models.Country;
-import models.Department;
 import models.Employee;
 import models.Job;
-import models.Location;
-import models.Region;
+import models.Role;
+import models.EmployeeJob;
+import models.EmployeeRole;
 import org.hibernate.SessionFactory;
+
+import daos.GeneralDAO;
+import icontrollers.IAccountController;
+import icontrollers.IJobController;
+
+import controllers.AccountController;
+import controllers.EmployeeController;
+import controllers.JobController;
+
 
 /**
  *
@@ -35,7 +30,7 @@ public class OHibernate {
     public static void main(String[] args) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         System.out.println(factory);
-//        IEmployeeController eco = new EmployeeController(factory);
+//        IEmpController eco = new EmployeeController(factory);
 //        IDepartmentController edo = new DepartmentController(factory);
 //        GeneralDAO<Employee> edao = new GeneralDAO<>(factory, Employee.class);
 //AccountController ac = new AccountController(factory);

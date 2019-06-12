@@ -5,15 +5,15 @@
  */
 package views;
 
-import controllers.RegionController;
-import icontrollers.IRegionController;
+//import controllers.RegionController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.Region;
+import models.Job;
 import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
+import icontrollers.IRoleController;
 
 /**
  *
@@ -22,7 +22,7 @@ import tools.HibernateUtil;
 public class JIRegionView extends javax.swing.JInternalFrame {
 
     SessionFactory factory = HibernateUtil.getSessionFactory();
-    IRegionController irc = new RegionController(factory);
+//    IRoleController irc = new RegionController(factory);
 
     /**
      * Creates new form JIRegionView
@@ -41,20 +41,20 @@ public class JIRegionView extends javax.swing.JInternalFrame {
 
 
      public void showTableRegion(String key) {
-        DefaultTableModel model = (DefaultTableModel) tableRegion.getModel();
-        model.setRowCount(0);
-        Object[] row = new Object[3];
-        List<Region> region = new ArrayList<>();
-        if (key == "") {
-            region = irc.getAll();
-        }
-        region = irc.search(key);
-        for (int i = 0; i < region.size(); i++) {
-            row[0] = i + 1;
-            row[1] = region.get(i).getId();
-            row[2] = region.get(i).getName();
-            model.addRow(row);
-        }
+//        DefaultTableModel model = (DefaultTableModel) tableRegion.getModel();
+//        model.setRowCount(0);
+//        Object[] row = new Object[3];
+//        List<Region> region = new ArrayList<>();
+//        if (key == "") {
+//            region = irc.getAll();
+//        }
+//        region = irc.search(key);
+//        for (int i = 0; i < region.size(); i++) {
+//            row[0] = i + 1;
+//            row[1] = region.get(i).getId();
+//            row[2] = region.get(i).getName();
+//            model.addRow(row);
+//        }
     }
     
     /**
@@ -233,39 +233,39 @@ public class JIRegionView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_inputNameActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        if (inputId.getText().equals("") || inputName.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(this, "Are You Sure?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (confirm == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, irc.save(inputId.getText(), inputName.getText()));
-                showTableRegion("");
-                resetTextRegion();
-            }
-        }
+//        if (inputId.getText().equals("") || inputName.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
+//        } else {
+//            int confirm = JOptionPane.showConfirmDialog(this, "Are You Sure?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//            if (confirm == JOptionPane.YES_OPTION) {
+//                JOptionPane.showMessageDialog(null, irc.save(inputId.getText(), inputName.getText()));
+//                showTableRegion("");
+//                resetTextRegion();
+//            }
+//        }
 
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        if (inputId.getText().equals("") || inputName.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(this, "Are You Sure?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (confirm == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, irc.save(inputId.getText(), inputName.getText()));
-                showTableRegion("");
-                resetTextRegion();
-            }
-        }
+//        if (inputId.getText().equals("") || inputName.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
+//        } else {
+//            int confirm = JOptionPane.showConfirmDialog(this, "Are You Sure?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//            if (confirm == JOptionPane.YES_OPTION) {
+//                JOptionPane.showMessageDialog(null, irc.save(inputId.getText(), inputName.getText()));
+//                showTableRegion("");
+//                resetTextRegion();
+//            }
+//        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(this, "Are You Sure?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (confirm == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, irc.delete(inputId.getText()));
-            showTableRegion("");
-            resetTextRegion();
-        }
+//        int confirm = JOptionPane.showConfirmDialog(this, "Are You Sure?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//        if (confirm == JOptionPane.YES_OPTION) {
+//            JOptionPane.showMessageDialog(null, irc.delete(inputId.getText()));
+//            showTableRegion("");
+//            resetTextRegion();
+//        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void tableRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableRegionMouseClicked

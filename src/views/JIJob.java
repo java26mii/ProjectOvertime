@@ -54,9 +54,7 @@ public class JIJob extends javax.swing.JInternalFrame {
         for (int i = 0; i < jobs.size(); i++) {
             row[0] = i + 1;
             row[1] = jobs.get(i).getId();
-            row[2] = jobs.get(i).getTitle();
-            row[3] = jobs.get(i).getMinSalary();
-            row[4] = jobs.get(i).getMaxSalary();
+            row[2] = jobs.get(i).getName();
             model.addRow(row);
         }
     }
@@ -269,7 +267,7 @@ public class JIJob extends javax.swing.JInternalFrame {
         } else {
             int confirm = JOptionPane.showConfirmDialog(this, "Ingin mengupdate data ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (confirm == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, ijc.save(jId.getText(), jTitle.getText(), jMinSalary.getText(), jMaxSalary.getText()));
+//                JOptionPane.showMessageDialog(null, ijc.save(jId.getText(), jTitle.getText(), jMinSalary.getText(), jMaxSalary.getText()));
                 showTableJob("");
                 resetTextJob();
             }
@@ -283,7 +281,7 @@ public class JIJob extends javax.swing.JInternalFrame {
         } else {
             int confirm = JOptionPane.showConfirmDialog(this, "Ingin mengupdate data ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (confirm == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, ijc.save(jId.getText(), jTitle.getText(), jMinSalary.getText(), jMaxSalary.getText()));
+//                JOptionPane.showMessageDialog(null, ijc.save(jId.getText(), jTitle.getText(), jMinSalary.getText(), jMaxSalary.getText()));
                 showTableJob("");
                 resetTextJob();
             }

@@ -10,7 +10,7 @@ import models.Employee;
 
 /**
  *
- * @author WINDOWS 10
+ * @author ASUS
  */
 public interface IEmployeeController {
 
@@ -20,12 +20,7 @@ public interface IEmployeeController {
 
     public List<Employee> search(Object keyword);
 
-    public String save(String Id, String firstName, String lastName,
-            String email, String phoneNumber, String hireDate,
-            String salary, String commissionPct, String department,
-            String manager, String job);
-   
-    
-    public String delete(String id);
+    public String save(String id, String firstName, String lastName,String email, String phoneNumber, String manager, String isDelete);
 
+    public String delete(String id);
 }
