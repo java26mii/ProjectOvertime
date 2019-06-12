@@ -54,9 +54,9 @@ public class JIJob extends javax.swing.JInternalFrame {
         for (int i = 0; i < jobs.size(); i++) {
             row[0] = i + 1;
             row[1] = jobs.get(i).getId();
-            row[2] = jobs.get(i).getTitle();
-            row[3] = jobs.get(i).getMinSalary();
-            row[4] = jobs.get(i).getMaxSalary();
+//            row[2] = jobs.get(i).getTitle();
+//            row[3] = jobs.get(i).getMinSalary();
+//            row[4] = jobs.get(i).getMaxSalary();
             model.addRow(row);
         }
     }
@@ -257,37 +257,19 @@ public class JIJob extends javax.swing.JInternalFrame {
         jId.setEditable(false);
         btnInsert.setEnabled(false);
         jId.setText(model.getValueAt(SelectRowIndex, 1).toString());
-        jTitle.setText(model.getValueAt(SelectRowIndex, 2).toString());
-        jMinSalary.setText(model.getValueAt(SelectRowIndex, 3).toString());
-        jMaxSalary.setText(model.getValueAt(SelectRowIndex, 4).toString());
+//        jTitle.setText(model.getValueAt(SelectRowIndex, 2).toString());
+//        jMinSalary.setText(model.getValueAt(SelectRowIndex, 3).toString());
+//        jMaxSalary.setText(model.getValueAt(SelectRowIndex, 4).toString());
     }//GEN-LAST:event_jTableResultMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        if (jId.getText().equals("") || jTitle.getText().equals("") || jMinSalary.getText().equals("") || jMaxSalary.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(this, "Ingin mengupdate data ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (confirm == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, ijc.save(jId.getText(), jTitle.getText(), jMinSalary.getText(), jMaxSalary.getText()));
-                showTableJob("");
-                resetTextJob();
-            }
-        }
+        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
-        if (jId.getText().equals("") || jTitle.getText().equals("") || jMinSalary.getText().equals("") || jMaxSalary.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(this, "Ingin mengupdate data ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (confirm == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, ijc.save(jId.getText(), jTitle.getText(), jMinSalary.getText(), jMaxSalary.getText()));
-                showTableJob("");
-                resetTextJob();
-            }
-        }
+        
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

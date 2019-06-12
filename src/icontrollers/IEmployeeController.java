@@ -21,11 +21,9 @@ public interface IEmployeeController {
     public List<Employee> search(Object keyword);
 
     public String save(String Id, String firstName, String lastName,
-            String email, String phoneNumber, String hireDate,
-            String salary, String commissionPct, String department,
-            String manager, String job);
-   
-    
+            String email, String phoneNumber,
+            String manager, String isdelete);
+
     public String delete(String id);
 
 }
