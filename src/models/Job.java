@@ -30,7 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
     , @NamedQuery(name = "Job.findById", query = "SELECT j FROM Job j WHERE j.id = :id")
-    , @NamedQuery(name = "Job.findByName", query = "SELECT j FROM Job j WHERE j.name = :name")})
+    , @NamedQuery(name = "Job.findByName", query = "SELECT j FROM Job j WHERE j.name = :name")
+    , @NamedQuery(name = "Job.findByIsdelete", query = "SELECT j FROM Job j WHERE j.isdelete = :isdelete")})
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,8 +42,11 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @Column(name = "NAME")
     private String name;
+    @Basic(optional = false)
+    @Column(name = "ISDELETE")
+    private Character isdelete;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeejobList;
+    private List<EmployeeJob> employeeJobList;
 
     public Job() {
     }
@@ -51,9 +55,10 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public Job(Long id, String name) {
+    public Job(Long id, String name, Character isdelete) {
         this.id = id;
         this.name = name;
+        this.isdelete = isdelete;
     }
 
     public Long getId() {
@@ -72,13 +77,21 @@ public class Job implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public List<EmployeeJob> getEmployeejobList() {
-        return employeejobList;
+    public Character getIsdelete() {
+        return isdelete;
     }
 
-    public void setEmployeejobList(List<EmployeeJob> employeejobList) {
-        this.employeejobList = employeejobList;
+    public void setIsdelete(Character isdelete) {
+        this.isdelete = isdelete;
+    }
+
+    @XmlTransient
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
+    }
+
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
     }
 
     @Override

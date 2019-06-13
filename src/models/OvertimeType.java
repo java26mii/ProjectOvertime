@@ -32,11 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "OvertimeType.findById", query = "SELECT o FROM OvertimeType o WHERE o.id = :id")
     , @NamedQuery(name = "OvertimeType.findByName", query = "SELECT o FROM OvertimeType o WHERE o.name = :name")
     , @NamedQuery(name = "OvertimeType.findByMinhour", query = "SELECT o FROM OvertimeType o WHERE o.minhour = :minhour")
-    , @NamedQuery(name = "OvertimeType.findBySalary", query = "SELECT o FROM OvertimeType o WHERE o.salary = :salary")})
+    , @NamedQuery(name = "OvertimeType.findBySalary", query = "SELECT o FROM OvertimeType o WHERE o.salary = :salary")
+    , @NamedQuery(name = "OvertimeType.findByIsdelete", query = "SELECT o FROM OvertimeType o WHERE o.isdelete = :isdelete")})
 public class OvertimeType implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimetype", fetch = FetchType.LAZY)
-    private List<OvertimeRequest> overtimeRequestList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,6 +50,11 @@ public class OvertimeType implements Serializable {
     @Basic(optional = false)
     @Column(name = "SALARY")
     private long salary;
+    @Basic(optional = false)
+    @Column(name = "ISDELETE")
+    private Character isdelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimetype", fetch = FetchType.LAZY)
+    private List<OvertimeRequest> overtimeRequestList;
 
     public OvertimeType() {
     }
@@ -60,11 +63,12 @@ public class OvertimeType implements Serializable {
         this.id = id;
     }
 
-    public OvertimeType(Long id, String name, short minhour, long salary) {
+    public OvertimeType(Long id, String name, short minhour, long salary, Character isdelete) {
         this.id = id;
         this.name = name;
         this.minhour = minhour;
         this.salary = salary;
+        this.isdelete = isdelete;
     }
 
     public Long getId() {
@@ -99,6 +103,23 @@ public class OvertimeType implements Serializable {
         this.salary = salary;
     }
 
+    public Character getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(Character isdelete) {
+        this.isdelete = isdelete;
+    }
+
+    @XmlTransient
+    public List<OvertimeRequest> getOvertimeRequestList() {
+        return overtimeRequestList;
+    }
+
+    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
+        this.overtimeRequestList = overtimeRequestList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,15 +143,6 @@ public class OvertimeType implements Serializable {
     @Override
     public String toString() {
         return "models.OvertimeType[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<OvertimeRequest> getOvertimeRequestList() {
-        return overtimeRequestList;
-    }
-
-    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
-        this.overtimeRequestList = overtimeRequestList;
     }
     
 }

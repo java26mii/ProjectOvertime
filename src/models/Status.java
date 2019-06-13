@@ -30,7 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")
     , @NamedQuery(name = "Status.findById", query = "SELECT s FROM Status s WHERE s.id = :id")
-    , @NamedQuery(name = "Status.findByName", query = "SELECT s FROM Status s WHERE s.name = :name")})
+    , @NamedQuery(name = "Status.findByName", query = "SELECT s FROM Status s WHERE s.name = :name")
+    , @NamedQuery(name = "Status.findByIsdelete", query = "SELECT s FROM Status s WHERE s.isdelete = :isdelete")})
 public class Status implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +42,9 @@ public class Status implements Serializable {
     @Basic(optional = false)
     @Column(name = "NAME")
     private String name;
+    @Basic(optional = false)
+    @Column(name = "ISDELETE")
+    private Character isdelete;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "status", fetch = FetchType.LAZY)
     private List<OvertimeRequestStatus> overtimeRequestStatusList;
 
@@ -51,9 +55,10 @@ public class Status implements Serializable {
         this.id = id;
     }
 
-    public Status(Long id, String name) {
+    public Status(Long id, String name, Character isdelete) {
         this.id = id;
         this.name = name;
+        this.isdelete = isdelete;
     }
 
     public Long getId() {
@@ -70,6 +75,14 @@ public class Status implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Character getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(Character isdelete) {
+        this.isdelete = isdelete;
     }
 
     @XmlTransient

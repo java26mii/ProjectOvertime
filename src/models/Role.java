@@ -6,14 +6,19 @@
 package models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
     , @NamedQuery(name = "Role.findById", query = "SELECT r FROM Role r WHERE r.id = :id")
-    , @NamedQuery(name = "Role.findByName", query = "SELECT r FROM Role r WHERE r.name = :name")})
+    , @NamedQuery(name = "Role.findByName", query = "SELECT r FROM Role r WHERE r.name = :name")
+    , @NamedQuery(name = "Role.findByIsdelete", query = "SELECT r FROM Role r WHERE r.isdelete = :isdelete")})
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,6 +42,11 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "NAME")
     private String name;
+    @Basic(optional = false)
+    @Column(name = "ISDELETE")
+    private Character isdelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)
+    private List<EmployeeRole> employeeRoleList;
 
     public Role() {
     }
@@ -44,9 +55,10 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public Role(Long id, String name) {
+    public Role(Long id, String name, Character isdelete) {
         this.id = id;
         this.name = name;
+        this.isdelete = isdelete;
     }
 
     public Long getId() {
@@ -63,6 +75,23 @@ public class Role implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Character getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(Character isdelete) {
+        this.isdelete = isdelete;
+    }
+
+    @XmlTransient
+    public List<EmployeeRole> getEmployeeRoleList() {
+        return employeeRoleList;
+    }
+
+    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
+        this.employeeRoleList = employeeRoleList;
     }
 
     @Override

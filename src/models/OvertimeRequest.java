@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "OvertimeRequest.findByReqdate", query = "SELECT o FROM OvertimeRequest o WHERE o.reqdate = :reqdate")
     , @NamedQuery(name = "OvertimeRequest.findByStarttime", query = "SELECT o FROM OvertimeRequest o WHERE o.starttime = :starttime")
     , @NamedQuery(name = "OvertimeRequest.findByEndtime", query = "SELECT o FROM OvertimeRequest o WHERE o.endtime = :endtime")
-    , @NamedQuery(name = "OvertimeRequest.findByActivity", query = "SELECT o FROM OvertimeRequest o WHERE o.activity = :activity")})
+    , @NamedQuery(name = "OvertimeRequest.findByActivity", query = "SELECT o FROM OvertimeRequest o WHERE o.activity = :activity")
+    , @NamedQuery(name = "OvertimeRequest.findByIsdelete", query = "SELECT o FROM OvertimeRequest o WHERE o.isdelete = :isdelete")})
 public class OvertimeRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +62,9 @@ public class OvertimeRequest implements Serializable {
     @Basic(optional = false)
     @Column(name = "ACTIVITY")
     private String activity;
+    @Basic(optional = false)
+    @Column(name = "ISDELETE")
+    private Character isdelete;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimerequest", fetch = FetchType.LAZY)
     private List<OvertimeRequestStatus> overtimeRequestStatusList;
     @JoinColumn(name = "EMPLOYEE", referencedColumnName = "ID")
@@ -77,12 +81,13 @@ public class OvertimeRequest implements Serializable {
         this.id = id;
     }
 
-    public OvertimeRequest(Long id, Date reqdate, Date starttime, Date endtime, String activity) {
+    public OvertimeRequest(Long id, Date reqdate, Date starttime, Date endtime, String activity, Character isdelete) {
         this.id = id;
         this.reqdate = reqdate;
         this.starttime = starttime;
         this.endtime = endtime;
         this.activity = activity;
+        this.isdelete = isdelete;
     }
 
     public Long getId() {
@@ -123,6 +128,14 @@ public class OvertimeRequest implements Serializable {
 
     public void setActivity(String activity) {
         this.activity = activity;
+    }
+
+    public Character getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(Character isdelete) {
+        this.isdelete = isdelete;
     }
 
     @XmlTransient

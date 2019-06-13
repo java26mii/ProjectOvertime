@@ -42,7 +42,7 @@ public class JobController implements IJobController {
     @Override
     public String save(String id, String name) {
         String result = "";
-        Job job = new Job(Long.parseLong(id), name);
+        Job job = new Job(Long.parseLong(id), name, Character.MIN_VALUE);
         if (gdao.saveOrDelete(job, false)) {
             result = "Success";
         } else {
