@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Job.findByIsdelete", query = "SELECT j FROM Job j WHERE j.isdelete = :isdelete")})
 public class Job implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
+    private List<EmployeeJob> employeeJobList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -45,8 +48,6 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @Column(name = "ISDELETE")
     private Character isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeeJobList;
 
     public Job() {
     }
@@ -85,15 +86,6 @@ public class Job implements Serializable {
         this.isdelete = isdelete;
     }
 
-    @XmlTransient
-    public List<EmployeeJob> getEmployeeJobList() {
-        return employeeJobList;
-    }
-
-    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
-        this.employeeJobList = employeeJobList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -117,6 +109,15 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "models.Job[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
+    }
+
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
     }
     
 }

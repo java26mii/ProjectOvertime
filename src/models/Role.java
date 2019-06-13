@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Role.findByIsdelete", query = "SELECT r FROM Role r WHERE r.isdelete = :isdelete")})
 public class Role implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)
+    private List<EmployeeRole> employeeRoleList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -45,8 +48,6 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "ISDELETE")
     private Character isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)
-    private List<EmployeeRole> employeeRoleList;
 
     public Role() {
     }
@@ -85,15 +86,6 @@ public class Role implements Serializable {
         this.isdelete = isdelete;
     }
 
-    @XmlTransient
-    public List<EmployeeRole> getEmployeeRoleList() {
-        return employeeRoleList;
-    }
-
-    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
-        this.employeeRoleList = employeeRoleList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -117,6 +109,15 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "models.Role[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<EmployeeRole> getEmployeeRoleList() {
+        return employeeRoleList;
+    }
+
+    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
+        this.employeeRoleList = employeeRoleList;
     }
     
 }

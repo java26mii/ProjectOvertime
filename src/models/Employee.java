@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -40,6 +39,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByIsdelete", query = "SELECT e FROM Employee e WHERE e.isdelete = :isdelete")})
 public class Employee implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<EmployeeJob> employeeJobList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<EmployeeRole> employeeRoleList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -60,19 +64,11 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "ISDELETE")
     private Character isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeeJobList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     @JoinColumn(name = "MANAGER", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee manager;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private Account account;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<OvertimeRequest> overtimeRequestList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeRole> employeeRoleList;
 
     public Employee() {
     }
@@ -139,15 +135,6 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
-    public List<EmployeeJob> getEmployeeJobList() {
-        return employeeJobList;
-    }
-
-    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
-        this.employeeJobList = employeeJobList;
-    }
-
-    @XmlTransient
     public List<Employee> getEmployeeList() {
         return employeeList;
     }
@@ -162,32 +149,6 @@ public class Employee implements Serializable {
 
     public void setManager(Employee manager) {
         this.manager = manager;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    @XmlTransient
-    public List<OvertimeRequest> getOvertimeRequestList() {
-        return overtimeRequestList;
-    }
-
-    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
-        this.overtimeRequestList = overtimeRequestList;
-    }
-
-    @XmlTransient
-    public List<EmployeeRole> getEmployeeRoleList() {
-        return employeeRoleList;
-    }
-
-    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
-        this.employeeRoleList = employeeRoleList;
     }
 
     @Override
@@ -213,6 +174,24 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "models.Employee[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
+    }
+
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
+    }
+
+    @XmlTransient
+    public List<EmployeeRole> getEmployeeRoleList() {
+        return employeeRoleList;
+    }
+
+    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
+        this.employeeRoleList = employeeRoleList;
     }
     
 }
