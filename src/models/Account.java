@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id")
     , @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
-    , @NamedQuery(name = "Account.findByIsdelete", query = "SELECT a FROM Account a WHERE a.isdelete = :isdelete")})
+    , @NamedQuery(name = "Account.findByIsDelete", query = "SELECT a FROM Account a WHERE a.isDelete = :isDelete")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,11 +45,11 @@ public class Account implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
     @Basic(optional = false)
-    @Column(name = "ISDELETE")
-    private Character isdelete;
+    @Column(name = "IS_DELETE")
+    private Character isDelete;
     @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private Employee employee;
+    private Employee employees;
 
     public Account() {
     }
@@ -57,18 +57,18 @@ public class Account implements Serializable {
     public Account(Long id) {
         this.id = id;
     }
-
+    
     public Account(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
     
-    public Account(Long id, String username, String password, Character isdelete) {
+    public Account(Long id, String username, String password, Character isDelete) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.isdelete = isdelete;
+        this.isDelete = isDelete;
     }
 
     public Long getId() {
@@ -95,20 +95,20 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public Character getIsdelete() {
-        return isdelete;
+    public Character getIsDelete() {
+        return isDelete;
     }
 
-    public void setIsdelete(Character isdelete) {
-        this.isdelete = isdelete;
+    public void setIsDelete(Character isDelete) {
+        this.isDelete = isDelete;
     }
 
     public Employee getEmployee() {
-        return employee;
+        return employees;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployee(Employee employees) {
+        this.employees = employees;
     }
 
     @Override

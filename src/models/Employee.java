@@ -32,17 +32,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
     , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")
-    , @NamedQuery(name = "Employee.findByFirstname", query = "SELECT e FROM Employee e WHERE e.firstname = :firstname")
-    , @NamedQuery(name = "Employee.findByLastname", query = "SELECT e FROM Employee e WHERE e.lastname = :lastname")
+    , @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName")
+    , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
-    , @NamedQuery(name = "Employee.findByPhonenumber", query = "SELECT e FROM Employee e WHERE e.phonenumber = :phonenumber")
-    , @NamedQuery(name = "Employee.findByIsdelete", query = "SELECT e FROM Employee e WHERE e.isdelete = :isdelete")})
+    , @NamedQuery(name = "Employee.findByPhoneNumber", query = "SELECT e FROM Employee e WHERE e.phoneNumber = :phoneNumber")
+    , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")})
 public class Employee implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeeJobList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeRole> employeeRoleList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,20 +45,20 @@ public class Employee implements Serializable {
     @Column(name = "ID")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "FIRSTNAME")
-    private String firstname;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
     @Basic(optional = false)
-    @Column(name = "LASTNAME")
-    private String lastname;
+    @Column(name = "LAST_NAME")
+    private String lastName;
     @Basic(optional = false)
     @Column(name = "EMAIL")
     private String email;
     @Basic(optional = false)
-    @Column(name = "PHONENUMBER")
-    private long phonenumber;
+    @Column(name = "PHONE_NUMBER")
+    private long phoneNumber;
     @Basic(optional = false)
-    @Column(name = "ISDELETE")
-    private Character isdelete;
+    @Column(name = "IS_DELETE")
+    private Character isDelete;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     @JoinColumn(name = "MANAGER", referencedColumnName = "ID")
@@ -76,23 +71,22 @@ public class Employee implements Serializable {
     public Employee(Long id) {
         this.id = id;
     }
-
-    public Employee(Long id, String firstname, String lastname, String email, long phonenumber, Employee manager) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.phonenumber = phonenumber;
-        this.manager = manager;
-    }
     
-    public Employee(Long id, String firstname, String lastname, String email, long phonenumber, Character isdelete) {
+    public Employee(Long id, String firstName, String lastName, String email, long phoneNumber) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.phonenumber = phonenumber;
-        this.isdelete = isdelete;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Employee(Long id, String firstName, String lastName, String email, long phoneNumber, Character isDelete) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.isDelete = isDelete;
     }
 
     public Long getId() {
@@ -103,20 +97,20 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -127,20 +121,20 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public long getPhonenumber() {
-        return phonenumber;
+    public long getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(long phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public Character getIsdelete() {
-        return isdelete;
+    public Character getIsDelete() {
+        return isDelete;
     }
 
-    public void setIsdelete(Character isdelete) {
-        this.isdelete = isdelete;
+    public void setIsDelete(Character isDelete) {
+        this.isDelete = isDelete;
     }
 
     @XmlTransient
@@ -183,24 +177,6 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "models.Employee[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<EmployeeJob> getEmployeeJobList() {
-        return employeeJobList;
-    }
-
-    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
-        this.employeeJobList = employeeJobList;
-    }
-
-    @XmlTransient
-    public List<EmployeeRole> getEmployeeRoleList() {
-        return employeeRoleList;
-    }
-
-    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
-        this.employeeRoleList = employeeRoleList;
     }
     
 }

@@ -31,11 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
     , @NamedQuery(name = "Job.findById", query = "SELECT j FROM Job j WHERE j.id = :id")
     , @NamedQuery(name = "Job.findByName", query = "SELECT j FROM Job j WHERE j.name = :name")
-    , @NamedQuery(name = "Job.findByIsdelete", query = "SELECT j FROM Job j WHERE j.isdelete = :isdelete")})
+    , @NamedQuery(name = "Job.findByIsDelete", query = "SELECT j FROM Job j WHERE j.isDelete = :isDelete")})
 public class Job implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeeJobList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,8 +43,10 @@ public class Job implements Serializable {
     @Column(name = "NAME")
     private String name;
     @Basic(optional = false)
-    @Column(name = "ISDELETE")
-    private Character isdelete;
+    @Column(name = "IS_DELETE")
+    private Character isDelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
+    private List<EmployeeJob> employeeJobList;
 
     public Job() {
     }
@@ -55,16 +54,16 @@ public class Job implements Serializable {
     public Job(Long id) {
         this.id = id;
     }
-
+    
     public Job(Long id, String name) {
         this.id = id;
         this.name = name;
     }
-    
-    public Job(Long id, String name, Character isdelete) {
+
+    public Job(Long id, String name, Character isDelete) {
         this.id = id;
         this.name = name;
-        this.isdelete = isdelete;
+        this.isDelete = isDelete;
     }
 
     public Long getId() {
@@ -83,12 +82,21 @@ public class Job implements Serializable {
         this.name = name;
     }
 
-    public Character getIsdelete() {
-        return isdelete;
+    public Character getIsDelete() {
+        return isDelete;
     }
 
-    public void setIsdelete(Character isdelete) {
-        this.isdelete = isdelete;
+    public void setIsDelete(Character isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    @XmlTransient
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
+    }
+
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
     }
 
     @Override
@@ -114,15 +122,6 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "models.Job[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<EmployeeJob> getEmployeeJobList() {
-        return employeeJobList;
-    }
-
-    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
-        this.employeeJobList = employeeJobList;
     }
     
 }

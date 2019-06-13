@@ -26,12 +26,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ASUS
  */
 @Entity
-@Table(name = "OVERTIMEREQUESTSTATUS")
+@Table(name = "OVERTIME_REQUEST_STATUS")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OvertimeRequestStatus.findAll", query = "SELECT o FROM OvertimeRequestStatus o")
     , @NamedQuery(name = "OvertimeRequestStatus.findById", query = "SELECT o FROM OvertimeRequestStatus o WHERE o.id = :id")
-    , @NamedQuery(name = "OvertimeRequestStatus.findByStatusdate", query = "SELECT o FROM OvertimeRequestStatus o WHERE o.statusdate = :statusdate")})
+    , @NamedQuery(name = "OvertimeRequestStatus.findByStatusDate", query = "SELECT o FROM OvertimeRequestStatus o WHERE o.statusDate = :statusDate")})
 public class OvertimeRequestStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,12 +40,12 @@ public class OvertimeRequestStatus implements Serializable {
     @Column(name = "ID")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "STATUSDATE")
+    @Column(name = "STATUS_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date statusdate;
-    @JoinColumn(name = "OVERTIMEREQUEST", referencedColumnName = "ID")
+    private Date statusDate;
+    @JoinColumn(name = "OVERTIME_REQUEST", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private OvertimeRequest overtimerequest;
+    private OvertimeRequest overtimeRequest;
     @JoinColumn(name = "STATUS", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Status status;
@@ -57,9 +57,9 @@ public class OvertimeRequestStatus implements Serializable {
         this.id = id;
     }
 
-    public OvertimeRequestStatus(Long id, Date statusdate) {
+    public OvertimeRequestStatus(Long id, Date statusDate) {
         this.id = id;
-        this.statusdate = statusdate;
+        this.statusDate = statusDate;
     }
 
     public Long getId() {
@@ -70,20 +70,20 @@ public class OvertimeRequestStatus implements Serializable {
         this.id = id;
     }
 
-    public Date getStatusdate() {
-        return statusdate;
+    public Date getStatusDate() {
+        return statusDate;
     }
 
-    public void setStatusdate(Date statusdate) {
-        this.statusdate = statusdate;
+    public void setStatusDate(Date statusDate) {
+        this.statusDate = statusDate;
     }
 
-    public OvertimeRequest getOvertimerequest() {
-        return overtimerequest;
+    public OvertimeRequest getOvertimeRequest() {
+        return overtimeRequest;
     }
 
-    public void setOvertimerequest(OvertimeRequest overtimerequest) {
-        this.overtimerequest = overtimerequest;
+    public void setOvertimeRequest(OvertimeRequest overtimeRequest) {
+        this.overtimeRequest = overtimeRequest;
     }
 
     public Status getStatus() {

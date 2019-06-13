@@ -7,9 +7,7 @@ package models;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,28 +16,26 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author ASUS
  */
 @Entity
-@Table(name = "OVERTIMEREQUESTS")
+@Table(name = "OVERTIME_REQUESTS")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OvertimeRequest.findAll", query = "SELECT o FROM OvertimeRequest o")
     , @NamedQuery(name = "OvertimeRequest.findById", query = "SELECT o FROM OvertimeRequest o WHERE o.id = :id")
-    , @NamedQuery(name = "OvertimeRequest.findByReqdate", query = "SELECT o FROM OvertimeRequest o WHERE o.reqdate = :reqdate")
-    , @NamedQuery(name = "OvertimeRequest.findByStarttime", query = "SELECT o FROM OvertimeRequest o WHERE o.starttime = :starttime")
-    , @NamedQuery(name = "OvertimeRequest.findByEndtime", query = "SELECT o FROM OvertimeRequest o WHERE o.endtime = :endtime")
+    , @NamedQuery(name = "OvertimeRequest.findByReqDate", query = "SELECT o FROM OvertimeRequest o WHERE o.reqDate = :reqDate")
+    , @NamedQuery(name = "OvertimeRequest.findByStartTime", query = "SELECT o FROM OvertimeRequest o WHERE o.startTime = :startTime")
+    , @NamedQuery(name = "OvertimeRequest.findByEndTime", query = "SELECT o FROM OvertimeRequest o WHERE o.endTime = :endTime")
     , @NamedQuery(name = "OvertimeRequest.findByActivity", query = "SELECT o FROM OvertimeRequest o WHERE o.activity = :activity")
-    , @NamedQuery(name = "OvertimeRequest.findByIsdelete", query = "SELECT o FROM OvertimeRequest o WHERE o.isdelete = :isdelete")})
+    , @NamedQuery(name = "OvertimeRequest.findByIsDelete", query = "SELECT o FROM OvertimeRequest o WHERE o.isDelete = :isDelete")})
 public class OvertimeRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,31 +44,29 @@ public class OvertimeRequest implements Serializable {
     @Column(name = "ID")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "REQDATE")
+    @Column(name = "REQ_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date reqdate;
+    private Date reqDate;
     @Basic(optional = false)
-    @Column(name = "STARTTIME")
+    @Column(name = "START_TIME")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date starttime;
+    private Date startTime;
     @Basic(optional = false)
-    @Column(name = "ENDTIME")
+    @Column(name = "END_TIME")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endtime;
+    private Date endTime;
     @Basic(optional = false)
     @Column(name = "ACTIVITY")
     private String activity;
     @Basic(optional = false)
-    @Column(name = "ISDELETE")
-    private Character isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimerequest", fetch = FetchType.LAZY)
-    private List<OvertimeRequestStatus> overtimeRequestStatusList;
+    @Column(name = "IS_DELETE")
+    private Character isDelete;
     @JoinColumn(name = "EMPLOYEE", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
-    @JoinColumn(name = "OVERTIMETYPE", referencedColumnName = "ID")
+    @JoinColumn(name = "OVERTIME_TYPE", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private OvertimeType overtimetype;
+    private OvertimeType overtimeType;
 
     public OvertimeRequest() {
     }
@@ -80,22 +74,22 @@ public class OvertimeRequest implements Serializable {
     public OvertimeRequest(Long id) {
         this.id = id;
     }
-
-    public OvertimeRequest(Long id, Date reqdate, Date starttime, Date endtime, String activity) {
+    
+    public OvertimeRequest(Long id, Date reqDate, Date startTime, Date endTime, String activity) {
         this.id = id;
-        this.reqdate = reqdate;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.reqDate = reqDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.activity = activity;
     }
-    
-    public OvertimeRequest(Long id, Date reqdate, Date starttime, Date endtime, String activity, Character isdelete) {
+
+    public OvertimeRequest(Long id, Date reqDate, Date startTime, Date endTime, String activity, Character isDelete) {
         this.id = id;
-        this.reqdate = reqdate;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.reqDate = reqDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.activity = activity;
-        this.isdelete = isdelete;
+        this.isDelete = isDelete;
     }
 
     public Long getId() {
@@ -106,28 +100,28 @@ public class OvertimeRequest implements Serializable {
         this.id = id;
     }
 
-    public Date getReqdate() {
-        return reqdate;
+    public Date getReqDate() {
+        return reqDate;
     }
 
-    public void setReqdate(Date reqdate) {
-        this.reqdate = reqdate;
+    public void setReqDate(Date reqDate) {
+        this.reqDate = reqDate;
     }
 
-    public Date getStarttime() {
-        return starttime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getEndtime() {
-        return endtime;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public String getActivity() {
@@ -138,21 +132,12 @@ public class OvertimeRequest implements Serializable {
         this.activity = activity;
     }
 
-    public Character getIsdelete() {
-        return isdelete;
+    public Character getIsDelete() {
+        return isDelete;
     }
 
-    public void setIsdelete(Character isdelete) {
-        this.isdelete = isdelete;
-    }
-
-    @XmlTransient
-    public List<OvertimeRequestStatus> getOvertimeRequestStatusList() {
-        return overtimeRequestStatusList;
-    }
-
-    public void setOvertimeRequestStatusList(List<OvertimeRequestStatus> overtimeRequestStatusList) {
-        this.overtimeRequestStatusList = overtimeRequestStatusList;
+    public void setIsDelete(Character isDelete) {
+        this.isDelete = isDelete;
     }
 
     public Employee getEmployee() {
@@ -163,12 +148,12 @@ public class OvertimeRequest implements Serializable {
         this.employee = employee;
     }
 
-    public OvertimeType getOvertimetype() {
-        return overtimetype;
+    public OvertimeType getOvertimeType() {
+        return overtimeType;
     }
 
-    public void setOvertimetype(OvertimeType overtimetype) {
-        this.overtimetype = overtimetype;
+    public void setOvertimeType(OvertimeType overtimeType) {
+        this.overtimeType = overtimeType;
     }
 
     @Override
