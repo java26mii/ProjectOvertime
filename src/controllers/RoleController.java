@@ -37,7 +37,7 @@ public class RoleController implements IRoleController {
     @Override
     public String save(String id, String name) {
         String result = "";
-        Role role = new Role(Long.parseLong(id), name, Character.MIN_VALUE);
+        Role role = new Role(Long.parseLong(id), name);
         if (gdao.saveOrDelete(role, false)) {
             result = "success";
         }else{

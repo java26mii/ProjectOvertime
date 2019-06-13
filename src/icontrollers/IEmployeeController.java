@@ -22,7 +22,7 @@ public interface IEmployeeController {
 
     public String save(String Id, String firstName, String lastName,
             String email, String phoneNumber,
-            String manager, String isdelete);
+            String manager);
 
     public String delete(String id);
 

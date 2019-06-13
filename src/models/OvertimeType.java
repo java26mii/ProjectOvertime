@@ -63,6 +63,13 @@ public class OvertimeType implements Serializable {
         this.id = id;
     }
 
+    public OvertimeType(Long id, String name, short minhour, long salary) {
+        this.id = id;
+        this.name = name;
+        this.minhour = minhour;
+        this.salary = salary;
+    }
+    
     public OvertimeType(Long id, String name, short minhour, long salary, Character isdelete) {
         this.id = id;
         this.name = name;

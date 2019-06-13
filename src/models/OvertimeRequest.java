@@ -81,6 +81,14 @@ public class OvertimeRequest implements Serializable {
         this.id = id;
     }
 
+    public OvertimeRequest(Long id, Date reqdate, Date starttime, Date endtime, String activity) {
+        this.id = id;
+        this.reqdate = reqdate;
+        this.starttime = starttime;
+        this.endtime = endtime;
+        this.activity = activity;
+    }
+    
     public OvertimeRequest(Long id, Date reqdate, Date starttime, Date endtime, String activity, Character isdelete) {
         this.id = id;
         this.reqdate = reqdate;
