@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -60,17 +59,11 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "ISDELETE")
     private Character isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<Employeejob> employeejobList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     @JoinColumn(name = "MANAGER", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee manager;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private Account account;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<Employeerole> employeeroleList;
 
     public Employee() {
     }
@@ -137,15 +130,6 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
-    public List<Employeejob> getEmployeejobList() {
-        return employeejobList;
-    }
-
-    public void setEmployeejobList(List<Employeejob> employeejobList) {
-        this.employeejobList = employeejobList;
-    }
-
-    @XmlTransient
     public List<Employee> getEmployeeList() {
         return employeeList;
     }
@@ -160,23 +144,6 @@ public class Employee implements Serializable {
 
     public void setManager(Employee manager) {
         this.manager = manager;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    @XmlTransient
-    public List<Employeerole> getEmployeeroleList() {
-        return employeeroleList;
-    }
-
-    public void setEmployeeroleList(List<Employeerole> employeeroleList) {
-        this.employeeroleList = employeeroleList;
     }
 
     @Override

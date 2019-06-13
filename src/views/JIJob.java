@@ -155,6 +155,8 @@ public class JIJob extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableResult);
         if (jTableResult.getColumnModel().getColumnCount() > 0) {
             jTableResult.getColumnModel().getColumn(0).setResizable(false);
+            jTableResult.getColumnModel().getColumn(3).setHeaderValue("Minimal Salary");
+            jTableResult.getColumnModel().getColumn(4).setHeaderValue("Maximal Salary");
         }
 
         jReset.setText("RESET");

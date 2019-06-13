@@ -6,27 +6,32 @@
 package models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author ASUS
  */
 @Entity
-@Table(name = "ROLES")
+@Table(name = "STATUS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
-    , @NamedQuery(name = "Role.findById", query = "SELECT r FROM Role r WHERE r.id = :id")
-    , @NamedQuery(name = "Role.findByName", query = "SELECT r FROM Role r WHERE r.name = :name")})
-public class Role implements Serializable {
+    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")
+    , @NamedQuery(name = "Status.findById", query = "SELECT s FROM Status s WHERE s.id = :id")
+    , @NamedQuery(name = "Status.findByName", query = "SELECT s FROM Status s WHERE s.name = :name")})
+public class Status implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,15 +41,17 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "NAME")
     private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "status", fetch = FetchType.LAZY)
+    private List<OvertimeRequestStatus> overtimeRequestStatusList;
 
-    public Role() {
+    public Status() {
     }
 
-    public Role(Long id) {
+    public Status(Long id) {
         this.id = id;
     }
 
-    public Role(Long id, String name) {
+    public Status(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -65,6 +72,15 @@ public class Role implements Serializable {
         this.name = name;
     }
 
+    @XmlTransient
+    public List<OvertimeRequestStatus> getOvertimeRequestStatusList() {
+        return overtimeRequestStatusList;
+    }
+
+    public void setOvertimeRequestStatusList(List<OvertimeRequestStatus> overtimeRequestStatusList) {
+        this.overtimeRequestStatusList = overtimeRequestStatusList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -75,10 +91,10 @@ public class Role implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+        if (!(object instanceof Status)) {
             return false;
         }
-        Role other = (Role) object;
+        Status other = (Status) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -87,7 +103,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Role[ id=" + id + " ]";
+        return "models.Status[ id=" + id + " ]";
     }
     
 }

@@ -25,13 +25,18 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ASUS
  */
 @Entity
-@Table(name = "JOBS")
+@Table(name = "OVERTIMETYPES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
-    , @NamedQuery(name = "Job.findById", query = "SELECT j FROM Job j WHERE j.id = :id")
-    , @NamedQuery(name = "Job.findByName", query = "SELECT j FROM Job j WHERE j.name = :name")})
-public class Job implements Serializable {
+    @NamedQuery(name = "OvertimeType.findAll", query = "SELECT o FROM OvertimeType o")
+    , @NamedQuery(name = "OvertimeType.findById", query = "SELECT o FROM OvertimeType o WHERE o.id = :id")
+    , @NamedQuery(name = "OvertimeType.findByName", query = "SELECT o FROM OvertimeType o WHERE o.name = :name")
+    , @NamedQuery(name = "OvertimeType.findByMinhour", query = "SELECT o FROM OvertimeType o WHERE o.minhour = :minhour")
+    , @NamedQuery(name = "OvertimeType.findBySalary", query = "SELECT o FROM OvertimeType o WHERE o.salary = :salary")})
+public class OvertimeType implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimetype", fetch = FetchType.LAZY)
+    private List<OvertimeRequest> overtimeRequestList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,19 +46,25 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @Column(name = "NAME")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeejobList;
+    @Basic(optional = false)
+    @Column(name = "MINHOUR")
+    private short minhour;
+    @Basic(optional = false)
+    @Column(name = "SALARY")
+    private long salary;
 
-    public Job() {
+    public OvertimeType() {
     }
 
-    public Job(Long id) {
+    public OvertimeType(Long id) {
         this.id = id;
     }
 
-    public Job(Long id, String name) {
+    public OvertimeType(Long id, String name, short minhour, long salary) {
         this.id = id;
         this.name = name;
+        this.minhour = minhour;
+        this.salary = salary;
     }
 
     public Long getId() {
@@ -72,13 +83,20 @@ public class Job implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public List<EmployeeJob> getEmployeejobList() {
-        return employeejobList;
+    public short getMinhour() {
+        return minhour;
     }
 
-    public void setEmployeejobList(List<EmployeeJob> employeejobList) {
-        this.employeejobList = employeejobList;
+    public void setMinhour(short minhour) {
+        this.minhour = minhour;
+    }
+
+    public long getSalary() {
+        return salary;
+    }
+
+    public void setSalary(long salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -91,10 +109,10 @@ public class Job implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Job)) {
+        if (!(object instanceof OvertimeType)) {
             return false;
         }
-        Job other = (Job) object;
+        OvertimeType other = (OvertimeType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +121,16 @@ public class Job implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Job[ id=" + id + " ]";
+        return "models.OvertimeType[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<OvertimeRequest> getOvertimeRequestList() {
+        return overtimeRequestList;
+    }
+
+    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
+        this.overtimeRequestList = overtimeRequestList;
     }
     
 }
