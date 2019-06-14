@@ -9,12 +9,12 @@ package views;
  *
  * @author ASUS
  */
-public class JIStatusForm extends javax.swing.JInternalFrame {
+public class JIJobForm extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form JIStatusForm
+     * Creates new form JIJobForm
      */
-    public JIStatusForm() {
+    public JIJobForm() {
         initComponents();
     }
 
@@ -35,16 +35,17 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel31.setText("Status name");
+        jLabel31.setText("Job name");
 
         txtLastname2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,20 +77,12 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
                 {null, null}
             },
             new String [] {
-                "id", "status name"
+                "id", "job name"
             }
         ));
         jScrollPane3.setViewportView(jTable2);
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 153));
-
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Admin Name");
-
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Id Employee");
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
 
         jButton5.setText("Logout");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +92,17 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
         });
 
         jButton6.setText("Edit User");
+
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Admin Name");
+
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Id Employee");
+
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Job");
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/home-icon.png"))); // NOI18N
 
@@ -111,6 +115,9 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel19))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel20))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addComponent(jLabel21))
@@ -136,17 +143,19 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addGap(56, 56, 56)
                 .addComponent(jLabel22)
                 .addGap(45, 45, 45)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addGap(52, 52, 52))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel33.setText("Status Form");
+        jLabel33.setText("Role Form");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,7 +207,7 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
                 .addComponent(txtSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -228,6 +237,7 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel31;
