@@ -30,26 +30,25 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id")
     , @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
-    , @NamedQuery(name = "Account.findByIsDelete", query = "SELECT a FROM Account a WHERE a.isDelete = :isDelete")})
+    , @NamedQuery(name = "Account.findByIsDelete", query = "SELECT a FROM Account a WHERE a.isDelete = :isDelete")
+    , @NamedQuery(name = "Account.findByPhoto", query = "SELECT a FROM Account a WHERE a.photo = :photo")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
-    @Column(name = "PASSWORD")
     private String password;
     @Basic(optional = false)
     @Column(name = "IS_DELETE")
     private Character isDelete;
+    private String photo;
     @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private Employee employees;
+    private Employee employee;
 
     public Account() {
     }
@@ -57,13 +56,7 @@ public class Account implements Serializable {
     public Account(Long id) {
         this.id = id;
     }
-    
-    public Account(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
-    
+
     public Account(Long id, String username, String password, Character isDelete) {
         this.id = id;
         this.username = username;
@@ -103,12 +96,20 @@ public class Account implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public Employee getEmployee() {
-        return employees;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setEmployee(Employee employees) {
-        this.employees = employees;
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override

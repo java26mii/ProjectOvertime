@@ -9,12 +9,12 @@ package views;
  *
  * @author ASUS
  */
-public class JHomeEmployee extends javax.swing.JInternalFrame {
+public class JIHomeEmployee extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JDashboardEmployee
      */
-    public JHomeEmployee() {
+    public JIHomeEmployee() {
         initComponents();
     }
 
