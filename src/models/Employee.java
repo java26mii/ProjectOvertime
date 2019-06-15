@@ -6,6 +6,7 @@
 package models;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -39,6 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByPhoneNumber", query = "SELECT e FROM Employee e WHERE e.phoneNumber = :phoneNumber")
     , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")})
 public class Employee implements Serializable {
+
+    @Basic(optional = false)
+    @Column(name = "SALARY")
+    private BigInteger salary;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
     private Account account;
@@ -212,6 +217,14 @@ public class Employee implements Serializable {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public BigInteger getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigInteger salary) {
+        this.salary = salary;
     }
     
 }
