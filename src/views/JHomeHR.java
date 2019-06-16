@@ -94,10 +94,10 @@ public class JHomeHR extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel4.setText("History Overtime");
+        jLabel4.setText("Report");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel13.setText("Overtime Request");
+        jLabel13.setText("Overtime Approval");
 
         javax.swing.GroupLayout tesPanelLayout = new javax.swing.GroupLayout(tesPanel);
         tesPanel.setLayout(tesPanelLayout);
@@ -129,7 +129,7 @@ public class JHomeHR extends javax.swing.JFrame {
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tesPanelLayout.setVerticalGroup(
             tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +171,7 @@ public class JHomeHR extends javax.swing.JFrame {
         basePanel.setLayout(basePanelLayout);
         basePanelLayout.setHorizontalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGap(0, 641, Short.MAX_VALUE)
         );
         basePanelLayout.setVerticalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
