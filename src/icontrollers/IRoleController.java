@@ -19,7 +19,7 @@ public interface IRoleController {
 
     public List<Role> search(Object keyword);
 
-    public String save(String id, String name);
+    public String save(String id, String name, String isDelete);
 
     public String delete(String id);
 }

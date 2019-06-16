@@ -5,17 +5,64 @@
  */
 package views;
 
+import controllers.RoleController;
+import icontrollers.IRoleController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.Employee;
+import models.Role;
+import org.hibernate.SessionFactory;
+import tools.HibernateUtil;
+
 /**
  *
  * @author ASUS
  */
 public class JIRoleForm extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form JIRoleForm
-     */
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IRoleController roleController = new RoleController(factory);
+
     public JIRoleForm() {
         initComponents();
+        showTable("");
+    }
+
+    private void resetText() {
+        txtId.setText("");
+        txtRole.setText("");
+
+        btnSave.setEnabled(true);
+        txtId.setEditable(true);
+    }
+
+    public void showTable(String key) {
+        DefaultTableModel model = (DefaultTableModel) tblRole.getModel();
+        model.setRowCount(0);
+        Object[] row = new Object[3];
+        List<Role> roles = new ArrayList<>();
+        if (key == "") {
+            roles = roleController.getAll();
+        }
+        roles = roleController.search(key);
+
+        for (int i = 0; i < roles.size(); i++) {
+            row[0] = i + 1;
+            row[1] = roles.get(i).getId();
+            row[2] = roles.get(i).getName();
+            model.addRow(row);
+        }
+    }
+
+    public void updateTable(String id) {
+        DefaultTableModel model = (DefaultTableModel) tblRole.getModel();
+        model.setRowCount(0);
+        if (id == "") {
+            showTable("");
+        }
+        showTable(id);
     }
 
     /**
@@ -27,49 +74,62 @@ public class JIRoleForm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnSave2 = new javax.swing.JButton();
-        txtSearch2 = new javax.swing.JTextField();
-        btnReset2 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        btnReset = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblRole = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        txtLastname2 = new javax.swing.JTextField();
-        btnSave3 = new javax.swing.JButton();
+        txtRole = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
+        jLabel32 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
-        btnSave2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnSave2.setText("Save");
-        btnSave2.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave2ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        btnReset2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnReset2.setText("Reset");
-        btnReset2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReset2ActionPerformed(evt);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        btnReset.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
+        tblRole.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "id", "role name"
+                "no", "id", "role name"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        tblRole.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRoleMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblRole);
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel33.setText("Role Form");
@@ -77,17 +137,26 @@ public class JIRoleForm extends javax.swing.JInternalFrame {
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel31.setText("Role name");
 
-        txtLastname2.addActionListener(new java.awt.event.ActionListener() {
+        txtRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastname2ActionPerformed(evt);
+                txtRoleActionPerformed(evt);
             }
         });
 
-        btnSave3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnSave3.setText("Delete");
-        btnSave3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel32.setText("ID");
+
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
             }
         });
 
@@ -98,79 +167,121 @@ public class JIRoleForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addComponent(txtLastname2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel33)
-                                .addGap(80, 80, 80))))
+                        .addGap(322, 322, 322)
+                        .addComponent(jLabel33))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(btnReset2)
-                        .addGap(60, 60, 60)
-                        .addComponent(btnSave2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnSave3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(btnReset)
+                                .addGap(60, 60, 60)
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(btnDelete))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(142, 142, 142)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel33)
-                .addGap(28, 28, 28)
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(txtLastname2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset2)
-                    .addComponent(btnSave2)
-                    .addComponent(btnSave3))
-                .addGap(41, 41, 41)
-                .addComponent(txtSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset)
+                    .addComponent(btnSave)
+                    .addComponent(btnDelete))
+                .addGap(86, 86, 86)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(380, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSave2ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if (txtId.getText().equals("") || txtRole.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Isi semua kolom");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(this, "Anda yakin menambah data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, roleController.save(txtId.getText(), txtRole.getText(), "0"));
+                resetText();
+            }
+        }
+        showTable("");
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void btnReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReset2ActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        resetText();
+    }//GEN-LAST:event_btnResetActionPerformed
 
-    private void txtLastname2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastname2ActionPerformed
+    private void txtRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRoleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastname2ActionPerformed
+    }//GEN-LAST:event_txtRoleActionPerformed
 
-    private void btnSave3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave3ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin melakukan delete? ", "confirm delete ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirm == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, roleController.delete(txtId.getText()));
+            updateTable("");
+            resetText();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSave3ActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void tblRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoleMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tblRole.getModel();
+        int SelectedRowIndex = tblRole.getSelectedRow();
+        
+        txtId.setEditable(false);
+        
+        txtId.setText(model.getValueAt(SelectedRowIndex, 1).toString());
+        txtRole.setText(model.getValueAt(SelectedRowIndex, 2).toString());
+    }//GEN-LAST:event_tblRoleMouseClicked
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        updateTable(txtSearch.getText());
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReset2;
-    private javax.swing.JButton btnSave2;
-    private javax.swing.JButton btnSave3;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField txtLastname2;
-    private javax.swing.JTextField txtSearch2;
+    private javax.swing.JTable tblRole;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtRole;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

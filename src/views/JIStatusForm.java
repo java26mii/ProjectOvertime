@@ -5,18 +5,65 @@
  */
 package views;
 
+import controllers.StatusController;
+import icontrollers.IStatusController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.Status;
+import org.hibernate.SessionFactory;
+import tools.HibernateUtil;
+
 /**
  *
  * @author ASUS
  */
 public class JIStatusForm extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form JIStatusForm
-     */
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IStatusController statusController = new StatusController(factory);
+    
     public JIStatusForm() {
         initComponents();
+        showTable("");
     }
+    
+    private void resetText() {
+        txtId.setText("");
+        txtStatus.setText("");
+
+        btnSave.setEnabled(true);
+        txtId.setEditable(true);
+    }
+    
+    public void showTable(String key) {
+        DefaultTableModel model = (DefaultTableModel) tblStatus.getModel();
+        model.setRowCount(0);
+        Object[] row = new Object[3];
+        List<Status> statuses = new ArrayList<>();
+        if (key == "") {
+            statuses = statusController.getAll();
+        }
+        statuses = statusController.search(key);
+
+        for (int i = 0; i < statuses.size(); i++) {
+            row[0] = i + 1;
+            row[1] = statuses.get(i).getId();
+            row[2] = statuses.get(i).getName();
+            model.addRow(row);
+        }
+    }
+
+    public void updateTable(String id) {
+        DefaultTableModel model = (DefaultTableModel) tblStatus.getModel();
+        model.setRowCount(0);
+        if (id == "") {
+            showTable("");
+        }
+        showTable(id);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,14 +75,16 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel31 = new javax.swing.JLabel();
-        txtLastname2 = new javax.swing.JTextField();
-        btnSave2 = new javax.swing.JButton();
-        btnReset2 = new javax.swing.JButton();
-        txtSearch2 = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblStatus = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
-        btnSave3 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        txtStatus = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -43,53 +92,76 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
         setResizable(true);
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel31.setText("Status name");
+        jLabel31.setText("ID");
 
-        txtLastname2.addActionListener(new java.awt.event.ActionListener() {
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastname2ActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
-        btnSave2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnSave2.setText("Save");
-        btnSave2.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave2ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        btnReset2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnReset2.setText("Reset");
-        btnReset2.addActionListener(new java.awt.event.ActionListener() {
+        btnReset.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReset2ActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
+        tblStatus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "id", "status name"
+                "no", "id", "status name"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        tblStatus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblStatusMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblStatusMouseReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblStatus);
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel33.setText("Status Form");
 
-        btnSave3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnSave3.setText("Delete");
-        btnSave3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
+
+        txtStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStatusActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel32.setText("Status name ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,43 +170,53 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(btnReset2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSave2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnSave3))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLastname2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(165, 165, 165)
-                        .addComponent(jLabel33)))
-                .addContainerGap(298, Short.MAX_VALUE))
+                        .addComponent(jLabel33))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(btnReset)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnDelete))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabel33)
-                .addGap(36, 36, 36)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(txtLastname2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset2)
-                    .addComponent(btnSave2)
-                    .addComponent(btnSave3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                .addComponent(txtSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32)
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnSave)
+                    .addComponent(btnReset))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -143,32 +225,70 @@ public class JIStatusForm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtLastname2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastname2ActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastname2ActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
-    private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSave2ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if (txtId.getText().equals("") || txtStatus.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Isi semua kolom");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(this, "Anda yakin menambah data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, statusController.save(txtId.getText(), txtStatus.getText(), "0"));
+                resetText();
+            }
+        }
+        showTable("");
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void btnReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReset2ActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        resetText();
+    }//GEN-LAST:event_btnResetActionPerformed
 
-    private void btnSave3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave3ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin melakukan delete? ", "confirm delete ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirm == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, statusController.delete(txtId.getText()));
+            updateTable("");
+            resetText();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSave3ActionPerformed
+    }//GEN-LAST:event_txtStatusActionPerformed
+
+    private void tblStatusMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStatusMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblStatusMouseReleased
+
+    private void tblStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStatusMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tblStatus.getModel();
+        int SelectedRowIndex = tblStatus.getSelectedRow();
+        
+        txtId.setEditable(false);
+        
+        txtId.setText(model.getValueAt(SelectedRowIndex, 1).toString());
+        txtStatus.setText(model.getValueAt(SelectedRowIndex, 2).toString());
+    }//GEN-LAST:event_tblStatusMouseClicked
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        updateTable(txtSearch.getText());
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReset2;
-    private javax.swing.JButton btnSave2;
-    private javax.swing.JButton btnSave3;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField txtLastname2;
-    private javax.swing.JTextField txtSearch2;
+    private javax.swing.JTable tblStatus;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
 }

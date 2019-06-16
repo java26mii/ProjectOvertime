@@ -39,9 +39,9 @@ public class StatusController implements IStatusController{
     }
 
     @Override
-    public String save(String id, String name) {
+    public String save(String id, String name, String isDelete) {
         String result = "";
-        Status status = new Status(Long.parseLong(id), name);
+        Status status = new Status(Long.parseLong(id), name, isDelete.charAt(0));
         if (gdao.saveOrDelete(status, false)) {
             result = "Success";
         } else {
