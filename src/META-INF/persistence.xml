@@ -8,12 +8,11 @@
     <class>models.Role</class>
     <class>models.Status</class>
     <class>models.OvertimeRequestStatus</class>
-    <class>models.OvertimeType</class>
     <class>models.EmployeeJob</class>
     <class>models.EmployeeRole</class>
-    <class>models.OvertimeRequest</class>
     <class>models.Account</class>
-    <class>models.Employeerole</class>
+    <class>models.OvertimeRequest</class>
+    <class>models.OvertimeType</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="hr"/>

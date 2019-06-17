@@ -20,7 +20,7 @@ public interface IOvertimeTypeController {
 
     public List<OvertimeType> search(Object keyword);
 
-    public String save(String id, String name, String minHour, String salary);
+    public String save(String id, String name, String minHour, String isDelete, String maxHour);
 
     public String delete(String id);
 }

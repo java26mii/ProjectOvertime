@@ -41,9 +41,9 @@ public class OvertimeTypeController implements IOvertimeTypeController {
     }
 
     @Override
-    public String save(String id, String name, String minHour, String salary) {
+    public String save(String id, String name, String minHour, String isDelete, String maxHour) {
         String result = "";
-        OvertimeType overtimeType = new OvertimeType(Long.parseLong(id), name, Short.parseShort(minHour), Short.parseShort(salary));
+        OvertimeType overtimeType = new OvertimeType(Long.parseLong(id), name, new Short(minHour), isDelete.charAt(0), new Short(maxHour));
         if (gdao.saveOrDelete(overtimeType, false)) {
             result = "Success";
         } else {
