@@ -36,6 +36,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "OvertimeType.findByIsDelete", query = "SELECT o FROM OvertimeType o WHERE o.isDelete = :isDelete")})
 public class OvertimeType implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "MAX_HOUR")
+    private short maxHour;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "PARAM_1HOUR")
+    private Double param1hour;
+    @Column(name = "PARAM_NEXTHOUR")
+    private Double paramNexthour;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimeType", fetch = FetchType.LAZY)
     private List<OvertimeRequest> overtimeRequestList;
 
@@ -151,6 +160,30 @@ public class OvertimeType implements Serializable {
 
     public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
         this.overtimeRequestList = overtimeRequestList;
+    }
+
+    public short getMaxHour() {
+        return maxHour;
+    }
+
+    public void setMaxHour(short maxHour) {
+        this.maxHour = maxHour;
+    }
+
+    public Double getParam1hour() {
+        return param1hour;
+    }
+
+    public void setParam1hour(Double param1hour) {
+        this.param1hour = param1hour;
+    }
+
+    public Double getParamNexthour() {
+        return paramNexthour;
+    }
+
+    public void setParamNexthour(Double paramNexthour) {
+        this.paramNexthour = paramNexthour;
     }
     
 }

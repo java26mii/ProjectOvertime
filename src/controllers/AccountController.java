@@ -38,10 +38,10 @@ public class AccountController implements IAccountController {
     }
 
     @Override
-    public String register(String id, String username, String password) {
+    public String register(String id, String username, String password, String isDelete) {
         String result = "";
         String pass = hash(password);
-        Account account = new Account(Long.parseLong(id), username, pass, Character.MIN_VALUE);
+        Account account = new Account(Long.parseLong(id), username, pass, isDelete.charAt(0));
         if (igdao.saveOrDelete(account, false)) {
             result = "Success";
         } else {

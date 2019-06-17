@@ -41,6 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")})
 public class Employee implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<OvertimeRequest> overtimeRequestList;
+
     @Basic(optional = false)
     @Column(name = "SALARY")
     private BigInteger salary;
@@ -225,6 +228,15 @@ public class Employee implements Serializable {
 
     public void setSalary(BigInteger salary) {
         this.salary = salary;
+    }
+
+    @XmlTransient
+    public List<OvertimeRequest> getOvertimeRequestList() {
+        return overtimeRequestList;
+    }
+
+    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
+        this.overtimeRequestList = overtimeRequestList;
     }
     
 }

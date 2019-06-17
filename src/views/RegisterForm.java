@@ -342,7 +342,7 @@ public class RegisterForm extends javax.swing.JFrame {
         if (validasiId) {
             if (validasiUser) {
                 if (cekPassword()) {
-                    JOptionPane.showMessageDialog(null, iac.register(txt_id.getText(), txt_username.getText(), String.valueOf(pass.getPassword())));
+                    JOptionPane.showMessageDialog(null, iac.register(txt_id.getText(), txt_username.getText(), String.valueOf(pass.getPassword()),"0"));
                     resetText();
                 } else {
                     JOptionPane.showMessageDialog(null, "Password Doesn't Match");

@@ -72,10 +72,8 @@
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="RoleMgt" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="EmployeeMgt" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JobMgt" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="EmployeeMgt" min="-2" max="-2" attributes="0"/>
+                              <Component id="JobMgt" min="-2" max="-2" attributes="0"/>
                               <Component id="StatusMgt" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>

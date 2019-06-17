@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "OvertimeRequest.findByStartTime", query = "SELECT o FROM OvertimeRequest o WHERE o.startTime = :startTime")
     , @NamedQuery(name = "OvertimeRequest.findByEndTime", query = "SELECT o FROM OvertimeRequest o WHERE o.endTime = :endTime")
     , @NamedQuery(name = "OvertimeRequest.findByActivity", query = "SELECT o FROM OvertimeRequest o WHERE o.activity = :activity")
-    , @NamedQuery(name = "OvertimeRequest.findByIsDelete", query = "SELECT o FROM OvertimeRequest o WHERE o.isDelete = :isDelete")})
+    , @NamedQuery(name = "OvertimeRequest.findByIsDelete", query = "SELECT o FROM OvertimeRequest o WHERE o.isDelete = :isDelete")
+    , @NamedQuery(name = "OvertimeRequest.findByOSalary", query = "SELECT o FROM OvertimeRequest o WHERE o.oSalary = :oSalary")})
 public class OvertimeRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,18 +51,23 @@ public class OvertimeRequest implements Serializable {
     private Date reqDate;
     @Basic(optional = false)
     @Column(name = "START_TIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
+    private short startTime;
     @Basic(optional = false)
     @Column(name = "END_TIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    private short endTime;
     @Basic(optional = false)
     @Column(name = "ACTIVITY")
     private String activity;
     @Basic(optional = false)
     @Column(name = "IS_DELETE")
     private Character isDelete;
+    @Basic(optional = false)
+    @Column(name = "O_SALARY")
+    private long oSalary;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "DOC")
+    private Serializable doc;
     @JoinColumn(name = "EMPLOYEE", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
@@ -74,22 +81,16 @@ public class OvertimeRequest implements Serializable {
     public OvertimeRequest(Long id) {
         this.id = id;
     }
-    
-    public OvertimeRequest(Long id, Date reqDate, Date startTime, Date endTime, String activity) {
-        this.id = id;
-        this.reqDate = reqDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.activity = activity;
-    }
 
-    public OvertimeRequest(Long id, Date reqDate, Date startTime, Date endTime, String activity, Character isDelete) {
+    public OvertimeRequest(Long id, Date reqDate, short startTime, short endTime, String activity, Character isDelete, long oSalary, Serializable doc) {
         this.id = id;
         this.reqDate = reqDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.activity = activity;
         this.isDelete = isDelete;
+        this.oSalary = oSalary;
+        this.doc = doc;
     }
 
     public Long getId() {
@@ -108,19 +109,19 @@ public class OvertimeRequest implements Serializable {
         this.reqDate = reqDate;
     }
 
-    public Date getStartTime() {
+    public short getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(short startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public short getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(short endTime) {
         this.endTime = endTime;
     }
 
@@ -138,6 +139,22 @@ public class OvertimeRequest implements Serializable {
 
     public void setIsDelete(Character isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public long getOSalary() {
+        return oSalary;
+    }
+
+    public void setOSalary(long oSalary) {
+        this.oSalary = oSalary;
+    }
+
+    public Serializable getDoc() {
+        return doc;
+    }
+
+    public void setDoc(Serializable doc) {
+        this.doc = doc;
     }
 
     public Employee getEmployee() {
