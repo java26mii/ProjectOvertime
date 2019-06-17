@@ -10,9 +10,13 @@
     <class>models.OvertimeRequestStatus</class>
     <class>models.EmployeeJob</class>
     <class>models.EmployeeRole</class>
+    <class>models.OvertimeRequest</class>
+    <class>models.Countries</class>
+    <class>models.Regions</class>
+    <class>models.Departments</class>
+    <class>models.Locations</class>
     <class>models.Account</class>
     <class>models.OvertimeType</class>
-    <class>models.OvertimeRequest</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="hr"/>

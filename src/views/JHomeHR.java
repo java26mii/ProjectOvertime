@@ -33,11 +33,9 @@ public class JHomeHR extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        OvertimeReq = new javax.swing.JLabel();
-        HistoryOvertime = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        btnApproval = new javax.swing.JButton();
+        btnReport = new javax.swing.JButton();
         basePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,20 +65,6 @@ public class JHomeHR extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(51, 51, 51));
         jLabel25.setText("Job");
 
-        OvertimeReq.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
-        OvertimeReq.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                OvertimeReqMouseReleased(evt);
-            }
-        });
-
-        HistoryOvertime.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
-        HistoryOvertime.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                HistoryOvertimeMouseReleased(evt);
-            }
-        });
-
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
         profile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -93,43 +77,49 @@ public class JHomeHR extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel4.setText("Report");
+        btnApproval.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnApproval.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
+        btnApproval.setText("Overtime Approval");
+        btnApproval.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnApprovalMouseClicked(evt);
+            }
+        });
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel13.setText("Overtime Approval");
+        btnReport.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnReport.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
+        btnReport.setText("Report");
+        btnReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout tesPanelLayout = new javax.swing.GroupLayout(tesPanel);
         tesPanel.setLayout(tesPanelLayout);
         tesPanelLayout.setHorizontalGroup(
             tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tesPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(135, 135, 135))
             .addGroup(tesPanelLayout.createSequentialGroup()
                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(profile)
-                        .addGap(18, 18, 18)
-                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel25)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(HistoryOvertime)
-                            .addComponent(OvertimeReq))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(30, 30, 30)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel13))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnApproval)
+                            .addGroup(tesPanelLayout.createSequentialGroup()
+                                .addComponent(profile)
+                                .addGap(18, 18, 18)
+                                .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel23)
+                                    .addComponent(jLabel24)
+                                    .addComponent(jLabel25)))
+                            .addComponent(btnReport)))
+                    .addGroup(tesPanelLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jButton7)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         tesPanelLayout.setVerticalGroup(
             tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,25 +134,15 @@ public class JHomeHR extends javax.swing.JFrame {
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25)))
-                .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(OvertimeReq))
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(jLabel13)))
-                .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(HistoryOvertime))
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                .addGap(131, 131, 131)
+                .addComponent(btnApproval)
+                .addGap(27, 27, 27)
+                .addComponent(btnReport)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(jButton7)
-                .addGap(41, 41, 41))
+                .addGap(49, 49, 49))
         );
 
         basePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -171,11 +151,11 @@ public class JHomeHR extends javax.swing.JFrame {
         basePanel.setLayout(basePanelLayout);
         basePanelLayout.setHorizontalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 641, Short.MAX_VALUE)
+            .addGap(0, 682, Short.MAX_VALUE)
         );
         basePanelLayout.setVerticalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 831, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,13 +164,13 @@ public class JHomeHR extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(basePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(basePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -199,18 +179,6 @@ public class JHomeHR extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void OvertimeReqMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OvertimeReqMouseReleased
-        JIOvertimeApproval overtimeApproval  = new JIOvertimeApproval();
-        this.basePanel.add(overtimeApproval);
-        overtimeApproval.show();
-    }//GEN-LAST:event_OvertimeReqMouseReleased
-
-    private void HistoryOvertimeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HistoryOvertimeMouseReleased
-//        JIOvertimeRequestStatus requestStatus = new JIOvertimeRequestStatus();
-//        this.basePanel.add(requestStatus);
-//        requestStatus.show();
-    }//GEN-LAST:event_HistoryOvertimeMouseReleased
 
     private void profileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_profileKeyReleased
         
@@ -221,6 +189,16 @@ public class JHomeHR extends javax.swing.JFrame {
         this.basePanel.add(profileForm);
         profileForm.show();
     }//GEN-LAST:event_profileMouseReleased
+
+    private void btnApprovalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApprovalMouseClicked
+        JIOvertimeApproval overtimeApproval  = new JIOvertimeApproval();
+        this.basePanel.add(overtimeApproval);
+        overtimeApproval.show();
+    }//GEN-LAST:event_btnApprovalMouseClicked
+
+    private void btnReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportMouseClicked
 
     /**
      * @param args the command line arguments
@@ -261,16 +239,14 @@ public class JHomeHR extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel HistoryOvertime;
-    private javax.swing.JLabel OvertimeReq;
     private javax.swing.JPanel basePanel;
+    private javax.swing.JButton btnApproval;
+    private javax.swing.JButton btnReport;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel tesPanel;
     // End of variables declaration//GEN-END:variables

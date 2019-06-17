@@ -30,12 +30,10 @@ public class JHomeAdmin extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        EmployeeMgt = new javax.swing.JLabel();
-        JobMgt = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
-        RoleMgt = new javax.swing.JLabel();
-        StatusMgt = new javax.swing.JLabel();
-        typeMgt = new javax.swing.JLabel();
+        btnAccount = new javax.swing.JButton();
+        btnType = new javax.swing.JButton();
+        btnEmployee = new javax.swing.JButton();
         basePanel = new javax.swing.JPanel();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -68,24 +66,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(51, 51, 51));
         jLabel25.setText("Job");
 
-        EmployeeMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        EmployeeMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
-        EmployeeMgt.setText("Employee Mgt");
-        EmployeeMgt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                EmployeeMgtMouseReleased(evt);
-            }
-        });
-
-        JobMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        JobMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
-        JobMgt.setText("Job Mgt");
-        JobMgt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                JobMgtMouseReleased(evt);
-            }
-        });
-
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
         profile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -98,30 +78,42 @@ public class JHomeAdmin extends javax.swing.JFrame {
             }
         });
 
-        RoleMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        RoleMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
-        RoleMgt.setText("Role Mgt");
-        RoleMgt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                RoleMgtMouseReleased(evt);
+        btnAccount.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnAccount.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
+        btnAccount.setText("Account Mgt");
+        btnAccount.setToolTipText("");
+        btnAccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAccountMouseClicked(evt);
+            }
+        });
+        btnAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccountActionPerformed(evt);
             }
         });
 
-        StatusMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        StatusMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
-        StatusMgt.setText("Status Mgt");
-        StatusMgt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                StatusMgtMouseReleased(evt);
+        btnType.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnType.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
+        btnType.setText("Overtime Type");
+        btnType.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTypeMouseClicked(evt);
             }
         });
 
-        typeMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        typeMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
-        typeMgt.setText("Overtime Type");
-        typeMgt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                typeMgtMouseReleased(evt);
+        btnEmployee.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnEmployee.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
+        btnEmployee.setText("Employee Mgt");
+        btnEmployee.setToolTipText("");
+        btnEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEmployeeMouseClicked(evt);
+            }
+        });
+        btnEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmployeeActionPerformed(evt);
             }
         });
 
@@ -140,21 +132,22 @@ public class JHomeAdmin extends javax.swing.JFrame {
                             .addComponent(jLabel24)
                             .addComponent(jLabel25)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RoleMgt)
-                            .addComponent(EmployeeMgt)
-                            .addComponent(JobMgt)
-                            .addComponent(StatusMgt)
-                            .addComponent(typeMgt)))
-                    .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(tesPanelLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jButton7)))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                                .addComponent(jButton7))))
+                    .addGroup(tesPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnType)
+                                .addGroup(tesPanelLayout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         tesPanelLayout.setVerticalGroup(
             tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,17 +162,13 @@ public class JHomeAdmin extends javax.swing.JFrame {
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25)))
-                .addGap(76, 76, 76)
-                .addComponent(EmployeeMgt)
-                .addGap(32, 32, 32)
-                .addComponent(JobMgt)
-                .addGap(63, 63, 63)
-                .addComponent(RoleMgt)
-                .addGap(52, 52, 52)
-                .addComponent(StatusMgt)
+                .addGap(68, 68, 68)
+                .addComponent(btnEmployee)
                 .addGap(29, 29, 29)
-                .addComponent(typeMgt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(btnType)
+                .addGap(18, 18, 18)
+                .addComponent(btnAccount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
@@ -192,7 +181,7 @@ public class JHomeAdmin extends javax.swing.JFrame {
         basePanel.setLayout(basePanelLayout);
         basePanelLayout.setHorizontalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 786, Short.MAX_VALUE)
+            .addGap(0, 756, Short.MAX_VALUE)
         );
         basePanelLayout.setVerticalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,14 +193,18 @@ public class JHomeAdmin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(tesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(basePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(basePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(69, 69, 69))
         );
 
         pack();
@@ -220,18 +213,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void EmployeeMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmployeeMgtMouseReleased
-        JIEmployeeForm employeeForm = new JIEmployeeForm();
-        this.basePanel.add(employeeForm);
-        employeeForm.show();
-    }//GEN-LAST:event_EmployeeMgtMouseReleased
-
-    private void JobMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JobMgtMouseReleased
-        JIJobForm jobForm = new JIJobForm();
-        this.basePanel.add(jobForm);
-        jobForm.show();
-    }//GEN-LAST:event_JobMgtMouseReleased
 
     private void profileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_profileKeyReleased
         
@@ -243,23 +224,31 @@ public class JHomeAdmin extends javax.swing.JFrame {
         profileForm.show();
     }//GEN-LAST:event_profileMouseReleased
 
-    private void RoleMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RoleMgtMouseReleased
-        JIRoleForm roleForm = new JIRoleForm();
-        this.basePanel.add(roleForm);
-        roleForm.show();
-    }//GEN-LAST:event_RoleMgtMouseReleased
+    private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccountActionPerformed
 
-    private void StatusMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StatusMgtMouseReleased
-        JIStatusForm statusForm = new JIStatusForm();
-        this.basePanel.add(statusForm);
-        statusForm.show();
-    }//GEN-LAST:event_StatusMgtMouseReleased
+    private void btnAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccountMouseClicked
+        JIUserForm userForm = new JIUserForm();
+        this.basePanel.add(userForm);
+        userForm.show();
+    }//GEN-LAST:event_btnAccountMouseClicked
 
-    private void typeMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_typeMgtMouseReleased
+    private void btnTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTypeMouseClicked
         JIOvertimeTypeForm overtimeTypeForm = new JIOvertimeTypeForm();
         this.basePanel.add(overtimeTypeForm);
         overtimeTypeForm.show();
-    }//GEN-LAST:event_typeMgtMouseReleased
+    }//GEN-LAST:event_btnTypeMouseClicked
+
+    private void btnEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmployeeMouseClicked
+        JIEmployeeForm employeeForm = new JIEmployeeForm();
+        this.basePanel.add(employeeForm);
+        employeeForm.show();
+    }//GEN-LAST:event_btnEmployeeMouseClicked
+
+    private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEmployeeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,11 +287,10 @@ public class JHomeAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel EmployeeMgt;
-    private javax.swing.JLabel JobMgt;
-    private javax.swing.JLabel RoleMgt;
-    private javax.swing.JLabel StatusMgt;
     private javax.swing.JPanel basePanel;
+    private javax.swing.JButton btnAccount;
+    private javax.swing.JButton btnEmployee;
+    private javax.swing.JButton btnType;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -311,6 +299,5 @@ public class JHomeAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel tesPanel;
-    private javax.swing.JLabel typeMgt;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,16 +9,19 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Sekar Ayu Safitri
+ * @author ASUS
  */
 @Entity
 @Table(name = "ACCOUNTS")
@@ -47,7 +50,10 @@ public class Account implements Serializable {
     private Character isDelete;
     @Lob
     @Column(name = "PHOTO")
-    private byte photo;
+    private Serializable photo;
+    @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    private Employee employee;
 
     public Account() {
     }
@@ -56,26 +62,13 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
-
-    public Account(Long id, String username, String password, byte photo) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.photo = photo;
-    }
-
     public Account(Long id, String username, String password, Character isDelete) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.isDelete = isDelete;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -108,12 +101,20 @@ public class Account implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public byte getPhoto() {
+    public Serializable getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(Serializable photo) {
         this.photo = photo;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -140,5 +141,5 @@ public class Account implements Serializable {
     public String toString() {
         return "models.Account[ id=" + id + " ]";
     }
-
+    
 }

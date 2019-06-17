@@ -51,7 +51,6 @@ Contributor(s):
     <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.connection.autocommit">true</property>
-    <mapping class="models.Account"/>
     <mapping class="models.Job"/>
     <mapping class="models.OvertimeRequest"/>
     <mapping class="models.OvertimeType"/>
@@ -61,5 +60,6 @@ Contributor(s):
     <mapping class="models.Role"/>
     <mapping class="models.Employee"/>
     <mapping class="models.EmployeeJob"/>
+    <mapping class="models.Account"/>
   </session-factory>
 </hibernate-configuration>

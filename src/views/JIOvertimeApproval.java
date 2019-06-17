@@ -36,15 +36,12 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         popupMenu1 = new java.awt.PopupMenu();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDetail = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblOvertimeReq = new javax.swing.JTable();
+        detailPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        btnApprove = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -91,18 +88,6 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        tblDetail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tblDetail.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "id", "employee", "type", "request date", "start", "end", "activity", "doc", "overtime salary", "status", "status date"
-            }
-        ));
-        jScrollPane1.setViewportView(tblDetail);
-
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSearchActionPerformed(evt);
@@ -112,8 +97,8 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Overtime Request Employee");
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblOvertimeReq.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblOvertimeReq.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -124,22 +109,25 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
                 "id", "employee", "type", "request date", "status"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
-
-        jLabel2.setText("Detail Data Overtime Request Employee");
-
-        btnApprove.setBackground(new java.awt.Color(0, 153, 51));
-        btnApprove.setForeground(new java.awt.Color(255, 255, 255));
-        btnApprove.setText("Approve");
-
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Decline");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        tblOvertimeReq.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOvertimeReqMouseClicked(evt);
             }
         });
+        jScrollPane2.setViewportView(tblOvertimeReq);
+
+        javax.swing.GroupLayout detailPanelLayout = new javax.swing.GroupLayout(detailPanel);
+        detailPanel.setLayout(detailPanelLayout);
+        detailPanelLayout.setHorizontalGroup(
+            detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1306, Short.MAX_VALUE)
+        );
+        detailPanelLayout.setVerticalGroup(
+            detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
+
+        jLabel2.setText("Search");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,24 +137,20 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 671, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(401, 401, 401))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(detailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnApprove)
-                .addGap(33, 33, 33)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(521, 521, 521))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,18 +158,14 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
                 .addGap(71, 71, 71)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(detailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -195,14 +175,15 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void tblOvertimeReqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOvertimeReqMouseClicked
+        JIDetailApproval detailApproval  = new JIDetailApproval();
+        this.detailPanel.add(detailApproval);
+        detailApproval.show();
+    }//GEN-LAST:event_tblOvertimeReqMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApprove;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel detailPanel;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
@@ -213,11 +194,9 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPopupMenu jPopupMenu3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private java.awt.PopupMenu popupMenu1;
-    private javax.swing.JTable tblDetail;
+    private javax.swing.JTable tblOvertimeReq;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

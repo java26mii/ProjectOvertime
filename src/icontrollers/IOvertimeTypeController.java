@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package icontrollers;
 
 import java.util.List;
@@ -20,7 +16,7 @@ public interface IOvertimeTypeController {
 
     public List<OvertimeType> search(Object keyword);
 
-    public String save(String id, String name, String minHour, String isDelete, String maxHour);
+    public String save(String id, String name, String minHour, String isDelete, String maxHour, String param1Hour, String paramNextHour );
 
     public String delete(String id);
 }

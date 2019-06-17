@@ -7,7 +7,9 @@ package models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +19,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -51,10 +55,12 @@ public class OvertimeRequest implements Serializable {
     private Date reqDate;
     @Basic(optional = false)
     @Column(name = "START_TIME")
-    private short startTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startTime;
     @Basic(optional = false)
     @Column(name = "END_TIME")
-    private short endTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
     @Basic(optional = false)
     @Column(name = "ACTIVITY")
     private String activity;
@@ -67,6 +73,8 @@ public class OvertimeRequest implements Serializable {
     @Lob
     @Column(name = "DOC")
     private Serializable doc;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimeRequest", fetch = FetchType.LAZY)
+    private List<OvertimeRequestStatus> overtimeRequestStatusList;
     @JoinColumn(name = "EMPLOYEE", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
@@ -81,7 +89,7 @@ public class OvertimeRequest implements Serializable {
         this.id = id;
     }
 
-    public OvertimeRequest(Long id, Date reqDate, short startTime, short endTime, String activity, Character isDelete, long oSalary) {
+    public OvertimeRequest(Long id, Date reqDate, Date startTime, Date endTime, String activity, Character isDelete, long oSalary) {
         this.id = id;
         this.reqDate = reqDate;
         this.startTime = startTime;
@@ -107,19 +115,19 @@ public class OvertimeRequest implements Serializable {
         this.reqDate = reqDate;
     }
 
-    public short getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(short startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public short getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(short endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -153,6 +161,15 @@ public class OvertimeRequest implements Serializable {
 
     public void setDoc(Serializable doc) {
         this.doc = doc;
+    }
+
+    @XmlTransient
+    public List<OvertimeRequestStatus> getOvertimeRequestStatusList() {
+        return overtimeRequestStatusList;
+    }
+
+    public void setOvertimeRequestStatusList(List<OvertimeRequestStatus> overtimeRequestStatusList) {
+        this.overtimeRequestStatusList = overtimeRequestStatusList;
     }
 
     public Employee getEmployee() {

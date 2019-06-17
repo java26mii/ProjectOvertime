@@ -54,13 +54,7 @@ public class Status implements Serializable {
     public Status(Long id) {
         this.id = id;
     }
-    
-    
-    public Status(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    
+
     public Status(Long id, String name, Character isDelete) {
         this.id = id;
         this.name = name;

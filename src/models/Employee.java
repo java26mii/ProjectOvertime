@@ -38,23 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
     , @NamedQuery(name = "Employee.findByPhoneNumber", query = "SELECT e FROM Employee e WHERE e.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")})
+    , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")
+    , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")})
 public class Employee implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<OvertimeRequest> overtimeRequestList;
-
-    @Basic(optional = false)
-    @Column(name = "SALARY")
-    private BigInteger salary;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private Account account;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeeJobList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeRole> employeeRoleList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -76,11 +62,22 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "IS_DELETE")
     private Character isDelete;
+    @Basic(optional = false)
+    @Column(name = "SALARY")
+    private BigInteger salary;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<EmployeeJob> employeeJobList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<OvertimeRequest> overtimeRequestList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     @JoinColumn(name = "MANAGER", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee manager;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private Account account;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<EmployeeRole> employeeRoleList;
 
     public Employee() {
     }
@@ -88,22 +85,15 @@ public class Employee implements Serializable {
     public Employee(Long id) {
         this.id = id;
     }
-    
-    public Employee(Long id, String firstName, String lastName, String email, long phoneNumber) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
 
-    public Employee(Long id, String firstName, String lastName, String email, long phoneNumber, Character isDelete) {
+    public Employee(Long id, String firstName, String lastName, String email, long phoneNumber, Character isDelete, BigInteger salary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.isDelete = isDelete;
+        this.salary = salary;
     }
 
     public Long getId() {
@@ -154,6 +144,32 @@ public class Employee implements Serializable {
         this.isDelete = isDelete;
     }
 
+    public BigInteger getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigInteger salary) {
+        this.salary = salary;
+    }
+
+    @XmlTransient
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
+    }
+
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
+    }
+
+    @XmlTransient
+    public List<OvertimeRequest> getOvertimeRequestList() {
+        return overtimeRequestList;
+    }
+
+    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
+        this.overtimeRequestList = overtimeRequestList;
+    }
+
     @XmlTransient
     public List<Employee> getEmployeeList() {
         return employeeList;
@@ -169,6 +185,23 @@ public class Employee implements Serializable {
 
     public void setManager(Employee manager) {
         this.manager = manager;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    @XmlTransient
+    public List<EmployeeRole> getEmployeeRoleList() {
+        return employeeRoleList;
+    }
+
+    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
+        this.employeeRoleList = employeeRoleList;
     }
 
     @Override
@@ -194,49 +227,6 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "models.Employee[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<EmployeeJob> getEmployeeJobList() {
-        return employeeJobList;
-    }
-
-    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
-        this.employeeJobList = employeeJobList;
-    }
-
-    @XmlTransient
-    public List<EmployeeRole> getEmployeeRoleList() {
-        return employeeRoleList;
-    }
-
-    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
-        this.employeeRoleList = employeeRoleList;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public BigInteger getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigInteger salary) {
-        this.salary = salary;
-    }
-
-    @XmlTransient
-    public List<OvertimeRequest> getOvertimeRequestList() {
-        return overtimeRequestList;
-    }
-
-    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
-        this.overtimeRequestList = overtimeRequestList;
     }
     
 }

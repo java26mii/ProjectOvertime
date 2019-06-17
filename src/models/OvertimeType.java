@@ -6,20 +6,15 @@
 package models;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.List;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -56,12 +51,13 @@ public class OvertimeType implements Serializable {
     @Basic(optional = false)
     @Column(name = "MAX_HOUR")
     private short maxHour;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
     @Column(name = "PARAM_1HOUR")
-    private BigInteger param1hour;
+    private BigDecimal param1hour;
+    @Basic(optional = false)
     @Column(name = "PARAM_NEXTHOUR")
-    private BigInteger paramNexthour;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimeType", fetch = FetchType.LAZY)
-    private List<OvertimeRequest> overtimeRequestList;
+    private BigDecimal paramNexthour;
 
     public OvertimeType() {
     }
@@ -70,12 +66,14 @@ public class OvertimeType implements Serializable {
         this.id = id;
     }
 
-    public OvertimeType(Long id, String name, short minHour, Character isDelete, short maxHour) {
+    public OvertimeType(Long id, String name, short minHour, Character isDelete, short maxHour, BigDecimal param1hour, BigDecimal paramNexthour) {
         this.id = id;
         this.name = name;
         this.minHour = minHour;
         this.isDelete = isDelete;
         this.maxHour = maxHour;
+        this.param1hour = param1hour;
+        this.paramNexthour = paramNexthour;
     }
 
     public Long getId() {
@@ -118,29 +116,20 @@ public class OvertimeType implements Serializable {
         this.maxHour = maxHour;
     }
 
-    public BigInteger getParam1hour() {
+    public BigDecimal getParam1hour() {
         return param1hour;
     }
 
-    public void setParam1hour(BigInteger param1hour) {
+    public void setParam1hour(BigDecimal param1hour) {
         this.param1hour = param1hour;
     }
 
-    public BigInteger getParamNexthour() {
+    public BigDecimal getParamNexthour() {
         return paramNexthour;
     }
 
-    public void setParamNexthour(BigInteger paramNexthour) {
+    public void setParamNexthour(BigDecimal paramNexthour) {
         this.paramNexthour = paramNexthour;
-    }
-
-    @XmlTransient
-    public List<OvertimeRequest> getOvertimeRequestList() {
-        return overtimeRequestList;
-    }
-
-    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
-        this.overtimeRequestList = overtimeRequestList;
     }
 
     @Override

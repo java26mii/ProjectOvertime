@@ -7,6 +7,7 @@ package controllers;
 
 import daos.GeneralDAO;
 import icontrollers.IOvertimeTypeController;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -41,9 +42,9 @@ public class OvertimeTypeController implements IOvertimeTypeController {
     }
 
     @Override
-    public String save(String id, String name, String minHour, String isDelete, String maxHour) {
+    public String save(String id, String name, String minHour, String isDelete, String maxHour, String param1Hour, String paramNextHour ) {
         String result = "";
-        OvertimeType overtimeType = new OvertimeType(Long.parseLong(id), name, new Short(minHour), isDelete.charAt(0), new Short(maxHour));
+        OvertimeType overtimeType = new OvertimeType(Long.parseLong(id), name, new Short(minHour), isDelete.charAt(0), new Short(maxHour), new BigDecimal(param1Hour), new BigDecimal(paramNextHour));
         if (gdao.saveOrDelete(overtimeType, false)) {
             result = "Success";
         } else {
