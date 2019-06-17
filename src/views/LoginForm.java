@@ -233,7 +233,7 @@ public class LoginForm extends javax.swing.JFrame {
     private void login_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_btnActionPerformed
         if (iac.login(txt_username.getText(), String.valueOf(txt_password.getPassword())) == "Login Successfull") {
             JOptionPane.showMessageDialog(null, iac.login(txt_username.getText(), String.valueOf(txt_password.getPassword())));
-                        JHomeEmployee homeEmployee = new JHomeEmployee();
+                        JHomeEmployee homeEmployee = new JHomeEmployee(txt_username.getText());
                         homeEmployee.setVisible(true);
             this.dispose();
         } else {

@@ -7,19 +7,14 @@ package tools;
 
 import controllers.AccountController;
 import controllers.JobController;
-import controllers.RoleController;
-import controllers.StatusController;
 import daos.GeneralDAO;
 import icontrollers.IAccountController;
 import icontrollers.IEmployeeController;
 import icontrollers.IJobController;
-import icontrollers.IRoleController;
-import icontrollers.IStatusController;
 import java.math.BigDecimal;
 import java.util.Date;
 import models.Employee;
 import models.Job;
-import models.Role;
 import org.hibernate.SessionFactory;
 
 /**
@@ -34,8 +29,8 @@ public class OHibernate {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         System.out.println(factory);
         
-        IRoleController roleController = new RoleController(factory);
-        IStatusController statusController = new StatusController(factory);
+//        IRoleController roleController = new RoleController(factory);
+//        IStatusController statusController = new StatusController(factory);
         IJobController jobController = new JobController(factory);
 //        roleController.save("1", "Admin","0");
 //        statusController.save("1", "Approve","0");

@@ -54,7 +54,7 @@ public class RegisterForm extends javax.swing.JFrame {
     }
 
     public void resetText() {
-        txt_id.setText("");
+//        txt_id.setText("");
         txt_username.setText("");
         pass.setText("");
         repass.setText("");
@@ -76,14 +76,11 @@ public class RegisterForm extends javax.swing.JFrame {
         register_btn = new javax.swing.JButton();
         pass = new javax.swing.JPasswordField();
         repass = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
         lblmatch = new javax.swing.JLabel();
-        txt_id = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        login = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -137,21 +134,8 @@ public class RegisterForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Employee ID");
-
         lblmatch.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         lblmatch.setText(" ");
-
-        txt_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idActionPerformed(evt);
-            }
-        });
-        txt_id.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_idKeyReleased(evt);
-            }
-        });
 
         jLabel2.setText("Username");
 
@@ -169,15 +153,6 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         jLabel4.setText("Confirm Password");
-
-        login.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
-        login.setForeground(new java.awt.Color(51, 51, 255));
-        login.setText("click here to login");
-        login.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginMouseClicked(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Register Account");
@@ -201,21 +176,16 @@ public class RegisterForm extends javax.swing.JFrame {
                                     .addComponent(register_btn))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
                                         .addComponent(jLabel2)
                                         .addComponent(jLabel3))
-                                    .addGap(92, 92, 92)
+                                    .addGap(104, 104, 104)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txt_username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                        .addComponent(pass)
-                                        .addComponent(txt_id)))
+                                        .addComponent(pass)))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                                    .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(login)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                    .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -223,11 +193,7 @@ public class RegisterForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel5)
-                .addGap(44, 44, 44)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(67, 67, 67)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -243,9 +209,7 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addComponent(lblmatch)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(register_btn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(login)
-                .addGap(34, 34, 34))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -305,19 +269,9 @@ public class RegisterForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idActionPerformed
-
     private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_usernameActionPerformed
-
-    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
-        LoginForm lf = new LoginForm();
-        lf.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_loginMouseClicked
 
     private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
 
@@ -337,36 +291,32 @@ public class RegisterForm extends javax.swing.JFrame {
 
     private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
 //        System.out.println(txt_id.getText() + txt_username.getText() + String.valueOf(pass.getPassword()));
-        boolean validasiId = iac.Validasi(txt_id.getText(), true);
+//        boolean validasiId = iac.Validasi(txt_id.getText(), true);
         boolean validasiUser = iac.Validasi(txt_username.getText(), false);
-        if (validasiId) {
-            if (validasiUser) {
-                if (cekPassword()) {
-                    JOptionPane.showMessageDialog(null, iac.register(txt_id.getText(), txt_username.getText(), String.valueOf(pass.getPassword()),"0"));
-                    resetText();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Password Doesn't Match");
-                }
+//        if (validasiId) {
+        if (validasiUser) {
+            if (cekPassword()) {
+                JOptionPane.showMessageDialog(null, iac.register(txt_username.getText(), String.valueOf(pass.getPassword()), "0"));
+                resetText();
             } else {
-                JOptionPane.showMessageDialog(null, "Username Already Exist");
+                JOptionPane.showMessageDialog(null, "Password Doesn't Match");
             }
         } else {
-            if (txt_id.getText().equals("") || txt_username.getText().equals("") || pass.getPassword().equals("") || repass.getPassword().equals("")) {
-                JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
-            } else {
-                JOptionPane.showMessageDialog(null, "ID has Registered");
-            }
+            JOptionPane.showMessageDialog(null, "Username Already Exist");
         }
+//        } else {
+//        if (txt_username.getText().equals("") || pass.getPassword().equals("") || repass.getPassword().equals("")) {
+//            JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
+//        } else {
+//            JOptionPane.showMessageDialog(null, "ID has Registered");
+//        }
+//        }
 
     }//GEN-LAST:event_register_btnActionPerformed
 
     private void txt_usernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyReleased
 //        
     }//GEN-LAST:event_txt_usernameKeyReleased
-
-    private void txt_idKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idKeyReleased
-//        Validasi(true);
-    }//GEN-LAST:event_txt_idKeyReleased
 
     /**
      * @param args the command line arguments
@@ -407,7 +357,6 @@ public class RegisterForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -418,11 +367,9 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblmatch;
     private javax.swing.JLabel lblstrength;
-    private javax.swing.JLabel login;
     private javax.swing.JPasswordField pass;
     private javax.swing.JButton register_btn;
     private javax.swing.JPasswordField repass;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,10 +9,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,8 +36,10 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ACCOUNTS_SEQ")
     @Basic(optional = false)
-    @Column(name = "ID")
+    @Column(name = "ID", unique=true, nullable = false)
     private Long id;
     @Basic(optional = false)
     @Column(name = "USERNAME")
@@ -47,35 +52,32 @@ public class Account implements Serializable {
     private Character isDelete;
     @Lob
     @Column(name = "PHOTO")
-    private byte photo;
+    private Serializable photo;
 
     public Account() {
     }
+//
+//    public Account(Long id) {
+//        this.id = id;
+//    }
 
-    public Account(Long id) {
-        this.id = id;
-    }
-
-    public Account(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
-
-    public Account(Long id, String username, String password, byte photo) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.photo = photo;
-    }
-
-    public Account(Long id, String username, String password, Character isDelete) {
-        this.id = id;
+    public Account(String username, String password, Character isDelete) {
         this.username = username;
         this.password = password;
         this.isDelete = isDelete;
     }
     
+//    public Account(Long id, String username, String password, Character isDelete) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.isDelete = isDelete;
+//    }
+
+//    public Account(String id, String username, String pass, char charAt) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     public Long getId() {
         return id;
     }
@@ -108,11 +110,11 @@ public class Account implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public byte getPhoto() {
+    public Serializable getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(Serializable photo) {
         this.photo = photo;
     }
 
@@ -140,5 +142,5 @@ public class Account implements Serializable {
     public String toString() {
         return "models.Account[ id=" + id + " ]";
     }
-
+    
 }

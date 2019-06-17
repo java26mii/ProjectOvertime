@@ -7,29 +7,23 @@ package views;
 
 import controllers.EmployeeController;
 import controllers.EmployeeJobController;
-import controllers.EmployeeRoleController;
 import controllers.JobController;
 import controllers.OvertimeRequestController;
 import controllers.OvertimeTypeController;
-import controllers.RoleController;
 import icontrollers.IEmployeeController;
 import icontrollers.IEmployeeJobController;
-import icontrollers.IEmployeeRoleController;
 import icontrollers.IJobController;
 import icontrollers.IOvertimeRequestController;
 import icontrollers.IOvertimeTypeController;
-import icontrollers.IRoleController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import models.Employee;
 import models.EmployeeJob;
-import models.EmployeeRole;
 import models.Job;
 import models.OvertimeRequest;
 import models.OvertimeType;
-import models.Role;
 import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 
@@ -50,9 +44,9 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
     SessionFactory factory = HibernateUtil.getSessionFactory();
     IEmployeeController employeeController = new EmployeeController(factory);
     IEmployeeJobController employeeJobController = new EmployeeJobController(factory);
-    IEmployeeRoleController employeeRoleController = new EmployeeRoleController(factory);
+//    IEmployeeRoleController employeeRoleController = new EmployeeRoleController(factory);
     IJobController jobController = new JobController(factory);
-    IRoleController roleController = new RoleController(factory);
+//    IRoleController roleController = new RoleController(factory);
     IOvertimeRequestController overtimeRequestController = new OvertimeRequestController(factory);
     IOvertimeTypeController overtimeTypeController = new OvertimeTypeController(factory);
 
@@ -76,17 +70,17 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
         Object[] row = new Object[12];
         List<Employee> employees = new ArrayList<>();
         List<EmployeeJob> employeeJobs = new ArrayList<>();
-        List<EmployeeRole> employeeRoles = new ArrayList<>();
+//        List<EmployeeRole> employeeRoles = new ArrayList<>();
         List<OvertimeRequest> overtimeRequests = new ArrayList<>();
         List<OvertimeType>overtimeTypes  = new ArrayList<>();
         List<Job> jobs = new ArrayList<>();
-        List<Role> roles = new ArrayList<>();
+//        List<Role> roles = new ArrayList<>();
         if (key == "") {
             employees = employeeController.getAll();
             employeeJobs = employeeJobController.getAll();
-            employeeRoles = employeeRoleController.getAll();
+//            employeeRoles = employeeRoleController.getAll();
             jobs = jobController.getAll();
-            roles = roleController.getAll();
+//            roles = roleController.getAll();
             overtimeRequests = overtimeRequestController.getAll();
 
         }
@@ -121,8 +115,6 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
             comboType.addItem(overtimeType.getId() + " " + overtimeType.getName());
         }
     }
-
-  
 
     public void updateTableLocations(String id) {
         DefaultTableModel model = (DefaultTableModel) tblOvertimeReq.getModel();

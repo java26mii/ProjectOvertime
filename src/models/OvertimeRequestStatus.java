@@ -10,10 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -23,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ASUS
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "OVERTIME_REQUEST_STATUS")
@@ -43,12 +40,6 @@ public class OvertimeRequestStatus implements Serializable {
     @Column(name = "STATUS_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date statusDate;
-    @JoinColumn(name = "OVERTIME_REQUEST", referencedColumnName = "ID")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private OvertimeRequest overtimeRequest;
-    @JoinColumn(name = "STATUS", referencedColumnName = "ID")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Status status;
 
     public OvertimeRequestStatus() {
     }
@@ -76,22 +67,6 @@ public class OvertimeRequestStatus implements Serializable {
 
     public void setStatusDate(Date statusDate) {
         this.statusDate = statusDate;
-    }
-
-    public OvertimeRequest getOvertimeRequest() {
-        return overtimeRequest;
-    }
-
-    public void setOvertimeRequest(OvertimeRequest overtimeRequest) {
-        this.overtimeRequest = overtimeRequest;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     @Override

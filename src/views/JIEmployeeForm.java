@@ -7,14 +7,10 @@ package views;
 
 import controllers.EmployeeController;
 import controllers.EmployeeJobController;
-import controllers.EmployeeRoleController;
 import controllers.JobController;
-import controllers.RoleController;
 import icontrollers.IEmployeeController;
 import icontrollers.IEmployeeJobController;
-import icontrollers.IEmployeeRoleController;
 import icontrollers.IJobController;
-import icontrollers.IRoleController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -22,9 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Employee;
 import models.EmployeeJob;
-import models.EmployeeRole;
 import models.Job;
-import models.Role;
 import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 
@@ -45,9 +39,9 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
     SessionFactory factory = HibernateUtil.getSessionFactory();
     IEmployeeController employeeController = new EmployeeController(factory);
     IEmployeeJobController employeeJobController = new EmployeeJobController(factory);
-    IEmployeeRoleController employeeRoleController = new EmployeeRoleController(factory);
+//    IEmployeeRoleController employeeRoleController = new EmployeeRoleController(factory);
     IJobController jobController = new JobController(factory);
-    IRoleController roleController = new RoleController(factory);
+//    IRoleController roleController = new RoleController(factory);
 
     private void resetText() {
         txtId.setText("");
@@ -70,15 +64,15 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
         Object[] row = new Object[12];
         List<Employee> employees = new ArrayList<>();
         List<EmployeeJob> employeeJobs = new ArrayList<>();
-        List<EmployeeRole> employeeRoles = new ArrayList<>();
+//        List<EmployeeRole> employeeRoles = new ArrayList<>();
         List<Job> jobs = new ArrayList<>();
-        List<Role> roles = new ArrayList<>();
+//        List<Role> roles = new ArrayList<>();
         if (key == "") {
             employees = employeeController.getAll();
             employeeJobs = employeeJobController.getAll();
-            employeeRoles = employeeRoleController.getAll();
+//            employeeRoles = employeeRoleController.getAll();
             jobs = jobController.getAll();
-            roles = roleController.getAll();
+//            roles = roleController.getAll();
 
         }
         employees = employeeController.search(key);
@@ -92,7 +86,7 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
             row[5] = employees.get(i).getPhoneNumber();
             row[6] = jobs.get(i).getName();
             row[7] = employees.get(i).getSalary();
-            row[8] = roles.get(i).getName();
+//            row[8] = roles.get(i).getName();
             row[9] = employees.get(i).getManager().getFirstName();
             model.addRow(row);
         }
@@ -121,12 +115,12 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
         }
     }
 
-    private void getRole() {
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for (Role role : roleController.getAll()) {
-            comboRole.addItem(role.getName());
-        }
-    }
+//    private void getRole() {
+//        DefaultComboBoxModel model = new DefaultComboBoxModel();
+//        for (Role role : roleController.getAll()) {
+//            comboRole.addItem(role.getName());
+//        }
+//    }
 
     public void updateTableLocations(String id) {
         DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();

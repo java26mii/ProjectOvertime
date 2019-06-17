@@ -33,8 +33,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         EmployeeMgt = new javax.swing.JLabel();
         JobMgt = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
-        RoleMgt = new javax.swing.JLabel();
-        StatusMgt = new javax.swing.JLabel();
         typeMgt = new javax.swing.JLabel();
         basePanel = new javax.swing.JPanel();
 
@@ -69,7 +67,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         jLabel25.setText("Job");
 
         EmployeeMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        EmployeeMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
         EmployeeMgt.setText("Employee Mgt");
         EmployeeMgt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -78,7 +75,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         });
 
         JobMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        JobMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
         JobMgt.setText("Job Mgt");
         JobMgt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -98,26 +94,7 @@ public class JHomeAdmin extends javax.swing.JFrame {
             }
         });
 
-        RoleMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        RoleMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
-        RoleMgt.setText("Role Mgt");
-        RoleMgt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                RoleMgtMouseReleased(evt);
-            }
-        });
-
-        StatusMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        StatusMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
-        StatusMgt.setText("Status Mgt");
-        StatusMgt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                StatusMgtMouseReleased(evt);
-            }
-        });
-
         typeMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        typeMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
         typeMgt.setText("Overtime Type");
         typeMgt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -142,13 +119,11 @@ public class JHomeAdmin extends javax.swing.JFrame {
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RoleMgt)
                             .addComponent(EmployeeMgt)
                             .addComponent(JobMgt)
-                            .addComponent(StatusMgt)
                             .addComponent(typeMgt)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                        .addGap(71, 71, 71)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(tesPanelLayout.createSequentialGroup()
@@ -173,17 +148,13 @@ public class JHomeAdmin extends javax.swing.JFrame {
                 .addComponent(EmployeeMgt)
                 .addGap(32, 32, 32)
                 .addComponent(JobMgt)
-                .addGap(63, 63, 63)
-                .addComponent(RoleMgt)
-                .addGap(52, 52, 52)
-                .addComponent(StatusMgt)
-                .addGap(29, 29, 29)
+                .addGap(202, 202, 202)
                 .addComponent(typeMgt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
-                .addGap(30, 30, 30))
+                .addGap(35, 35, 35))
         );
 
         basePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -243,18 +214,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         profileForm.show();
     }//GEN-LAST:event_profileMouseReleased
 
-    private void RoleMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RoleMgtMouseReleased
-        JIRoleForm roleForm = new JIRoleForm();
-        this.basePanel.add(roleForm);
-        roleForm.show();
-    }//GEN-LAST:event_RoleMgtMouseReleased
-
-    private void StatusMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StatusMgtMouseReleased
-        JIStatusForm statusForm = new JIStatusForm();
-        this.basePanel.add(statusForm);
-        statusForm.show();
-    }//GEN-LAST:event_StatusMgtMouseReleased
-
     private void typeMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_typeMgtMouseReleased
         JIOvertimeTypeForm overtimeTypeForm = new JIOvertimeTypeForm();
         this.basePanel.add(overtimeTypeForm);
@@ -300,8 +259,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel EmployeeMgt;
     private javax.swing.JLabel JobMgt;
-    private javax.swing.JLabel RoleMgt;
-    private javax.swing.JLabel StatusMgt;
     private javax.swing.JPanel basePanel;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

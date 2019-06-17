@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ASUS
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "EMPLOYEE_ROLES")
@@ -35,9 +35,6 @@ public class EmployeeRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
-    @JoinColumn(name = "EMPLOYEE", referencedColumnName = "ID")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Employee employee;
     @JoinColumn(name = "ROLE", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Role role;
@@ -55,14 +52,6 @@ public class EmployeeRole implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public Role getRole() {

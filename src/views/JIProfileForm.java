@@ -5,6 +5,8 @@
  */
 package views;
 
+import controllers.AccountController;
+import icontrollers.IAccountController;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.ByteArrayOutputStream;
@@ -27,8 +29,10 @@ import tools.HibernateUtil;
  */
 public class JIProfileForm extends javax.swing.JInternalFrame {
 
+    private Image image;
+
     SessionFactory factory = HibernateUtil.getSessionFactory();
-    
+    IAccountController iac = new AccountController(factory);
 
     /**
      * Creates new form JIProfileForm
@@ -40,7 +44,7 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
     private void resetText() {
         inputUserName.setText("");
         inputPass.setText("");
-    
+
         btnSave.setEnabled(true);
     }
 
@@ -194,12 +198,43 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-       
+//        if (inputUserName.getText().equals("") || inputPass.getPassword().equals("") || inputPict.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "Isi semua data");
+//        } else {
+//            ObjectOutputStream objectOutputStream = null;
+//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//            try {
+//                objectOutputStream = new ObjectOutputStream(outputStream);
+//                ImageIcon icon = new ImageIcon(image);
+//                objectOutputStream.writeObject(icon);
+//                objectOutputStream.flush();
+//                objectOutputStream.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(JIProfileForm.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            int confirm = JOptionPane.showConfirmDialog(this, "Anda yakin menambah data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//            if (confirm == JOptionPane.YES_OPTION) {
+//                JOptionPane.showMessageDialog(null, iac.save(inputUserName.getText(), inputPass.getText(), inputPict.getText()));
+//            }
+//        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
         // TODO add your handling code here:
-     
+        JFileChooser chooser = new JFileChooser(System.getProperty("user.home"));
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setFileFilter(new FileNameExtensionFilter("jpg|png|bmp", "jpg", "png", "bmp"));
+
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                image = ImageIO.read(file);
+//                panelGambar1.setImage(image);
+            } catch (IOException ex) {
+                Logger.getLogger(JIProfileForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            inputPict.setText(file.getAbsolutePath());
+        }
     }//GEN-LAST:event_btnFileActionPerformed
 
     private void profileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseReleased

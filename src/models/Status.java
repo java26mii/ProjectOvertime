@@ -6,23 +6,18 @@
 package models;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ASUS
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "STATUS")
@@ -45,8 +40,6 @@ public class Status implements Serializable {
     @Basic(optional = false)
     @Column(name = "IS_DELETE")
     private Character isDelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "status", fetch = FetchType.LAZY)
-    private List<OvertimeRequestStatus> overtimeRequestStatusList;
 
     public Status() {
     }
@@ -54,13 +47,7 @@ public class Status implements Serializable {
     public Status(Long id) {
         this.id = id;
     }
-    
-    
-    public Status(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    
+
     public Status(Long id, String name, Character isDelete) {
         this.id = id;
         this.name = name;
@@ -89,15 +76,6 @@ public class Status implements Serializable {
 
     public void setIsDelete(Character isDelete) {
         this.isDelete = isDelete;
-    }
-
-    @XmlTransient
-    public List<OvertimeRequestStatus> getOvertimeRequestStatusList() {
-        return overtimeRequestStatusList;
-    }
-
-    public void setOvertimeRequestStatusList(List<OvertimeRequestStatus> overtimeRequestStatusList) {
-        this.overtimeRequestStatusList = overtimeRequestStatusList;
     }
 
     @Override

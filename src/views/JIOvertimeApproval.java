@@ -128,12 +128,10 @@ public class JIOvertimeApproval extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Detail Data Overtime Request Employee");
 
-        btnApprove.setBackground(new java.awt.Color(0, 153, 51));
-        btnApprove.setForeground(new java.awt.Color(255, 255, 255));
+        btnApprove.setBackground(new java.awt.Color(255, 255, 255));
         btnApprove.setText("Approve");
 
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Decline");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -71,15 +71,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="RoleMgt" min="-2" max="-2" attributes="0"/>
                               <Component id="EmployeeMgt" min="-2" max="-2" attributes="0"/>
                               <Component id="JobMgt" min="-2" max="-2" attributes="0"/>
-                              <Component id="StatusMgt" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="typeMgt" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jButton8" min="-2" pref="111" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -112,17 +110,13 @@
                   <Component id="EmployeeMgt" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="JobMgt" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                  <Component id="RoleMgt" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                  <Component id="StatusMgt" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
                   <Component id="typeMgt" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="69" max="32767" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
                   <Component id="jButton8" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -185,9 +179,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="24" style="1"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Project Overtime\icon\cilik\form2.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Employee Mgt"/>
           </Properties>
           <Events>
@@ -198,9 +189,6 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="24" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Project Overtime\icon\cilik\history2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Job Mgt"/>
           </Properties>
@@ -219,41 +207,10 @@
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="profileKeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="RoleMgt">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="24" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Project Overtime\icon\cilik\history2.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Role Mgt"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RoleMgtMouseReleased"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="StatusMgt">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="24" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Project Overtime\icon\cilik\history2.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Status Mgt"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="StatusMgtMouseReleased"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="typeMgt">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="24" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Project Overtime\icon\cilik\history2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Overtime Type"/>
           </Properties>

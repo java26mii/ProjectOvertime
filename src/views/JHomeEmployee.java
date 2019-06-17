@@ -8,7 +8,6 @@ package views;
 import controllers.EmployeeController;
 import icontrollers.IEmployeeController;
 import org.hibernate.SessionFactory;
-import session.UserSession;
 import tools.HibernateUtil;
 
 /**
@@ -16,24 +15,27 @@ import tools.HibernateUtil;
  * @author ASUS
  */
 public class JHomeEmployee extends javax.swing.JFrame {
-    
+    public String tes;
     SessionFactory factory = HibernateUtil.getSessionFactory();
     IEmployeeController iec = new EmployeeController(factory);
-
-    String id = UserSession.getIdUser();
-    String name = UserSession.getUsername();
-    String job = UserSession.getJob();
-    
+       
     /**
      * Creates new form JHomeEmployee
      */
     public JHomeEmployee() {
-        initComponents();
         
-        txtName.setText(id);
-        txtId.setText(name);
-        txtJob.setText(job);
+        initComponents();
+                        System.out.println("Non Haha");
     }
+    
+    public JHomeEmployee(String tesbx) {
+        this.tes = tesbx;
+                        System.out.println(tes);
+                        
+        initComponents();
+        txtName.setText(tes);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,12 +123,19 @@ public class JHomeEmployee extends javax.swing.JFrame {
         tesPanel.setLayout(tesPanelLayout);
         tesPanelLayout.setHorizontalGroup(
             tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tesPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(135, 135, 135))
             .addGroup(tesPanelLayout.createSequentialGroup()
                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tesPanelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(HistoryOvertime)
+                            .addComponent(OvertimeReq))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel13)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(profile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,20 +143,8 @@ public class JHomeEmployee extends javax.swing.JFrame {
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtName)
                             .addComponent(txtId)
-                            .addComponent(txtJob)))
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(HistoryOvertime)
-                            .addComponent(OvertimeReq))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel13)))
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtJob))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         tesPanelLayout.setVerticalGroup(
             tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +186,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
         basePanel.setLayout(basePanelLayout);
         basePanelLayout.setHorizontalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGap(0, 586, Short.MAX_VALUE)
         );
         basePanelLayout.setVerticalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,6 +268,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JHomeEmployee().setVisible(true);
+
             }
         });
     }

@@ -25,7 +25,7 @@ public class AccountController implements IAccountController {
 
     private IGeneralDAO<Account> igdao;
     private Session session;
-    
+
     private Transaction transaction;
     SessionFactory factory = HibernateUtil.getSessionFactory();
 
@@ -38,10 +38,10 @@ public class AccountController implements IAccountController {
     }
 
     @Override
-    public String register(String id, String username, String password, String isDelete) {
+    public String register(String username, String password, String isDelete) {
         String result = "";
         String pass = hash(password);
-        Account account = new Account(Long.parseLong(id), username, pass, isDelete.charAt(0));
+        Account account = new Account(username, pass, isDelete.charAt(0));
         if (igdao.saveOrDelete(account, false)) {
             result = "Success";
         } else {
@@ -55,11 +55,11 @@ public class AccountController implements IAccountController {
         String result = "";
         session = this.factory.openSession();
         transaction = session.beginTransaction();
-        Query query = session.createQuery("SELECT password FROM Account WHERE username ='"+username+"'");
+        Query query = session.createQuery("SELECT password FROM Account WHERE username ='" + username + "'");
         String hashed = (String) query.uniqueResult();
-        
+
         boolean cekpassword = BCrypt.checkpw(password, hashed);
-        if (!Validasi(username, false) || !Validasi(username, true) ) {
+        if (!Validasi(username, false) || !Validasi(username, true)) {
             if (cekpassword) {
                 result = "Login Successfull";
             } else {
@@ -100,5 +100,4 @@ public class AccountController implements IAccountController {
 
         return result;
     }
-
 }
