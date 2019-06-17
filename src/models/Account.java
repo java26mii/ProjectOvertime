@@ -9,18 +9,16 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ASUS
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "ACCOUNTS")
@@ -30,25 +28,26 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id")
     , @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
-    , @NamedQuery(name = "Account.findByIsDelete", query = "SELECT a FROM Account a WHERE a.isDelete = :isDelete")
-    , @NamedQuery(name = "Account.findByPhoto", query = "SELECT a FROM Account a WHERE a.photo = :photo")})
+    , @NamedQuery(name = "Account.findByIsDelete", query = "SELECT a FROM Account a WHERE a.isDelete = :isDelete")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @Column(name = "ID")
     private Long id;
     @Basic(optional = false)
+    @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
+    @Column(name = "PASSWORD")
     private String password;
     @Basic(optional = false)
     @Column(name = "IS_DELETE")
     private Character isDelete;
-    private String photo;
-    @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private Employee employee;
+    @Lob
+    @Column(name = "PHOTO")
+    private byte photo;
 
     public Account() {
     }
@@ -57,13 +56,26 @@ public class Account implements Serializable {
         this.id = id;
     }
 
+    public Account(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Account(Long id, String username, String password, byte photo) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.photo = photo;
+    }
+
     public Account(Long id, String username, String password, Character isDelete) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.isDelete = isDelete;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -96,20 +108,12 @@ public class Account implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public String getPhoto() {
+    public byte getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte photo) {
         this.photo = photo;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     @Override
@@ -136,5 +140,5 @@ public class Account implements Serializable {
     public String toString() {
         return "models.Account[ id=" + id + " ]";
     }
-    
+
 }

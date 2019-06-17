@@ -5,17 +5,34 @@
  */
 package views;
 
+import controllers.EmployeeController;
+import icontrollers.IEmployeeController;
+import org.hibernate.SessionFactory;
+import session.UserSession;
+import tools.HibernateUtil;
+
 /**
  *
  * @author ASUS
  */
 public class JHomeEmployee extends javax.swing.JFrame {
+    
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IEmployeeController iec = new EmployeeController(factory);
 
+    String id = UserSession.getIdUser();
+    String name = UserSession.getUsername();
+    String job = UserSession.getJob();
+    
     /**
      * Creates new form JHomeEmployee
      */
     public JHomeEmployee() {
         initComponents();
+        
+        txtName.setText(id);
+        txtId.setText(name);
+        txtJob.setText(job);
     }
 
     /**
@@ -29,10 +46,10 @@ public class JHomeEmployee extends javax.swing.JFrame {
 
         tesPanel = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JButton();
+        txtName = new javax.swing.JLabel();
+        txtId = new javax.swing.JLabel();
+        txtJob = new javax.swing.JLabel();
         OvertimeReq = new javax.swing.JLabel();
         HistoryOvertime = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
@@ -52,29 +69,27 @@ public class JHomeEmployee extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton8.setText("Edit User");
+        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnEdit.setText("Edit User");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("Employee Name");
+        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtName.setForeground(new java.awt.Color(51, 51, 51));
+        txtName.setText("Employee Name");
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel24.setText("Id Employee");
+        txtId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtId.setForeground(new java.awt.Color(51, 51, 51));
+        txtId.setText("Id Employee");
 
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText("Job");
+        txtJob.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtJob.setForeground(new java.awt.Color(51, 51, 51));
+        txtJob.setText("Job");
 
-        OvertimeReq.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
         OvertimeReq.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 OvertimeReqMouseReleased(evt);
             }
         });
 
-        HistoryOvertime.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
         HistoryOvertime.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 HistoryOvertimeMouseReleased(evt);
@@ -82,6 +97,9 @@ public class JHomeEmployee extends javax.swing.JFrame {
         });
 
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
+        profile.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        profile.setMinimumSize(null);
+        profile.setPreferredSize(new java.awt.Dimension(136, 164));
         profile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 profileMouseReleased(evt);
@@ -111,12 +129,12 @@ public class JHomeEmployee extends javax.swing.JFrame {
                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(profile)
+                        .addComponent(profile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel25)))
+                            .addComponent(txtName)
+                            .addComponent(txtId)
+                            .addComponent(txtJob)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -128,22 +146,22 @@ public class JHomeEmployee extends javax.swing.JFrame {
                             .addComponent(jLabel13)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(134, 134, 134)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tesPanelLayout.setVerticalGroup(
             tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tesPanelLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profile)
+                    .addComponent(profile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel23)
+                        .addComponent(txtName)
                         .addGap(7, 7, 7)
-                        .addComponent(jLabel24)
+                        .addComponent(txtId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25)))
+                        .addComponent(txtJob)))
                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
@@ -159,7 +177,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jButton7)
                 .addGap(41, 41, 41))
@@ -213,7 +231,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_HistoryOvertimeMouseReleased
 
     private void profileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_profileKeyReleased
-        
+
     }//GEN-LAST:event_profileKeyReleased
 
     private void profileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseReleased
@@ -261,14 +279,15 @@ public class JHomeEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel HistoryOvertime;
     private javax.swing.JLabel OvertimeReq;
     private javax.swing.JPanel basePanel;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel tesPanel;
+    private javax.swing.JLabel txtId;
+    private javax.swing.JLabel txtJob;
+    private javax.swing.JLabel txtName;
     // End of variables declaration//GEN-END:variables
+
 }
