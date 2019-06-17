@@ -35,6 +35,7 @@ public class JHomeAdmin extends javax.swing.JFrame {
         profile = new javax.swing.JLabel();
         RoleMgt = new javax.swing.JLabel();
         StatusMgt = new javax.swing.JLabel();
+        typeMgt = new javax.swing.JLabel();
         basePanel = new javax.swing.JPanel();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -115,6 +116,15 @@ public class JHomeAdmin extends javax.swing.JFrame {
             }
         });
 
+        typeMgt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        typeMgt.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
+        typeMgt.setText("Overtime Type");
+        typeMgt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                typeMgtMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout tesPanelLayout = new javax.swing.GroupLayout(tesPanel);
         tesPanel.setLayout(tesPanelLayout);
         tesPanelLayout.setHorizontalGroup(
@@ -133,10 +143,10 @@ public class JHomeAdmin extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(RoleMgt)
-                            .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(EmployeeMgt)
-                                .addComponent(JobMgt))
-                            .addComponent(StatusMgt)))
+                            .addComponent(EmployeeMgt)
+                            .addComponent(JobMgt)
+                            .addComponent(StatusMgt)
+                            .addComponent(typeMgt)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +177,9 @@ public class JHomeAdmin extends javax.swing.JFrame {
                 .addComponent(RoleMgt)
                 .addGap(52, 52, 52)
                 .addComponent(StatusMgt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(typeMgt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
@@ -180,7 +192,7 @@ public class JHomeAdmin extends javax.swing.JFrame {
         basePanel.setLayout(basePanelLayout);
         basePanelLayout.setHorizontalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 791, Short.MAX_VALUE)
+            .addGap(0, 786, Short.MAX_VALUE)
         );
         basePanelLayout.setVerticalGroup(
             basePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +255,12 @@ public class JHomeAdmin extends javax.swing.JFrame {
         statusForm.show();
     }//GEN-LAST:event_StatusMgtMouseReleased
 
+    private void typeMgtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_typeMgtMouseReleased
+        JIOvertimeTypeForm overtimeTypeForm = new JIOvertimeTypeForm();
+        this.basePanel.add(overtimeTypeForm);
+        overtimeTypeForm.show();
+    }//GEN-LAST:event_typeMgtMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -293,5 +311,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel tesPanel;
+    private javax.swing.JLabel typeMgt;
     // End of variables declaration//GEN-END:variables
 }

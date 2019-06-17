@@ -118,6 +118,9 @@ public class JHomeHR extends javax.swing.JFrame {
                             .addComponent(jLabel24)
                             .addComponent(jLabel25)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(HistoryOvertime)
@@ -125,10 +128,7 @@ public class JHomeHR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel13)))
-                    .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel13))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tesPanelLayout.setVerticalGroup(
