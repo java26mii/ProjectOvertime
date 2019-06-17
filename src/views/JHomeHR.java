@@ -201,15 +201,15 @@ public class JHomeHR extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void OvertimeReqMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OvertimeReqMouseReleased
-        JIOvertimeRequestForm requestForm = new JIOvertimeRequestForm();
-        this.basePanel.add(requestForm);
-        requestForm.show();
+        JIOvertimeApproval overtimeApproval  = new JIOvertimeApproval();
+        this.basePanel.add(overtimeApproval);
+        overtimeApproval.show();
     }//GEN-LAST:event_OvertimeReqMouseReleased
 
     private void HistoryOvertimeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HistoryOvertimeMouseReleased
-        JIOvertimeRequestStatus requestStatus = new JIOvertimeRequestStatus();
-        this.basePanel.add(requestStatus);
-        requestStatus.show();
+//        JIOvertimeRequestStatus requestStatus = new JIOvertimeRequestStatus();
+//        this.basePanel.add(requestStatus);
+//        requestStatus.show();
     }//GEN-LAST:event_HistoryOvertimeMouseReleased
 
     private void profileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_profileKeyReleased

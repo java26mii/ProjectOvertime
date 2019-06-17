@@ -44,9 +44,9 @@ public class OvertimeRequestController implements IOvertimeRequestController {
     }
 
     @Override
-    public String save(String id, String reqDate, String startTime, String endTime, String activity, String isDelete) {
+    public String save(String id, String reqDate, String startTime, String endTime, String activity, String isDelete, String oSalary) {
         String result = "";
-        OvertimeRequest overtimeRequest = new OvertimeRequest(Long.parseLong(id), new java.sql.Date(date.getTime()), new java.sql.Date(date.getTime()),  new java.sql.Date(date.getTime()), activity, isDelete.charAt(0));
+        OvertimeRequest overtimeRequest = new OvertimeRequest(Long.parseLong(id), new java.sql.Date(date.getTime()), new Short(startTime), new Short(endTime), activity,  isDelete.charAt(0), new Long(oSalary));
         if (gdao.saveOrDelete(overtimeRequest, false)) {
             result = "Success";
         } else {

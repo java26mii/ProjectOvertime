@@ -10,12 +10,14 @@ import controllers.EmployeeJobController;
 import controllers.EmployeeRoleController;
 import controllers.JobController;
 import controllers.OvertimeRequestController;
+import controllers.OvertimeTypeController;
 import controllers.RoleController;
 import icontrollers.IEmployeeController;
 import icontrollers.IEmployeeJobController;
 import icontrollers.IEmployeeRoleController;
 import icontrollers.IJobController;
 import icontrollers.IOvertimeRequestController;
+import icontrollers.IOvertimeTypeController;
 import icontrollers.IRoleController;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,7 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
     IJobController jobController = new JobController(factory);
     IRoleController roleController = new RoleController(factory);
     IOvertimeRequestController overtimeRequestController = new OvertimeRequestController(factory);
+    IOvertimeTypeController overtimeTypeController = new OvertimeTypeController(factory);
 
     private void resetText() {
         txtId.setText("");
@@ -114,8 +117,8 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
 
     private void getOvertimeType() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for (OvertimeType overtimeType  : overtimeRequestController.getAll()) {
-            comboType.addItem(overtimeType.getId() + " " + overtimeType.getFirstName());
+        for (OvertimeType overtimeType  : overtimeTypeController.getAll()) {
+            comboType.addItem(overtimeType.getId() + " " + overtimeType.getName());
         }
     }
 
@@ -372,12 +375,10 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel13)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
                     .addComponent(jReqDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

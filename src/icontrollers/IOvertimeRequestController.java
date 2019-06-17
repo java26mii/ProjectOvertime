@@ -20,7 +20,7 @@ public interface IOvertimeRequestController {
 
     public List<OvertimeRequest> search(Object keyword);
 
-    public String save(String id, String reqDate, String startTime, String endTime, String activity, String isDelete);
+    public String save(String id, String reqDate, String startTime, String endTime, String activity,  String isDelete, String oSalary);
 
     public String delete(String id);
 }
