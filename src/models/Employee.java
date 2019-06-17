@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -64,10 +63,10 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "SALARY")
     private BigInteger salary;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     @JoinColumn(name = "MANAGER", referencedColumnName = "ID")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Employee manager;
 
     public Employee() {
@@ -87,6 +86,17 @@ public class Employee implements Serializable {
         this.salary = salary;
     }
 
+    public Employee(Long id, String firstName, String lastName, String email, long phoneNumber, Character isDelete, BigInteger salary, Employee manager) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.isDelete = isDelete;
+        this.salary = salary;
+        this.manager = manager;
+    }
+    
     public Long getId() {
         return id;
     }

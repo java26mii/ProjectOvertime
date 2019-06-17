@@ -13,12 +13,13 @@ import models.Account;
  * @author HP
  */
 public interface IAccountController {
-    public boolean Validasi(Object keyword,boolean isId);
-    
+
+    public boolean Validasi(Object keyword, boolean isId);
+
 //    public String register (String id, String username, String password, String isDelete);
-        public String register (String username, String password, String isDelete);
+    public String register(String username, String password, String isDelete);
 
     public String login(String username, String password);
-    
+
 //    public String profil(String username, String password, String photo);
 }

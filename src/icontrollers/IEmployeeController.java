@@ -21,8 +21,8 @@ public interface IEmployeeController {
     public List<Employee> search(Object keyword);
 
     public String save(String Id, String firstName, String lastName,
-            String email, String phoneNumber,
-            String manager);
+            String email, String phoneNumber, String isDelete,
+            String salary, String manager);
 
     public String delete(String id);
 

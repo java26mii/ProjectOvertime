@@ -18,6 +18,7 @@ import models.Employee;
 import models.Job;
 import org.hibernate.SessionFactory;
 import icontrollers.IEmployeeController;
+import java.math.BigInteger;
 
 /**
  *
@@ -56,15 +57,16 @@ public class EmployeeController implements IEmployeeController {
     }
 
     @Override
-    public String save(String Id, String firstName, String lastName, String email, String phoneNumber, String manager) {
+    public String save(String Id, String firstName, String lastName, String email, String phoneNumber, String isDelete, String salary, String manager) {
         String result = "Data gagal disimpan";
-//        try {
-//            if (gdao.saveOrDelete(new Employee(Long.parseLong(Id), firstName, lastName, email, phoneNumber, new Employee(manager), new BigDecimal(commissionPct), new Department(Short.parseShort(department)), new Employee(Integer.parseInt(manager)), new Job(job)), false)) {
-//                result = "Data berhasil di simpan";
-//            }
-//        } catch (ParseException ex) {
-//            Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            if (gdao.saveOrDelete(new Employee(Long.parseLong(Id), firstName, lastName, email,
+                    Long.parseLong(phoneNumber), isDelete.charAt(0), new BigInteger(salary), new Employee(Long.parseLong(manager))), false)) {
+                result = "Data berhasil di simpan";
+            }
+        } catch (Exception e) {
+            Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, e);
+        }
         return result;
     }
 //        if (gdao.saveOrDelete(new Employee(id, firstName, lastName, email, phoneNumber, new java.sql.Date(date.getTime()), new BigDecimal(salary), new BigDecimal(commissionPct), new Department(Short.parseShort(department)), new Employee(Integer.parseInt(manager)), new Job(job)) {
