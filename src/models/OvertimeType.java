@@ -7,14 +7,19 @@ package models;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,24 +42,26 @@ public class OvertimeType implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "NAME", nullable = false, length = 25)
+    @Column(name = "NAME")
     private String name;
     @Basic(optional = false)
-    @Column(name = "MIN_HOUR", nullable = false)
+    @Column(name = "MIN_HOUR")
     private short minHour;
     @Basic(optional = false)
-    @Column(name = "IS_DELETE", nullable = false)
+    @Column(name = "IS_DELETE")
     private Character isDelete;
     @Basic(optional = false)
-    @Column(name = "MAX_HOUR", nullable = false)
+    @Column(name = "MAX_HOUR")
     private short maxHour;
     @Column(name = "PARAM_1HOUR")
     private BigInteger param1hour;
     @Column(name = "PARAM_NEXTHOUR")
     private BigInteger paramNexthour;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimeType", fetch = FetchType.LAZY)
+    private List<OvertimeRequest> overtimeRequestList;
 
     public OvertimeType() {
     }
@@ -125,6 +132,15 @@ public class OvertimeType implements Serializable {
 
     public void setParamNexthour(BigInteger paramNexthour) {
         this.paramNexthour = paramNexthour;
+    }
+
+    @XmlTransient
+    public List<OvertimeRequest> getOvertimeRequestList() {
+        return overtimeRequestList;
+    }
+
+    public void setOvertimeRequestList(List<OvertimeRequest> overtimeRequestList) {
+        this.overtimeRequestList = overtimeRequestList;
     }
 
     @Override

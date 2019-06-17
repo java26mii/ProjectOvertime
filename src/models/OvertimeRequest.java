@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ASUS
  */
 @Entity
-@Table(name = "OVERTIME_REQUESTS", catalog = "", schema = "OVERTIME")
+@Table(name = "OVERTIME_REQUESTS")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OvertimeRequest.findAll", query = "SELECT o FROM OvertimeRequest o")
@@ -64,7 +64,6 @@ public class OvertimeRequest implements Serializable {
     @Basic(optional = false)
     @Column(name = "O_SALARY")
     private long oSalary;
-    @Basic(optional = false)
     @Lob
     @Column(name = "DOC")
     private Serializable doc;
@@ -81,7 +80,7 @@ public class OvertimeRequest implements Serializable {
     public OvertimeRequest(Long id) {
         this.id = id;
     }
-    
+
     public OvertimeRequest(Long id, Date reqDate, short startTime, short endTime, String activity, Character isDelete, long oSalary) {
         this.id = id;
         this.reqDate = reqDate;
@@ -90,17 +89,6 @@ public class OvertimeRequest implements Serializable {
         this.activity = activity;
         this.isDelete = isDelete;
         this.oSalary = oSalary;
-     
-    }
-    public OvertimeRequest(Long id, Date reqDate, short startTime, short endTime, String activity, Character isDelete, long oSalary, Serializable doc) {
-        this.id = id;
-        this.reqDate = reqDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.activity = activity;
-        this.isDelete = isDelete;
-        this.oSalary = oSalary;
-        this.doc = doc;
     }
 
     public Long getId() {
