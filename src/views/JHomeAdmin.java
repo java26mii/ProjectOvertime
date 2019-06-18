@@ -39,6 +39,7 @@ public class JHomeAdmin extends javax.swing.JFrame {
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         tesPanel.setBackground(new java.awt.Color(255, 204, 102));
 
@@ -134,13 +135,13 @@ public class JHomeAdmin extends javax.swing.JFrame {
                                 .addComponent(jButton7))))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnType)
-                                .addGroup(tesPanelLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addComponent(btnType))
+                    .addGroup(tesPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tesPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         tesPanelLayout.setVerticalGroup(
@@ -154,13 +155,13 @@ public class JHomeAdmin extends javax.swing.JFrame {
                         .addComponent(lblAdmin)
                         .addGap(7, 7, 7)
                         .addComponent(lblId)))
-                .addGap(68, 68, 68)
+                .addGap(83, 83, 83)
                 .addComponent(btnEmployee)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnType)
                 .addGap(18, 18, 18)
                 .addComponent(btnAccount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)

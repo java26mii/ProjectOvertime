@@ -53,6 +53,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
         btnOvertimeReq = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         basePanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,6 +118,11 @@ public class JHomeEmployee extends javax.swing.JFrame {
                 btnOvertimeReqMouseClicked(evt);
             }
         });
+        btnOvertimeReq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOvertimeReqActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tesPanelLayout = new javax.swing.GroupLayout(tesPanel);
         tesPanel.setLayout(tesPanelLayout);
@@ -154,11 +160,11 @@ public class JHomeEmployee extends javax.swing.JFrame {
                         .addComponent(lblUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblId)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(66, 66, 66)
                 .addComponent(btnOvertimeReq)
-                .addGap(65, 65, 65)
+                .addGap(44, 44, 44)
                 .addComponent(btnHistory)
-                .addGap(123, 123, 123)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jButton7)
@@ -208,6 +214,10 @@ public class JHomeEmployee extends javax.swing.JFrame {
         this.basePanel.add(overtimeRequestForm);
         overtimeRequestForm.show();
     }//GEN-LAST:event_btnOvertimeReqMouseClicked
+
+    private void btnOvertimeReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOvertimeReqActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOvertimeReqActionPerformed
 
     /**
      * @param args the command line arguments

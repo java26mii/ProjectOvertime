@@ -39,6 +39,7 @@ public class JHomeHR extends javax.swing.JFrame {
         basePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         tesPanel.setBackground(new java.awt.Color(255, 255, 102));
 
@@ -136,7 +137,7 @@ public class JHomeHR extends javax.swing.JFrame {
                         .addComponent(jLabel25)))
                 .addGap(131, 131, 131)
                 .addComponent(btnApproval)
-                .addGap(27, 27, 27)
+                .addGap(38, 38, 38)
                 .addComponent(btnReport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)

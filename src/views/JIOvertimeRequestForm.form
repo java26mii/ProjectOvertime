@@ -102,10 +102,6 @@
                       <Component id="btnSave" min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="255" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="1199" max="-2" attributes="0"/>
                   </Group>
@@ -114,6 +110,10 @@
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtSearch" min="-2" pref="387" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="255" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="170" max="32767" attributes="0"/>
@@ -126,12 +126,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtId" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <Component id="jReqDate" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtId" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
