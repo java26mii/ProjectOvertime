@@ -7,15 +7,24 @@ package icontrollers;
 
 import java.util.List;
 import models.Account;
+import models.Employee;
 
 /**
  *
  * @author HP
  */
 public interface IAccountController {
-    public boolean Validasi(Object keyword,boolean isId);
+    public List<Account> getAll();
     
+    public Account getById(String id);
+
+    public List<Account> search(Object keyword);
+   
     public String register (String id, String username, String password, String isDelete);
     
     public String login(String username, String password);
+    
+    public Account getAccount(String username);
+    
+    public Employee getEmployee(String email);
 }

@@ -28,7 +28,6 @@ import tools.HibernateUtil;
 public class JIProfileForm extends javax.swing.JInternalFrame {
 
     SessionFactory factory = HibernateUtil.getSessionFactory();
-    
 
     /**
      * Creates new form JIProfileForm
@@ -38,9 +37,9 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
     }
 
     private void resetText() {
-        inputUserName.setText("");
-        inputPass.setText("");
-    
+//        inputUserName.setText("");
+//        inputPass.setText("");
+//    
         btnSave.setEnabled(true);
     }
 
@@ -57,17 +56,10 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
         btnReset = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        inputUserName = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnFile = new javax.swing.JButton();
-        inputPass = new javax.swing.JPasswordField();
         inputPict = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        inputPass1 = new javax.swing.JPasswordField();
-        inputPass2 = new javax.swing.JPasswordField();
-        jLabel7 = new javax.swing.JLabel();
+        lblPicture = new javax.swing.JLabel();
 
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
         profile.setMaximumSize(new java.awt.Dimension(32767, 32767));
@@ -98,22 +90,10 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Edit Profile ");
+        jLabel1.setText("Edit Profile Picture");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Profile Picture ");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Recent Password");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Username");
-
-        inputUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputUserNameActionPerformed(evt);
-            }
-        });
 
         btnSave.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSave.setText("Save");
@@ -130,29 +110,12 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
             }
         });
 
-        inputPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPassActionPerformed(evt);
+        lblPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
+        lblPicture.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPictureMouseClicked(evt);
             }
         });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("New Password");
-
-        inputPass1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPass1ActionPerformed(evt);
-            }
-        });
-
-        inputPass2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPass2ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("Repassword");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,71 +124,42 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
+                        .addGap(170, 170, 170)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(lblPicture))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
                         .addComponent(btnReset)
                         .addGap(40, 40, 40)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(inputPass, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addComponent(inputPict, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFile))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(inputPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(inputPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(117, Short.MAX_VALUE))
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(inputPict, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFile)))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(inputUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputPass, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
+                .addComponent(lblPicture)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputPict, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFile)
                     .addComponent(jLabel3))
-                .addGap(70, 70, 70)
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnReset))
-                .addGap(50, 50, 50))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,18 +170,31 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
         resetText();
     }//GEN-LAST:event_btnResetActionPerformed
 
-    private void inputUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputUserNameActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
-        // TODO add your handling code here:
-     
+        JFileChooser chooser = new JFileChooser();
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JPG, GIF, and PNG Images", "jpg", "gif", "png");
+
+        chooser.setFileFilter(filter);
+        chooser.showOpenDialog(null);
+        File file = chooser.getSelectedFile();
+
+//        choose.setText(file.getSelectedFile().toString());
+        try {
+            Image image = ImageIO.read(file);
+            ImageIcon imageIcon = new ImageIcon(image.getScaledInstance(105, 105, 300));
+            lblPicture.setIcon(imageIcon);
+            lblPicture.setText("");
+        } catch (Exception e) {
+
+        }
+
     }//GEN-LAST:event_btnFileActionPerformed
 
     private void profileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseReleased
@@ -258,34 +205,23 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_profileKeyReleased
 
-    private void inputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPassActionPerformed
-
-    private void inputPass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPass1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPass1ActionPerformed
-
-    private void inputPass2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPass2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPass2ActionPerformed
+    private void lblPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPictureMouseClicked
+        //        String username = textFirstName.getText()+" "+textLastName.getText();
+        //        String iduser = textEmpId.getText();
+//        JIProfileForm profileForm = new JIProfileForm(username, iduser);
+//        this.baseLayer.add(profileForm);
+//        profileForm.show();
+    }//GEN-LAST:event_lblPictureMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFile;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSave;
-    private javax.swing.JPasswordField inputPass;
-    private javax.swing.JPasswordField inputPass1;
-    private javax.swing.JPasswordField inputPass2;
     private javax.swing.JTextField inputPict;
-    private javax.swing.JTextField inputUserName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblPicture;
     private javax.swing.JLabel profile;
     // End of variables declaration//GEN-END:variables
 }

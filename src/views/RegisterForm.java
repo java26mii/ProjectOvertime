@@ -337,26 +337,26 @@ public class RegisterForm extends javax.swing.JFrame {
 
     private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
         //        System.out.println(txt_id.getText() + txt_username.getText() + String.valueOf(pass.getPassword()));
-        boolean validasiId = iac.Validasi(txt_id.getText(), true);
-        boolean validasiUser = iac.Validasi(txt_username.getText(), false);
-        if (validasiId) {
-            if (validasiUser) {
-                if (cekPassword()) {
-                    JOptionPane.showMessageDialog(null, iac.register(txt_id.getText(), txt_username.getText(), String.valueOf(pass.getPassword()),"0"));
-                    resetText();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Password Doesn't Match");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Username Already Exist");
-            }
-        } else {
-            if (txt_id.getText().equals("") || txt_username.getText().equals("") || pass.getPassword().equals("") || repass.getPassword().equals("")) {
-                JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
-            } else {
-                JOptionPane.showMessageDialog(null, "ID has Registered");
-            }
-        }
+//        boolean validasiId = iac.Validasi(txt_id.getText(), true);
+//        boolean validasiUser = iac.Validasi(txt_username.getText(), false);
+//        if (validasiId) {
+//            if (validasiUser) {
+//                if (cekPassword()) {
+//                    JOptionPane.showMessageDialog(null, iac.register(txt_id.getText(), txt_username.getText(), String.valueOf(pass.getPassword()),"0"));
+//                    resetText();
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Password Doesn't Match");
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Username Already Exist");
+//            }
+//        } else {
+//            if (txt_id.getText().equals("") || txt_username.getText().equals("") || pass.getPassword().equals("") || repass.getPassword().equals("")) {
+//                JOptionPane.showMessageDialog(null, "DATA TIDAK BOLEH KOSONG");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "ID has Registered");
+//            }
+//        }
     }//GEN-LAST:event_register_btnActionPerformed
 
     private void txt_idKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idKeyReleased

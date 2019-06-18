@@ -39,7 +39,7 @@ public class OHibernate {
         IJobController jobController = new JobController(factory);
 //        roleController.save("1", "Admin","0");
 //        statusController.save("1", "Approve","0");
-        jobController.save("1", "ADD1", "0");
+//        jobController.save("1", "ADD1", "0");
         
 //        IEmployeeController eco = new EmployeeController(factory);
 //        IDepartmentController edo = new DepartmentController(factory);

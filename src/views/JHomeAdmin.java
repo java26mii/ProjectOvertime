@@ -27,9 +27,8 @@ public class JHomeAdmin extends javax.swing.JFrame {
         tesPanel = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lblAdmin = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
         btnAccount = new javax.swing.JButton();
         btnType = new javax.swing.JButton();
@@ -54,17 +53,13 @@ public class JHomeAdmin extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton8.setText("Edit User");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("Admin Name");
+        lblAdmin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblAdmin.setForeground(new java.awt.Color(51, 51, 51));
+        lblAdmin.setText("Admin Name");
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel24.setText("Id Employee");
-
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText("Job");
+        lblId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblId.setForeground(new java.awt.Color(51, 51, 51));
+        lblId.setText("Id Employee");
 
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
         profile.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,9 +123,8 @@ public class JHomeAdmin extends javax.swing.JFrame {
                         .addComponent(profile)
                         .addGap(18, 18, 18)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel25)))
+                            .addComponent(lblAdmin)
+                            .addComponent(lblId)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,11 +151,9 @@ public class JHomeAdmin extends javax.swing.JFrame {
                     .addComponent(profile)
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel23)
+                        .addComponent(lblAdmin)
                         .addGap(7, 7, 7)
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25)))
+                        .addComponent(lblId)))
                 .addGap(68, 68, 68)
                 .addComponent(btnEmployee)
                 .addGap(29, 29, 29)
@@ -229,9 +221,11 @@ public class JHomeAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAccountActionPerformed
 
     private void btnAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccountMouseClicked
-        JIUserForm userForm = new JIUserForm();
-        this.basePanel.add(userForm);
-        userForm.show();
+//        String username = tx.getText()+" "+textLastName.getText();
+//        String id = textEmpId.getText();
+//        JIAccountForm userForm = new JIAccountForm(username, id);
+//        this.basePanel.add(userForm);
+//        userForm.show();
     }//GEN-LAST:event_btnAccountMouseClicked
 
     private void btnTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTypeMouseClicked
@@ -294,9 +288,8 @@ public class JHomeAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel lblAdmin;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel tesPanel;
     // End of variables declaration//GEN-END:variables

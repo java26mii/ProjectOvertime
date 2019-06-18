@@ -10,6 +10,7 @@ import icontrollers.IAccountController;
 import idaos.IGeneralDAO;
 import java.util.List;
 import models.Account;
+import models.Employee;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,14 +24,29 @@ import tools.HibernateUtil;
  */
 public class AccountController implements IAccountController {
 
-    private IGeneralDAO<Account> igdao;
+    private GeneralDAO<Account> gdao;
     private Session session;
     
     private Transaction transaction;
     SessionFactory factory = HibernateUtil.getSessionFactory();
 
     public AccountController(SessionFactory factory) {
-        igdao = new GeneralDAO(factory, Account.class);
+        gdao = new GeneralDAO(factory, Account.class);
+    }
+    
+    @Override
+    public List<Account> getAll() {
+        return gdao.getData("");
+    }
+
+    @Override
+    public Account getById(String id) {
+        return gdao.getById(new Long(id));
+    }
+
+    @Override
+    public List<Account> search(Object keyword) {
+        return gdao.getData(keyword);
     }
 
     public String hash(String password) {
@@ -42,7 +58,7 @@ public class AccountController implements IAccountController {
         String result = "";
         String pass = hash(password);
         Account account = new Account(Long.parseLong(id), username, pass, isDelete.charAt(0));
-        if (igdao.saveOrDelete(account, false)) {
+        if (gdao.saveOrDelete(account, false)) {
             result = "Success";
         } else {
             result = "Failed";
@@ -52,53 +68,57 @@ public class AccountController implements IAccountController {
 
     @Override
     public String login(String username, String password) {
-        String result = "";
-        session = this.factory.openSession();
-        transaction = session.beginTransaction();
-        Query query = session.createQuery("SELECT password FROM Account WHERE username ='"+username+"'");
-        String hashed = (String) query.uniqueResult();
-        
-        boolean cekpassword = BCrypt.checkpw(password, hashed);
-        if (!Validasi(username, false) || !Validasi(username, true) ) {
-            if (cekpassword) {
-                result = "Login Successfull";
+                String result = "NO such account";
+        String hashed = "";
+        if (!username.contains("@")) {
+            Account account = gdao.getAccount(username);
+            if (account != null) {
+                
+                hashed = String.valueOf(account.getPassword());
+
+                boolean cekPassword = BCrypt.checkpw(password, hashed);
+
+                if (cekPassword) {
+                    result = "Login Success";
+                } else {
+                    result = "Wrong Password";
+                }
+
             } else {
-                result = "Login Unsuccessfull, Password Wrong";
+                result = "Username is wrong";
             }
+
         } else {
-            result = "Login Unsuccessfull, Username Wrong";
+            Employee employee = gdao.getEmployee(username);
+            if (employee != null) {
+                Account account = gdao.getById(employee.getId());
+                hashed = String.valueOf(account.getPassword());
+
+                boolean cekPassword = BCrypt.checkpw(password, hashed);
+
+                if (cekPassword) {
+                    result = "Login Success";
+                } else {
+                    result = "Wrong Password";
+                }
+
+            } else {
+                result = "Email is wrong";
+            }
+
         }
+
         return result;
+    }
+   
+    @Override
+    public Account getAccount(String username) {
+        return gdao.getAccount(username);
     }
 
     @Override
-    public boolean Validasi(Object keyword, boolean isId) {
-        boolean result = false;
-        session = this.factory.openSession();
-        transaction = session.beginTransaction();
-        String hql = "SELECT COUNT(*) FROM Account WHERE ";
-        if (isId) {
-            hql += "id = " + keyword;
-        } else {
-            hql += "username = '" + keyword + "'";
-        }
-        try {
-            Query query = session.createQuery(hql);
-            Long count = (Long) query.uniqueResult();
-//            System.out.println(count);
-            if (count != 1) {
-                result = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-
-        return result;
+    public Employee getEmployee(String email) {
+        return gdao.getEmployee(email);
     }
 
 }

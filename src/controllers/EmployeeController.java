@@ -38,7 +38,7 @@ public class EmployeeController implements IEmployeeController {
 
     @Override
     public Employee getById(String id) {
-        return gdao.getById(new Integer(id));
+        return gdao.getById(new Long(id));
     }
 
 //    @Override

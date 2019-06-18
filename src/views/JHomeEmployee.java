@@ -20,16 +20,17 @@ public class JHomeEmployee extends javax.swing.JFrame {
     SessionFactory factory = HibernateUtil.getSessionFactory();
     IEmployeeController iec = new EmployeeController(factory);
 
-    String id = UserSession.getIdUser();
-    String name = UserSession.getUsername();
-    String job = UserSession.getJob();
+//    String id = UserSession.getIdUser();
+//    String name = UserSession.getUsername();
+//    String job = UserSession.getJob();
 
     /**
      * Creates new form JHomeEmployee
      */
-    public JHomeEmployee() {
+    public JHomeEmployee(String id, String user) {
         initComponents();
-
+        lblUser.setText(user);
+        lblId.setText(id);
     }
 
     /**
@@ -45,9 +46,8 @@ public class JHomeEmployee extends javax.swing.JFrame {
         tesPanel = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
         btnHistory = new javax.swing.JButton();
         btnOvertimeReq = new javax.swing.JButton();
@@ -80,17 +80,13 @@ public class JHomeEmployee extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton8.setText("Edit User");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("HR Name");
+        lblUser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(51, 51, 51));
+        lblUser.setText("HR Name");
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel24.setText("Id Employee");
-
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText("Job");
+        lblId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblId.setForeground(new java.awt.Color(51, 51, 51));
+        lblId.setText("Id");
 
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
         profile.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -139,9 +135,8 @@ public class JHomeEmployee extends javax.swing.JFrame {
                                 .addComponent(profile)
                                 .addGap(18, 18, 18)
                                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel24)
-                                    .addComponent(jLabel25)))
+                                    .addComponent(lblUser)
+                                    .addComponent(lblId)))
                             .addComponent(btnHistory)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(146, 146, 146)
@@ -155,12 +150,10 @@ public class JHomeEmployee extends javax.swing.JFrame {
                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(profile)
                     .addGroup(tesPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel23)
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25)))
+                        .addGap(23, 23, 23)
+                        .addComponent(lblUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblId)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(btnOvertimeReq)
                 .addGap(65, 65, 65)
@@ -246,7 +239,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JHomeEmployee().setVisible(true);
+                new JHomeEmployee("","").setVisible(true);
             }
         });
     }
@@ -257,9 +250,8 @@ public class JHomeEmployee extends javax.swing.JFrame {
     private javax.swing.JButton btnOvertimeReq;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel tesPanel;
     // End of variables declaration//GEN-END:variables
