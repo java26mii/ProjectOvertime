@@ -45,6 +45,7 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
     public JIOvertimeRequestForm() {
         initComponents();
 //        showTable("");
+        getOvertimeType();
     }
     
     SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -58,8 +59,8 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
 //
     private void resetText() {
         txtId.setText("");
-        startTime.setText("");
-        startEnd.setText("");
+//        startTime.setText("");
+//        startEnd.setText("");
         txtActivity.setText("");
         jReqDate.setDate(null);
         comboType.setSelectedItem(0);
@@ -115,12 +116,12 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
 //        showTable(id);
 //    }
 //
-//    private void getOvertimeType() {
-//        DefaultComboBoxModel model = new DefaultComboBoxModel();
-//        for (OvertimeType overtimeType  : overtimeTypeController.getAll()) {
-//            comboType.addItem(overtimeType.getId() + " " + overtimeType.getName());
-//        }
-//    }
+    private void getOvertimeType() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (OvertimeType overtimeType  : overtimeTypeController.getAll()) {
+            comboType.addItem(overtimeType.getId() + " " + overtimeType.getName());
+        }
+    }
 //
 //    public void updateTableLocations(String id) {
 //        DefaultTableModel model = (DefaultTableModel) tblOvertimeReq.getModel();
@@ -227,7 +228,7 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Overtime type");
 
-        comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose" }));
         comboType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTypeActionPerformed(evt);
