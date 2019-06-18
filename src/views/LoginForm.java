@@ -7,18 +7,23 @@ package views;
 
 import controllers.AccountController;
 import controllers.EmployeeController;
+import controllers.EmployeeRoleController;
+import daos.GeneralDAO;
 import icontrollers.IAccountController;
 import icontrollers.IEmployeeController;
+import icontrollers.IEmployeeRoleController;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import models.Account;
 import models.Employee;
+import models.EmployeeRole;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import session.UserSession;
 import tools.BCrypt;
 import tools.HibernateUtil;
 
@@ -31,15 +36,18 @@ public class LoginForm extends javax.swing.JFrame {
     /**
      * Creates new form LoginForm
      */
-    public LoginForm() {
-        initComponents();
-    }
-
+    
     private Session session;
     private Transaction transaction;
     SessionFactory factory = HibernateUtil.getSessionFactory();
+    GeneralDAO<Account> dAO = new GeneralDAO<>(factory, Account.class);
     IAccountController iac = new AccountController(factory);
     IEmployeeController iec = new EmployeeController(factory);
+    IEmployeeRoleController ierc = new EmployeeRoleController(factory);
+
+    public LoginForm() {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -227,13 +235,28 @@ public class LoginForm extends javax.swing.JFrame {
                 if (emp != null) {
                     id = String.valueOf(emp.getId());
                     user = emp.getFirstName() + " " + emp.getLastName();
-
                 }
             }
 
-            JHomeEmployee jHomeEmployee = new JHomeEmployee(id, user);
-            jHomeEmployee.setVisible(true);
-            this.dispose();
+            UserSession userSession = new UserSession(id, user);
+            String role = "";
+            for (EmployeeRole empRole : ierc.search(id)) {
+                role = empRole.getRole().getName();
+            }
+
+            if (role.equals("admin")) {
+                JHomeAdmin jHomeAdmin = new JHomeAdmin();
+                jHomeAdmin.setVisible(true);
+                this.dispose();
+            } else if (role.equals("employee")) {
+                JHomeEmployee jHomeEmployee = new JHomeEmployee();
+                jHomeEmployee.setVisible(true);
+                this.dispose();
+            } else if (role.equals("hr")) {
+                JHomeHR jHomeHR = new JHomeHR();
+                jHomeHR.setVisible(true);
+                this.dispose();
+            }
         } else {
             JOptionPane.showMessageDialog(null, result);
         }

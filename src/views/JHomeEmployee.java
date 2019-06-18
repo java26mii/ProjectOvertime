@@ -6,7 +6,14 @@
 package views;
 
 import controllers.EmployeeController;
+import controllers.EmployeeRoleController;
+import controllers.JobController;
+import controllers.RoleController;
 import icontrollers.IEmployeeController;
+import icontrollers.IEmployeeRoleController;
+import icontrollers.IJobController;
+import icontrollers.IRoleController;
+import models.EmployeeRole;
 import org.hibernate.SessionFactory;
 import session.UserSession;
 import tools.HibernateUtil;
@@ -19,18 +26,26 @@ public class JHomeEmployee extends javax.swing.JFrame {
 
     SessionFactory factory = HibernateUtil.getSessionFactory();
     IEmployeeController iec = new EmployeeController(factory);
+    IJobController ijc = new JobController(factory);
+    IEmployeeRoleController ierc = new EmployeeRoleController(factory);
+    IRoleController irc = new RoleController(factory);
 
 //    String id = UserSession.getIdUser();
 //    String name = UserSession.getUsername();
 //    String job = UserSession.getJob();
-
     /**
      * Creates new form JHomeEmployee
      */
-    public JHomeEmployee(String id, String user) {
+    public JHomeEmployee() {
         initComponents();
-        lblUser.setText(user);
-        lblId.setText(id);
+        UserSession us = new UserSession();
+        String idRole = "";
+        String role = "";
+        for (EmployeeRole employeeRole : ierc.search(us.getIdUser())) {
+            role = employeeRole.getRole().getName();
+        }
+        lblUser.setText("Hello, "+us.getUsername());
+        lblId.setText(us.getIdUser());
     }
 
     /**
@@ -111,7 +126,6 @@ public class JHomeEmployee extends javax.swing.JFrame {
         });
 
         btnOvertimeReq.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnOvertimeReq.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
         btnOvertimeReq.setText("Overtime Request");
         btnOvertimeReq.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -210,7 +224,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistoryMouseClicked
 
     private void btnOvertimeReqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOvertimeReqMouseClicked
-       JIOvertimeRequestForm overtimeRequestForm = new JIOvertimeRequestForm();
+        JIOvertimeRequestForm overtimeRequestForm = new JIOvertimeRequestForm();
         this.basePanel.add(overtimeRequestForm);
         overtimeRequestForm.show();
     }//GEN-LAST:event_btnOvertimeReqMouseClicked
@@ -249,7 +263,7 @@ public class JHomeEmployee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JHomeEmployee("","").setVisible(true);
+                new JHomeEmployee().setVisible(true);
             }
         });
     }

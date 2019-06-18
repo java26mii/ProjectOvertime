@@ -1,5 +1,17 @@
-
 package views;
+
+import controllers.EmployeeController;
+import controllers.EmployeeRoleController;
+import controllers.JobController;
+import controllers.RoleController;
+import icontrollers.IEmployeeController;
+import icontrollers.IEmployeeRoleController;
+import icontrollers.IJobController;
+import icontrollers.IRoleController;
+import models.EmployeeRole;
+import session.UserSession;
+import org.hibernate.SessionFactory;
+import tools.HibernateUtil;
 
 /**
  *
@@ -10,8 +22,24 @@ public class JHomeAdmin extends javax.swing.JFrame {
     /**
      * Creates new form JHomeEmployee
      */
+    
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IEmployeeController iec = new EmployeeController(factory);
+    IJobController ijc = new JobController(factory);
+    IEmployeeRoleController ierc = new EmployeeRoleController(factory);
+    IRoleController irc = new RoleController(factory);
+
     public JHomeAdmin() {
         initComponents();
+        UserSession us = new UserSession();
+        String idRole = "";
+        String role = "";
+        for (EmployeeRole employeeRole : ierc.search(us.getIdUser())) {
+            role = employeeRole.getRole().getName();
+//            idRole = employeeRole.getRole().getId();
+        }
+        lblAdmin.setText(us.getUsername());
+        lblId.setText(us.getIdUser());
     }
 
     /**
@@ -75,7 +103,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         });
 
         btnAccount.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnAccount.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
         btnAccount.setText("Account Mgt");
         btnAccount.setToolTipText("");
         btnAccount.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -90,7 +117,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         });
 
         btnType.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnType.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
         btnType.setText("Overtime Type");
         btnType.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,7 +125,6 @@ public class JHomeAdmin extends javax.swing.JFrame {
         });
 
         btnEmployee.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnEmployee.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
         btnEmployee.setText("Employee Mgt");
         btnEmployee.setToolTipText("");
         btnEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -208,7 +233,7 @@ public class JHomeAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void profileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_profileKeyReleased
-        
+
     }//GEN-LAST:event_profileKeyReleased
 
     private void profileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseReleased

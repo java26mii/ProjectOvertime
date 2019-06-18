@@ -10,11 +10,33 @@ package session;
  * @author Sekar Ayu Safitri
  */
 public class UserSession {
-    private static String idUser;
-    private static String username;
-    private static String password;
-    private static String job;
 
+    public static String idUser;
+    public static String username;
+    public static String job;
+
+    public UserSession() {
+    }
+
+    public UserSession(String idSession, String nameSession) {
+        this.idUser = idSession;
+        this.username = nameSession;
+    }
+    
+    public UserSession(String idSession, String nameSession, String jobs) {
+        this.idUser = idSession;
+        this.username = nameSession;
+        this.job = jobs;
+    }
+
+    public static String getJob() {
+        return job;
+    }
+
+    public static void setJob(String job) {
+        UserSession.job = job;
+    }
+    
     public static String getIdUser() {
         return idUser;
     }
@@ -31,21 +53,4 @@ public class UserSession {
         UserSession.username = username;
     }
 
-    public static String getPassword() {
-        return password;
-    }
-
-    public static void setPassword(String password) {
-        UserSession.password = password;
-    }
-
-    public static String getJob() {
-        return job;
-    }
-
-    public static void setJob(String job) {
-        UserSession.job = job;
-    }
-    
-    
 }

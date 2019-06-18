@@ -5,6 +5,21 @@
  */
 package views;
 
+import controllers.AccountController;
+import controllers.EmployeeController;
+import controllers.OvertimeRequestController;
+import icontrollers.IAccountController;
+import icontrollers.IEmployeeController;
+import icontrollers.IOvertimeRequestController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.Employee;
+import models.OvertimeType;
+import models.Role;
+import org.hibernate.SessionFactory;
+import tools.HibernateUtil;
+
 /**
  *
  * @author ASUS
@@ -14,8 +29,49 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIOvertimeType
      */
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IOvertimeRequestController iorc = new OvertimeRequestController(factory);
+    IAccountController iac = new AccountController(factory);
+
     public JIOvertimeTypeForm() {
         initComponents();
+        showTable("");
+    }
+
+    private void resetText() {
+        txtType.setText("");
+        txtMinHour.setText("");
+        txtMaxHour.setText("");
+        txtParam.setText("");
+        txtParamNext.setText("");
+
+        btnSave2.setEnabled(true);
+//        txtId.setEditable(true);
+    }
+
+    private void showTable(String key) {
+//        DefaultTableModel model = (DefaultTableModel) tblType.getModel();
+//        model.setRowCount(0);
+//        Object[] row = new Object[12];
+//        List<OvertimeType>  = new ArrayList<>();
+//        List<Role> roles = new ArrayList<>();
+//        if (key == "") {
+//            employees = iec.getAll();
+//
+//        }
+//        employees = iec.search(key);
+//
+//        for (int i = 0; i < employees.size(); i++) {
+//            row[0] = i + 1;
+//            row[1] = employees.get(i).getId();
+//            row[2] = employees.get(i).getFirstName();
+//            row[3] = employees.get(i).getLastName();
+//            row[4] = employees.get(i).getEmail();
+//            row[5] = employees.get(i).getPhoneNumber();
+//            row[6] = employees.get(i).getSalary();
+//            row[7] = employees.get(i).getManager().getFirstName() + " " + employees.get(i).getManager().getLastName();
+//            model.addRow(row);
+//        }
     }
 
     /**
@@ -30,19 +86,19 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
         txtSearch2 = new javax.swing.JTextField();
         btnReset2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblType = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        txtLastname2 = new javax.swing.JTextField();
+        txtType = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         btnSave2 = new javax.swing.JButton();
-        txtEmail2 = new javax.swing.JTextField();
+        txtParamNext = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        txtEmail3 = new javax.swing.JTextField();
-        txtEmail4 = new javax.swing.JTextField();
-        txtLastname3 = new javax.swing.JTextField();
+        txtMaxHour = new javax.swing.JTextField();
+        txtParam = new javax.swing.JTextField();
+        txtMinHour = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -64,7 +120,7 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblType.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -75,7 +131,7 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
                 "id", "type ", "max hour", "min hour", "param hour 1", "param next hour "
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tblType);
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel33.setText("Overtime Type Form");
@@ -86,9 +142,9 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel31.setText("Type name");
 
-        txtLastname2.addActionListener(new java.awt.event.ActionListener() {
+        txtType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastname2ActionPerformed(evt);
+                txtTypeActionPerformed(evt);
             }
         });
 
@@ -109,9 +165,9 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel37.setText("Param hour 1");
 
-        txtLastname3.addActionListener(new java.awt.event.ActionListener() {
+        txtMinHour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastname3ActionPerformed(evt);
+                txtMinHourActionPerformed(evt);
             }
         });
 
@@ -135,11 +191,11 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtLastname2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                .addComponent(txtEmail3)
-                                .addComponent(txtEmail4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtLastname3, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
-                            .addComponent(txtEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtType, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                .addComponent(txtMaxHour)
+                                .addComponent(txtParam, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtMinHour, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                            .addComponent(txtParamNext, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,24 +222,24 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
                 .addComponent(jLabel33)
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLastname2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLastname3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMinHour, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(txtEmail3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaxHour, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEmail4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtParam, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel37))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
-                    .addComponent(txtEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtParamNext, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset2)
@@ -204,17 +260,17 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReset2ActionPerformed
 
-    private void txtLastname2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastname2ActionPerformed
+    private void txtTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastname2ActionPerformed
+    }//GEN-LAST:event_txtTypeActionPerformed
 
     private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSave2ActionPerformed
 
-    private void txtLastname3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastname3ActionPerformed
+    private void txtMinHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinHourActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastname3ActionPerformed
+    }//GEN-LAST:event_txtMinHourActionPerformed
 
     private void txtSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch2ActionPerformed
         // TODO add your handling code here:
@@ -232,12 +288,13 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField txtEmail2;
-    private javax.swing.JTextField txtEmail3;
-    private javax.swing.JTextField txtEmail4;
-    private javax.swing.JTextField txtLastname2;
-    private javax.swing.JTextField txtLastname3;
+    private javax.swing.JTable tblType;
+    private javax.swing.JTextField txtMaxHour;
+    private javax.swing.JTextField txtMinHour;
+    private javax.swing.JTextField txtParam;
+    private javax.swing.JTextField txtParamNext;
     private javax.swing.JTextField txtSearch2;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
+
 }

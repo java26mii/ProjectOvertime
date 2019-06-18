@@ -40,15 +40,15 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIEmployeeForm
      */
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IEmployeeController iec = new EmployeeController(factory);
+    IAccountController iac = new AccountController(factory);
+
     public JIEmployeeForm() {
         initComponents();
         showTable("");
         getManager();
     }
-
-    SessionFactory factory = HibernateUtil.getSessionFactory();
-    IEmployeeController iec = new EmployeeController(factory);
-    IAccountController iac = new AccountController(factory);
 
     private void resetText() {
         txtId.setText("");
@@ -99,8 +99,6 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
         }
         showTable(id);
     }
-    
-   
 
     private void checkUser(String id) {
         List<Employee> employees = new ArrayList<>();
@@ -244,6 +242,7 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setPreferredSize(new java.awt.Dimension(500, 400));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Employee Form");
@@ -492,7 +491,7 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if (txtId.getText().equals("") || txtFirstname.getText().equals("") || txtLastname.getText().equals("")
+        if (txtFirstname.getText().equals("") || txtLastname.getText().equals("")
                 || txtEmail.getText().equals("") || txtPhone.getText().equals("")
                 || txtSalary.getText().equals("") || comboManager.getSelectedItem() == ("Choose")) {
             JOptionPane.showMessageDialog(null, "Isi semua kolom");
@@ -501,7 +500,7 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
             if (confirm == JOptionPane.YES_OPTION) {
                 String managerId = comboManager.getSelectedItem().toString();
                 managerId = managerId.substring(0, managerId.indexOf(" = "));
-                JOptionPane.showMessageDialog(null, iec.save(txtId.getText(), txtFirstname.getText(), txtLastname.getText(), txtEmail.getText(), txtPhone.getText(), managerId));
+                JOptionPane.showMessageDialog(null, iec.save(String.valueOf(Long.parseLong("1")), txtFirstname.getText(), txtLastname.getText(), txtEmail.getText(), txtPhone.getText(), managerId));
                 resetText();
             }
         }
@@ -555,7 +554,7 @@ public class JIEmployeeForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void lblNewAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewAccountMouseClicked
-        String username = txtFirstname.getText()+" "+txtLastname.getText();
+        String username = txtFirstname.getText() + " " + txtLastname.getText();
         String iduser = txtId.getText();
         JIAccountForm jIAccountForm = new JIAccountForm(username, iduser);
         this.basePanel.add(jIAccountForm);

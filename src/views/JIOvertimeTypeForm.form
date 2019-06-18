@@ -41,12 +41,12 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtLastname2" alignment="0" pref="189" max="32767" attributes="0"/>
-                              <Component id="txtEmail3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtEmail4" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtLastname3" alignment="0" pref="189" max="32767" attributes="0"/>
+                              <Component id="txtType" alignment="0" pref="189" max="32767" attributes="0"/>
+                              <Component id="txtMaxHour" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtParam" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtMinHour" alignment="0" pref="189" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtEmail2" alignment="1" min="-2" pref="189" max="-2" attributes="0"/>
+                          <Component id="txtParamNext" alignment="1" min="-2" pref="189" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -83,28 +83,28 @@
               <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtLastname2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="txtType" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtLastname3" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="txtMinHour" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEmail3" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="txtMaxHour" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtEmail4" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="txtParam" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEmail2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="txtParamNext" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -147,7 +147,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable2">
+        <Component class="javax.swing.JTable" name="tblType">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
@@ -224,9 +224,9 @@
         <Property name="text" type="java.lang.String" value="Type name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtLastname2">
+    <Component class="javax.swing.JTextField" name="txtType">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLastname2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTypeActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel35">
@@ -248,7 +248,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSave2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail2">
+    <Component class="javax.swing.JTextField" name="txtParamNext">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel36">
       <Properties>
@@ -266,13 +266,13 @@
         <Property name="text" type="java.lang.String" value="Param hour 1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail3">
+    <Component class="javax.swing.JTextField" name="txtMaxHour">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail4">
+    <Component class="javax.swing.JTextField" name="txtParam">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtLastname3">
+    <Component class="javax.swing.JTextField" name="txtMinHour">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLastname3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMinHourActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

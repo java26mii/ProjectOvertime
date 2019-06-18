@@ -5,17 +5,50 @@
  */
 package views;
 
+import controllers.EmployeeController;
+import controllers.EmployeeJobController;
+import controllers.EmployeeRoleController;
+import controllers.JobController;
+import controllers.RoleController;
+import icontrollers.IEmployeeController;
+import icontrollers.IEmployeeJobController;
+import icontrollers.IEmployeeRoleController;
+import icontrollers.IJobController;
+import icontrollers.IRoleController;
+import models.EmployeeJob;
+import models.EmployeeRole;
+import org.hibernate.SessionFactory;
+import session.UserSession;
+import tools.HibernateUtil;
+
 /**
  *
  * @author ASUS
  */
 public class JHomeHR extends javax.swing.JFrame {
 
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IEmployeeController iec = new EmployeeController(factory);
+    IJobController ijc = new JobController(factory);
+    IEmployeeJobController iej = new EmployeeJobController(factory);
+    IEmployeeRoleController ierc = new EmployeeRoleController(factory);
+    IRoleController irc = new RoleController(factory);
+    
     /**
      * Creates new form JHomeEmployee
      */
     public JHomeHR() {
         initComponents();
+        UserSession us = new UserSession();
+        String idRole = "";
+        String role = "";
+        String job = "";
+        for (EmployeeJob employeeJob : iej.search(us.getIdUser())) {
+            role = employeeJob.getJob().getName();
+        }
+        lblHr.setText("Hello, "+us.getUsername());
+        lblId.setText(us.getIdUser());
+        lblJob.setText(us.getJob());
     }
 
     /**
@@ -30,9 +63,9 @@ public class JHomeHR extends javax.swing.JFrame {
         tesPanel = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lblHr = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        lblJob = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
         btnApproval = new javax.swing.JButton();
         btnReport = new javax.swing.JButton();
@@ -54,17 +87,17 @@ public class JHomeHR extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton8.setText("Edit User");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("HR Name");
+        lblHr.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblHr.setForeground(new java.awt.Color(51, 51, 51));
+        lblHr.setText("HR Name");
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel24.setText("Id Employee");
+        lblId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblId.setForeground(new java.awt.Color(51, 51, 51));
+        lblId.setText("Id Employee");
 
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText("Job");
+        lblJob.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblJob.setForeground(new java.awt.Color(51, 51, 51));
+        lblJob.setText("Job");
 
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/download.png"))); // NOI18N
         profile.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,7 +112,6 @@ public class JHomeHR extends javax.swing.JFrame {
         });
 
         btnApproval.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnApproval.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\form2.png")); // NOI18N
         btnApproval.setText("Overtime Approval");
         btnApproval.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -88,7 +120,6 @@ public class JHomeHR extends javax.swing.JFrame {
         });
 
         btnReport.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnReport.setIcon(new javax.swing.ImageIcon("D:\\Project Overtime\\icon\\cilik\\history2.png")); // NOI18N
         btnReport.setText("Report");
         btnReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,9 +144,9 @@ public class JHomeHR extends javax.swing.JFrame {
                                 .addComponent(profile)
                                 .addGap(18, 18, 18)
                                 .addGroup(tesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel24)
-                                    .addComponent(jLabel25)))
+                                    .addComponent(lblHr)
+                                    .addComponent(lblId)
+                                    .addComponent(lblJob)))
                             .addComponent(btnReport)))
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(146, 146, 146)
@@ -130,11 +161,11 @@ public class JHomeHR extends javax.swing.JFrame {
                     .addComponent(profile)
                     .addGroup(tesPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel23)
+                        .addComponent(lblHr)
                         .addGap(7, 7, 7)
-                        .addComponent(jLabel24)
+                        .addComponent(lblId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25)))
+                        .addComponent(lblJob)))
                 .addGap(131, 131, 131)
                 .addComponent(btnApproval)
                 .addGap(38, 38, 38)
@@ -245,9 +276,9 @@ public class JHomeHR extends javax.swing.JFrame {
     private javax.swing.JButton btnReport;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel lblHr;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblJob;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel tesPanel;
     // End of variables declaration//GEN-END:variables

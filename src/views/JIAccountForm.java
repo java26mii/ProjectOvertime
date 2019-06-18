@@ -107,17 +107,16 @@ public class JIAccountForm extends javax.swing.JInternalFrame {
                     InternetAddress.parse(email));
             message.setSubject("Your Account Already Set");
             message.setText("Dear " + name + "\n'Akun Anda dari aplikasi Leave Request sudah dibuat. Berikut informasi account anda : \n'"
-                    +"Username = "+username+"\n"
-                    +"Password = "+password+"\n"
-                    +"Dimohon disimpan baik-baik informasi Account ini agar tidak disalah gunakan.\n\nBest Regards Admin");
+                    + "Username = " + username + "\n"
+                    + "Password = " + password + "\n"
+                    + "Dimohon disimpan baik-baik informasi Account ini agar tidak disalah gunakan.\n\nBest Regards Admin");
             Transport.send(message);
 
             JOptionPane.showMessageDialog(null, "Account Sudah teregistrasi");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
-        
+        } 
     }
 
     public void resetText() {
@@ -278,7 +277,7 @@ public class JIAccountForm extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(basePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,18 +320,18 @@ public class JIAccountForm extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
-       if (txt_id.getText().trim().isEmpty() || txt_username.getText().trim().isEmpty() || pass.getText().trim().isEmpty()) {
+        if (txt_id.getText().trim().isEmpty() || txt_username.getText().trim().isEmpty() || pass.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Silahkan isi semua data terlebih dahulu");
 
         } else if (comboRole.getSelectedIndex() == 0) {
@@ -350,7 +349,7 @@ public class JIAccountForm extends javax.swing.JInternalFrame {
                 Employee employee = iec.getById(id);
                 String email = employee.getEmail();
                 String username = txt_username.getText();
-                String name = employee.getFirstName()+" "+employee.getLastName();
+                String name = employee.getFirstName() + " " + employee.getLastName();
                 sendMail(email, username, password, name);
                 //updateTableEmp("");
                 //resetTextAccount();
@@ -363,7 +362,7 @@ public class JIAccountForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_passActionPerformed
 
     private void passKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passKeyReleased
-       
+
     }//GEN-LAST:event_passKeyReleased
 
     private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
