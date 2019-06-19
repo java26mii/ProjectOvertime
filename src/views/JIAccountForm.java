@@ -106,7 +106,7 @@ public class JIAccountForm extends javax.swing.JInternalFrame {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
             message.setSubject("Your Account Already Set");
-            message.setText("Dear " + name + "\n'Akun Anda dari aplikasi Leave Request sudah dibuat. Berikut informasi account anda : \n'"
+            message.setText("Dear " + name + "\n'Akun Anda dari aplikasi Overtime Request sudah dibuat. Berikut informasi account anda : \n'"
                     + "Username = " + username + "\n"
                     + "Password = " + password + "\n"
                     + "Dimohon disimpan baik-baik informasi Account ini agar tidak disalah gunakan.\n\nBest Regards Admin");

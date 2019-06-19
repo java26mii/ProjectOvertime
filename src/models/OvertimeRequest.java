@@ -89,6 +89,18 @@ public class OvertimeRequest implements Serializable {
         this.id = id;
     }
 
+    public OvertimeRequest(Long id, Date reqDate, Date startTime, Date endTime, String activity, Character isDelete, long oSalary, Serializable doc, OvertimeType overtimeType) {
+        this.id = id;
+        this.reqDate = reqDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.activity = activity;
+        this.isDelete = isDelete;
+        this.oSalary = oSalary;
+        this.doc = doc;
+        this.overtimeType = overtimeType;
+    }
+
     public OvertimeRequest(Long id, Date reqDate, Date startTime, Date endTime, String activity, Character isDelete, long oSalary) {
         this.id = id;
         this.reqDate = reqDate;
@@ -212,5 +224,5 @@ public class OvertimeRequest implements Serializable {
     public String toString() {
         return "models.OvertimeRequest[ id=" + id + " ]";
     }
-    
+
 }

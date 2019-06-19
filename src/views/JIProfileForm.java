@@ -5,6 +5,8 @@
  */
 package views;
 
+import controllers.AccountController;
+import icontrollers.IAccountController;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.ByteArrayOutputStream;
@@ -28,6 +30,9 @@ import tools.HibernateUtil;
 public class JIProfileForm extends javax.swing.JInternalFrame {
 
     SessionFactory factory = HibernateUtil.getSessionFactory();
+    File file;
+    JFileChooser jfc = new JFileChooser();
+    IAccountController iac = new AccountController(factory);
 
     /**
      * Creates new form JIProfileForm
@@ -194,7 +199,6 @@ public class JIProfileForm extends javax.swing.JInternalFrame {
         } catch (Exception e) {
 
         }
-
     }//GEN-LAST:event_btnFileActionPerformed
 
     private void profileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseReleased

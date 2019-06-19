@@ -8,11 +8,13 @@ package views;
 import controllers.AccountController;
 import controllers.EmployeeController;
 import controllers.OvertimeRequestController;
+import controllers.OvertimeTypeController;
 import icontrollers.IAccountController;
 import icontrollers.IEmployeeController;
-import icontrollers.IOvertimeRequestController;
+import icontrollers.IOvertimeTypeController;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Employee;
 import models.OvertimeType;
@@ -30,50 +32,48 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
      * Creates new form JIOvertimeType
      */
     SessionFactory factory = HibernateUtil.getSessionFactory();
-    IOvertimeRequestController iorc = new OvertimeRequestController(factory);
-    IAccountController iac = new AccountController(factory);
-
+    IOvertimeTypeController iotc = new OvertimeTypeController(factory);
+    
     public JIOvertimeTypeForm() {
         initComponents();
-        showTable("");
+        showTableType("");
     }
-
+    
     private void resetText() {
         txtType.setText("");
         txtMinHour.setText("");
         txtMaxHour.setText("");
         txtParam.setText("");
         txtParamNext.setText("");
-
+        
         btnSave2.setEnabled(true);
 //        txtId.setEditable(true);
     }
-
-    private void showTable(String key) {
-//        DefaultTableModel model = (DefaultTableModel) tblType.getModel();
-//        model.setRowCount(0);
-//        Object[] row = new Object[12];
-//        List<OvertimeType>  = new ArrayList<>();
-//        List<Role> roles = new ArrayList<>();
-//        if (key == "") {
-//            employees = iec.getAll();
-//
-//        }
-//        employees = iec.search(key);
-//
-//        for (int i = 0; i < employees.size(); i++) {
-//            row[0] = i + 1;
-//            row[1] = employees.get(i).getId();
-//            row[2] = employees.get(i).getFirstName();
-//            row[3] = employees.get(i).getLastName();
-//            row[4] = employees.get(i).getEmail();
-//            row[5] = employees.get(i).getPhoneNumber();
-//            row[6] = employees.get(i).getSalary();
-//            row[7] = employees.get(i).getManager().getFirstName() + " " + employees.get(i).getManager().getLastName();
-//            model.addRow(row);
-//        }
+    
+    private void showTableType(String key) {
+        DefaultTableModel model = (DefaultTableModel) tblType.getModel();
+        model.setRowCount(0);
+        Object[] row = new Object[7];
+        List<OvertimeType> overtimeTypes = new ArrayList<>();
+        List<Role> roles = new ArrayList<>();
+        if (key == "") {
+            overtimeTypes = iotc.getAll();
+            
+        }
+        overtimeTypes = iotc.search(key);
+        
+        for (int i = 0; i < overtimeTypes.size(); i++) {
+            row[0] = i + 1;
+            row[1] = overtimeTypes.get(i).getId();
+            row[2] = overtimeTypes.get(i).getName();
+            row[3] = overtimeTypes.get(i).getMinHour();
+            row[4] = overtimeTypes.get(i).getMaxHour();
+            row[5] = overtimeTypes.get(i).getParam1hour();
+            row[6] = overtimeTypes.get(i).getParamNexthour();
+            model.addRow(row);
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -258,6 +258,7 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
 
     private void btnReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset2ActionPerformed
         // TODO add your handling code here:
+        resetText();
     }//GEN-LAST:event_btnReset2ActionPerformed
 
     private void txtTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTypeActionPerformed
@@ -266,6 +267,16 @@ public class JIOvertimeTypeForm extends javax.swing.JInternalFrame {
 
     private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
         // TODO add your handling code here:
+        if (txtType.getText().equals("") || txtMinHour.getText().equals("") || txtMaxHour.getText().equals("") || txtParam.getText().equals("") || txtParamNext.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Isi semua data");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(this, "Anda yakin menambah data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, iotc.save(String.valueOf(Long.parseLong("1")), txtType.getText(), txtMinHour.getText(), "0", txtMaxHour.getText(), txtParam.getText(), txtParamNext.getText()));
+                resetText();
+            }
+        }
+        showTableType("");
     }//GEN-LAST:event_btnSave2ActionPerformed
 
     private void txtMinHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinHourActionPerformed

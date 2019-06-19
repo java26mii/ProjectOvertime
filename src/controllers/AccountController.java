@@ -120,5 +120,4 @@ public class AccountController implements IAccountController {
     public Employee getEmployee(String email) {
         return gdao.getEmployee(email);
     }
-
 }

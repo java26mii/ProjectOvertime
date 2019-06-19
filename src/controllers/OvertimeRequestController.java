@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import models.OvertimeRequest;
+import models.OvertimeType;
 import org.hibernate.SessionFactory;
 
 /**
@@ -44,9 +45,9 @@ public class OvertimeRequestController implements IOvertimeRequestController {
     }
 
     @Override
-    public String save(String id, String reqDate, String startTime, String endTime, String activity, String isDelete, String oSalary) {
+    public String save(String id, String reqDate, String startTime, String endTime, String activity, String isDelete, String oSalary, String type, String doc) {
         String result = "";
-        OvertimeRequest overtimeRequest = new OvertimeRequest(Long.parseLong(id), new java.sql.Date(date.getTime()), new java.sql.Date(date.getTime()), new java.sql.Date(date.getTime()), activity,  isDelete.charAt(0), new Long(oSalary));
+        OvertimeRequest overtimeRequest = new OvertimeRequest(Long.parseLong(id), new java.sql.Date(date.getTime()), new java.sql.Date(date.getTime()), new java.sql.Date(date.getTime()), activity,  isDelete.charAt(0), new Long(oSalary), doc, new OvertimeType(Long.parseLong(type)));
         if (gdao.saveOrDelete(overtimeRequest, false)) {
             result = "Success";
         } else {

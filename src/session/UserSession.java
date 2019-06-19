@@ -14,6 +14,7 @@ public class UserSession {
     public static String idUser;
     public static String username;
     public static String job;
+    public static String image;
 
     public UserSession() {
     }
@@ -28,7 +29,19 @@ public class UserSession {
         this.username = nameSession;
         this.job = jobs;
     }
+    
+    public UserSession(String imageSession) {
+        this.image = imageSession;
+    }
 
+    public static String getImage() {
+        return image;
+    }
+
+    public static void setImage(String image) {
+        UserSession.image = image;
+    }
+    
     public static String getJob() {
         return job;
     }

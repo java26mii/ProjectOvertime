@@ -5,33 +5,30 @@
  */
 package views;
 
-import controllers.EmployeeController;
-import controllers.EmployeeJobController;
-import controllers.EmployeeRoleController;
-import controllers.JobController;
 import controllers.OvertimeRequestController;
 import controllers.OvertimeTypeController;
-import controllers.RoleController;
-import icontrollers.IEmployeeController;
-import icontrollers.IEmployeeJobController;
-import icontrollers.IEmployeeRoleController;
-import icontrollers.IJobController;
 import icontrollers.IOvertimeRequestController;
 import icontrollers.IOvertimeTypeController;
-import icontrollers.IRoleController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.Employee;
-import models.EmployeeJob;
-import models.EmployeeRole;
-import models.Job;
 import models.OvertimeRequest;
 import models.OvertimeType;
-import models.Role;
+import org.apache.commons.io.FileUtils;
 import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -42,70 +39,70 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
     /**
      * Creates new form OvertimeRequest
      */
+    SessionFactory factory = HibernateUtil.getSessionFactory();
+    IOvertimeRequestController iorc = new OvertimeRequestController(factory);
+    IOvertimeTypeController overtimeTypeController = new OvertimeTypeController(factory);
+    Date date = new Date(); // this object contains the current date value 
+    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+    File file;
+
     public JIOvertimeRequestForm() {
         initComponents();
 //        showTable("");
         getOvertimeType();
     }
-    
-    SessionFactory factory = HibernateUtil.getSessionFactory();
-//    IEmployeeController employeeController = new EmployeeController(factory);
-//    IEmployeeJobController employeeJobController = new EmployeeJobController(factory);
-//    IEmployeeRoleController employeeRoleController = new EmployeeRoleController(factory);
-//    IJobController jobController = new JobController(factory);
-//    IRoleController roleController = new RoleController(factory);
-    IOvertimeRequestController overtimeRequestController = new OvertimeRequestController(factory);
-    IOvertimeTypeController overtimeTypeController = new OvertimeTypeController(factory);
-//
+
     private void resetText() {
         txtId.setText("");
-//        startTime.setText("");
-//        startEnd.setText("");
+        txtStartTime.setText("");
+        txtEndTime.setText("");
         txtActivity.setText("");
-        jReqDate.setDate(null);
+        ReqDate.setDate(null);
         comboType.setSelectedItem(0);
         txtOvertimeSal.setText("");
         txtDoc.setText("");
-       
+
         btnSave.setEnabled(true);
         txtId.setEditable(true);
     }
-//
-//    public void showTable(String key) {
-//        DefaultTableModel model = (DefaultTableModel) tblOvertimeReq.getModel();
-//        model.setRowCount(0);
-//        Object[] row = new Object[12];
-//        List<Employee> employees = new ArrayList<>();
-//        List<EmployeeJob> employeeJobs = new ArrayList<>();
-//        List<EmployeeRole> employeeRoles = new ArrayList<>();
-//        List<OvertimeRequest> overtimeRequests = new ArrayList<>();
-//        List<OvertimeType>overtimeTypes  = new ArrayList<>();
-//        List<Job> jobs = new ArrayList<>();
+
+    public void showTableRequest(String key) {
+        DefaultTableModel model = (DefaultTableModel) tblOvertimeReq.getModel();
+        model.setRowCount(0);
+        Object[] row = new Object[8];
+        List<OvertimeRequest> overtimeRequests = new ArrayList<>();
 //        List<Role> roles = new ArrayList<>();
-//        if (key == "") {
-//            employees = employeeController.getAll();
-//            employeeJobs = employeeJobController.getAll();
-//            employeeRoles = employeeRoleController.getAll();
-//            jobs = jobController.getAll();
-//            roles = roleController.getAll();
+
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            String path = new File(".").getCanonicalPath();
+//            Image imagedResized = doc.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
+//            ImageIcon icon = new ImageIcon(imagedResized);
+//            jLabelGambar.setIcon(icon);
+        } catch (IOException ex) {
+            Logger.getLogger(JIOvertimeRequestForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (key == "") {
+            overtimeRequests = iorc.getAll();
 //            overtimeRequests = overtimeRequestController.getAll();
-//
-//        }
-//        employees = employeeController.search(key);
-//
-//        for (int i = 0; i < employees.size(); i++) {
-//            row[0] = i + 1;
-//            row[1] = overtimeRequests.get(i).getId();
-//            row[2] = overtimeRequests.get(i).getOvertimeType().getName();
-//            row[3] = overtimeRequests.get(i).getStartTime();
-//            row[4] = overtimeRequests.get(i).getEndTime();
-//            row[5] = overtimeRequests.get(i).getActivity();
-//            row[6] = overtimeRequests.get(i).getOSalary();
-//            row[7] = employees.get(i).getSalary();
-//            row[8] = overtimeRequests.get(i).getDoc();
-//            model.addRow(row);
-//        }
-//    }
+
+        }
+        overtimeRequests = iorc.search(key);
+
+        for (int i = 0; i < overtimeRequests.size(); i++) {
+            row[0] = i + 1;
+            row[1] = overtimeRequests.get(i).getId();
+            row[3] = overtimeRequests.get(i).getStartTime();
+            row[4] = overtimeRequests.get(i).getEndTime();
+            row[5] = overtimeRequests.get(i).getActivity();
+            row[6] = overtimeRequests.get(i).getOSalary();
+            row[7] = overtimeRequests.get(i).getOvertimeType();
+            row[8] = overtimeRequests.get(i).getDoc();
+            model.addRow(row);
+        }
+    }
 //
 //    public void updateTable(String id) {
 //        DefaultTableModel model = (DefaultTableModel) tblOvertimeReq.getModel();
@@ -116,9 +113,10 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
 //        showTable(id);
 //    }
 //
+
     private void getOvertimeType() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for (OvertimeType overtimeType  : overtimeTypeController.getAll()) {
+        for (OvertimeType overtimeType : overtimeTypeController.getAll()) {
             comboType.addItem(overtimeType.getId() + " " + overtimeType.getName());
         }
     }
@@ -151,20 +149,23 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jReqDate = new com.toedter.calendar.JDateChooser();
+        ReqDate = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         comboType = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         txtDoc = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtOvertimeSal = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnFile = new javax.swing.JButton();
         btnReset1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtActivity = new javax.swing.JTextArea();
         txtId = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        txtStartTime = new javax.swing.JTextField();
+        txtEndTime = new javax.swing.JTextField();
+        jLabelGambar = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -172,6 +173,7 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setMinimumSize(new java.awt.Dimension(50, 34));
         setPreferredSize(new java.awt.Dimension(1400, 900));
 
         tblOvertimeReq.setModel(new javax.swing.table.DefaultTableModel(
@@ -249,10 +251,10 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFile.setText("...");
+        btnFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFileActionPerformed(evt);
             }
         });
 
@@ -286,43 +288,6 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(118, 118, 118)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(comboType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtOvertimeSal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jReqDate, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(btnReset1)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -332,7 +297,52 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(263, 263, 263)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtStartTime, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtEndTime, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(118, 118, 118)
+                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(btnReset1)
+                                .addGap(31, 31, 31)
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(ReqDate, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(comboType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                                            .addComponent(txtOvertimeSal))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnFile, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -344,20 +354,36 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel6)
-                        .addComponent(jReqDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ReqDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
                         .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtStartTime)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel9)
-                                .addComponent(txtOvertimeSal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel9)
+                                        .addComponent(txtOvertimeSal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -367,23 +393,22 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnSave)
-                                    .addComponent(btnReset1)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12)
-                                .addComponent(jButton1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                                    .addComponent(btnReset1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(btnFile))
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabelGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(95, 95, 95))))
         );
 
         pack();
@@ -391,9 +416,26 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-//        if () {
-//            
-//        }
+        if (txtStartTime.getText().equals("") || txtEndTime.getText().equals("") || txtActivity.getText().equals("") || ReqDate.getDate().equals("") || comboType.getSelectedItem() == ("Choose") || txtOvertimeSal.getText().equals("") || txtDoc.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Isi semua data");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(this, "Anda yakin menambah data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
+                String overType = comboType.getSelectedItem().toString();
+                overType = overType.substring(0, overType.indexOf(" "));
+                date = ReqDate.getDate();
+                String reqDate = formatter.format(date);
+                JOptionPane.showMessageDialog(null, iorc.save(String.valueOf(Long.parseLong("1")), reqDate, txtStartTime.getText(), txtEndTime.getText(), txtActivity.getText(), "0", txtOvertimeSal.getText(), overType, txtDoc.getText()));
+                try {
+                    String path = new File(".").getCanonicalPath();
+                    FileUtils.copyFileToDirectory(file, new File(path + "/image")); //copy file ke folder image
+                } catch (IOException ex) {
+                    Logger.getLogger(JIOvertimeRequestForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                resetText();
+            }
+        }
+        showTableRequest("");
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDocActionPerformed
@@ -404,9 +446,21 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOvertimeSalActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        if (jfc.showOpenDialog(jLabel1) == JFileChooser.APPROVE_OPTION) {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(jfc.getSelectedFile().getAbsolutePath());
+            Image imagedResized = image.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+
+            jLabelGambar.setIcon(imageIcon);
+            txtDoc.setText(jfc.getSelectedFile().getName());
+
+            File file = new File(jfc.getSelectedFile().getPath()); // file untuk dikopi
+        }
+    }//GEN-LAST:event_btnFileActionPerformed
 
     private void comboTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTypeActionPerformed
         // TODO add your handling code here:
@@ -430,10 +484,11 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser ReqDate;
+    private javax.swing.JButton btnFile;
     private javax.swing.JButton btnReset1;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> comboType;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -444,15 +499,17 @@ public class JIOvertimeRequestForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelGambar;
     private javax.swing.JMenuItem jMenuItem1;
-    private com.toedter.calendar.JDateChooser jReqDate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblOvertimeReq;
     private javax.swing.JTextArea txtActivity;
     private javax.swing.JTextField txtDoc;
+    private javax.swing.JTextField txtEndTime;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtOvertimeSal;
     private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtStartTime;
     // End of variables declaration//GEN-END:variables
 }

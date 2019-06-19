@@ -56,6 +56,10 @@ public class Account implements Serializable {
         this.id = id;
     }
 
+    public Account(Serializable photo) {
+        this.photo = photo;
+    }
+    
     public Account(Long id, String username, String password, Character isDelete) {
         this.id = id;
         this.username = username;
